@@ -1,0 +1,23 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /proxy
+  
+
+spring:
+  application:
+    name: ip-proxy
+  banner:
+    charset: utf-8
+  profiles:
+    active:
+    - h2
+    - jpa
+    - hikari
+    - excutor
+    - user
+
+    
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

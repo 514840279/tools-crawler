@@ -1,0 +1,7 @@
+spring:
+  excutor:
+    core-pool-size: 200
+    max-pool-size: 200
+    queue-capacity: 1000
+    thread-name-prefix: "ip"
+    

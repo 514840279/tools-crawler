@@ -1,0 +1,9 @@
+user:
+  # 开关
+  start: true
+  # 默认返回数据大小
+  page-size: 100
+  # 库中最小保留可用ip
+  min-size: 500
+  # ip有效时间，库中ip从入库开始算最长保留时间 /s
+  long-time: 200
