@@ -39,7 +39,7 @@ public class IpProxyInfo {
 	@DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date	createTime;
-	
+
 	// 更新时间
 	@Column(name = "update_time", updatable = false, insertable = false) // 这里应用数据库更行策略 ON UPDATE CURRENT_TIMESTAMP 所以无需jpa插座
 	@Temporal(TemporalType.TIMESTAMP)
@@ -48,31 +48,38 @@ public class IpProxyInfo {
 	@DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date	updateTime;
-
+	
 	private Integer	deleteFlag;
-
+	
 	public IpProxyInfo() {
 		super();
 	}
-
+	
 	public IpProxyInfo(Integer id, String ip, Integer port) {
 		super();
 		this.id = id;
 		this.ip = ip;
 		this.port = port;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "IpProxyInfo [id=" + id + ", ip=" + ip + ", port=" + port + ", responseTime=" + responseTime + ", createTime=" + createTime + ", updateTime=" + updateTime + ", deleteFlag=" + deleteFlag + "]";
 	}
-
+	
 	public IpProxyInfo(String ip, Integer port, Double responseTime, String country, Integer deleteFlag) {
 		super();
 		this.ip = ip;
 		this.port = port;
 		this.responseTime = responseTime;
 		this.country = country;
+		this.deleteFlag = deleteFlag;
+	}
+	
+	public IpProxyInfo(String ip, Integer port, Integer deleteFlag) {
+		super();
+		this.ip = ip;
+		this.port = port;
 		this.deleteFlag = deleteFlag;
 	}
 	

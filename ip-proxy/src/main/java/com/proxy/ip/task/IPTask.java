@@ -34,13 +34,13 @@ public class IPTask {
 	private static final Logger	logger	= LoggerFactory.getLogger(IPTask.class);
 	@Autowired
 	UserConfig					userConfig;
-	
-	@Autowired
-	IpProxyInfoDao				ipProxyInfoDao;
 
 	@Autowired
-	CheckIpProxy				checkIpProxy;
+	IpProxyInfoDao				ipProxyInfoDao;
 	
+	@Autowired
+	CheckIpProxy				checkIpProxy;
+
 	//
 	@Scheduled(cron = "0/30 0/1 * * * ? ")
 	// @Scheduled(fixedRate = 1000)
@@ -49,23 +49,116 @@ public class IPTask {
 		// 判断总开关
 		if (userConfig.getStart()) {
 			// 判断有效IP量
-
+			
 			long startTime = System.currentTimeMillis(); // 获取开始时间
 			Long time = startTime - userConfig.getLongTime() * 1000;
 			Date d = new Date(time);
 			SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			List<IpProxyInfo> list = ipProxyInfoDao.findList(userConfig.getMinSize(), myFormatter.format(d));
 			if (list == null || list.size() < userConfig.getMinSize()) {
-				// 第一个免费代理信息录入
-				parseGit();
-				
-				// 第er个免费代理信息录入
-
+				int c = userConfig.getMinSize() - list.size();
+				// 免费的
+				if (userConfig.getStartFree()) {
+					try {
+						logger.info("免费的开始备用", c);
+						// 第一个免费代理信息录入
+						int b = parseGit();
+						c -= b;
+					} catch (Exception e) {
+					}
+				}
+				// StartKingdaili
+				if (userConfig.getStartKingdaili()) {
+					while (c > 0) {
+						logger.info("本次调用：最小备用数据小于{}，开始采集调整。", userConfig.getMinSize());
+						// 第er个免费代理信息录入
+						int a = parsekingdaili();
+						c -= a;
+						logger.info("最小备用数据缺少 {}个，5s后继续补充", c);
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+						}
+					}
+				}
 			}
 		}
 	}
+	
+	private int parsekingdaili() {
+		int result = 0;
+		// 建立一个新的请求客户端
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		// 使用HttpGet方式请求网址
+		HttpGet httpGet = new HttpGet("http://www.kingdaili.com:3314/laofu.aspx?action=GetIPAPI&OrderNumber=eb8d57cb9e1e41064b8104143cde52b6&poolIndex=1615439468&poolnumber=0&cache=1&qty=" + userConfig.getPageSize());
+		// 获取网址的返回结果
+		CloseableHttpResponse response = null;
+		try {
+			response = httpClient.execute(httpGet);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 获取返回结果中的实体
+		HttpEntity entity = response.getEntity();
+		
+		// 将返回的实体输出
+		try {
+			String[] ss = EntityUtils.toString(entity).split("\n");
+			List<IpProxyInfo> list = new ArrayList<>();
+			// 创建异步信息
+			List<CompletableFuture<IpProxyInfo>> alistCompletableFuture = new ArrayList<>();
+			for (String string : ss) {
+				String[] st = string.split(":");
+				IpProxyInfo info = new IpProxyInfo(st[0].trim(), Integer.parseInt(st[1].trim()), 0);
+				Boolean a = true;
+				// 去重
+				for (IpProxyInfo info2 : list) {
+					if (info.getIp().equals(info2.getIp()) && info.getPort().equals(info2.getPort())) {
+						a = false;
+						break;
+					}
+				}
 
+				if (a) {
+					list.add(info);
+					// 驗證
+					CompletableFuture<IpProxyInfo> createOrder = checkIpProxy.check(info);
+					alistCompletableFuture.add(createOrder);
+				}
+			}
+
+			// 创建结果信息
+			list = new ArrayList<>();
+			// 创建完成信息
+			for (CompletableFuture<IpProxyInfo> completableFuture : alistCompletableFuture) {
+				// 获取异步信息
+				// 收集结果信息
+				IpProxyInfo info = completableFuture.get();
+				if (info != null) {
+					list.add(info);
+				}
+			}
+			if (list.size() > 0) {
+				ipProxyInfoDao.saveAllAndFlush(list);
+				result = list.size();
+			}
+			EntityUtils.consume(entity);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+	
 	private int parseGit() {
+		int result = 0;
 		// https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list
 		// 建立一个新的请求客户端
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -78,10 +171,10 @@ public class IPTask {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		// 获取返回结果中的实体
 		HttpEntity entity = response.getEntity();
-
+		
 		// 将返回的实体输出
 		try {
 			String[] ss = EntityUtils.toString(entity).split("\n");
@@ -99,7 +192,7 @@ public class IPTask {
 						break;
 					}
 				}
-				
+
 				if (a) {
 					list.add(info);
 					// 驗證
@@ -107,7 +200,7 @@ public class IPTask {
 					alistCompletableFuture.add(createOrder);
 				}
 			}
-			
+
 			// 创建结果信息
 			list = new ArrayList<>();
 			// 创建完成信息
@@ -121,6 +214,7 @@ public class IPTask {
 			}
 			if (list.size() > 0) {
 				ipProxyInfoDao.saveAllAndFlush(list);
+				result = list.size();
 			}
 			EntityUtils.consume(entity);
 		} catch (IOException e) {
@@ -132,9 +226,9 @@ public class IPTask {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return result;
 	}
-	
+
 	@Scheduled(cron = "0 0 0/1 * * ? ")
 	// @Scheduled(fixedRate = 1000)
 	public void runDelete() {
