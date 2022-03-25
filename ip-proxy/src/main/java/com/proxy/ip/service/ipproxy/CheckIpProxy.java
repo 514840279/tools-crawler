@@ -17,16 +17,16 @@ import com.proxy.ip.po.IpProxyInfo;
 
 @Component
 public class CheckIpProxy {
-
+	
 	@Autowired
 	IpProxyInfoDao	ipProxyInfoDao;
-
+	
 	@Autowired
 	UserConfig		userConfig;
-
+	
 	@Async
 	public CompletableFuture<IpProxyInfo> check(IpProxyInfo info) {
-		
+
 		String ip = info.getIp();
 		Integer port = info.getPort();
 		// 查詢目的去重
@@ -34,7 +34,7 @@ public class CheckIpProxy {
 		if (s != null) {
 			return CompletableFuture.completedFuture(null);
 		}
-
+		
 		URL url = null;
 		try {
 			url = new URL(userConfig.getCheckUrl());
@@ -44,7 +44,7 @@ public class CheckIpProxy {
 		InetSocketAddress addr = null;
 		addr = new InetSocketAddress(ip, port);
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, addr); // http proxy
-
+		
 		try {
 			Long time1 = System.currentTimeMillis();
 			URLConnection conn = url.openConnection(proxy);
@@ -53,14 +53,14 @@ public class CheckIpProxy {
 			conn.getInputStream();
 			Long time2 = System.currentTimeMillis();
 			info.setResponseTime((time2 - time1) / 1000.00);
-
+			
 		} catch (Exception e) {
 			System.out.println("ip " + ip + " is not aviable");// 异常IP
-			info.setDeleteFlag(1);
+			return CompletableFuture.completedFuture(null);
 		}
-
+		
 		return CompletableFuture.completedFuture(info);
-
+		
 	}
-
+	
 }

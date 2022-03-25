@@ -10,4 +10,5 @@ user:
   # ip有效时间，库中ip从入库开始算最长保留时间 /s
   long-time: 200
   # 校验地址url= https://www.baidu.com/
-  check-url: "http://www.gsxt.gov.cn/socialuser-use-register.html?aaa="
+  #check-url: "http://www.gsxt.gov.cn/socialuser-use-register.html?aaa="
+  check-url: "https://www.baidu.com"
