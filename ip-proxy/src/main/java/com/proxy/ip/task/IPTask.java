@@ -34,13 +34,13 @@ public class IPTask {
 	private static final Logger	logger	= LoggerFactory.getLogger(IPTask.class);
 	@Autowired
 	UserConfig					userConfig;
-
-	@Autowired
-	IpProxyInfoDao				ipProxyInfoDao;
 	
 	@Autowired
-	CheckIpProxy				checkIpProxy;
+	IpProxyInfoDao				ipProxyInfoDao;
 
+	@Autowired
+	CheckIpProxy				checkIpProxy;
+	
 	//
 	@Scheduled(cron = "0/30 0/1 * * * ? ")
 	// @Scheduled(fixedRate = 1000)
@@ -49,7 +49,7 @@ public class IPTask {
 		// 判断总开关
 		if (userConfig.getStart()) {
 			// 判断有效IP量
-			
+
 			long startTime = System.currentTimeMillis(); // 获取开始时间
 			Long time = startTime - userConfig.getLongTime() * 1000;
 			Date d = new Date(time);
@@ -67,30 +67,35 @@ public class IPTask {
 					} catch (Exception e) {
 					}
 				}
-				// StartKingdaili
-				if (userConfig.getStartKingdaili()) {
-					while (c > 0) {
+
+				// 多个代理 格式 ip:port 每行一个
+				String[] urls = {
+				        // kingdaili
+				        "http://www.kingdaili.com:3314/laofu.aspx?action=GetIPAPI&OrderNumber=eb8d57cb9e1e41064b8104143cde52b6&poolIndex=1615439468&poolnumber=0&cache=1&qty=" + userConfig.getPageSize(),
+				        // 66daili
+				        "http://api.66daili.cn/API/GetSecretProxy/?orderid=O87O848l5ZZOlOO393l&num=20&token=66daili&format=text&line_separator=win&protocol=http&region=domestic" };
+				while (c > 0) {
+					// StartKingdaili
+					if (userConfig.getStartKingdaili()) {
 						logger.info("本次调用：最小备用数据小于{}，开始采集调整。", userConfig.getMinSize());
-						// 第er个免费代理信息录入
-						int a = parsekingdaili();
-						c -= a;
-						logger.info("最小备用数据缺少 {}个，5s后继续补充", c);
-						try {
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
+						for (String url : urls) {
+							// 第er个免费代理信息录入
+							int a = parsekingdaili(url);
+							c -= a;
 						}
+						logger.info("最小备用数据缺少 {}个，5s后继续补充", c);
 					}
 				}
 			}
 		}
 	}
 	
-	private int parsekingdaili() {
+	private int parsekingdaili(String url) {
 		int result = 0;
 		// 建立一个新的请求客户端
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		// 使用HttpGet方式请求网址
-		HttpGet httpGet = new HttpGet("http://www.kingdaili.com:3314/laofu.aspx?action=GetIPAPI&OrderNumber=eb8d57cb9e1e41064b8104143cde52b6&poolIndex=1615439468&poolnumber=0&cache=1&qty=" + userConfig.getPageSize());
+		HttpGet httpGet = new HttpGet(url);
 		// 获取网址的返回结果
 		CloseableHttpResponse response = null;
 		try {
@@ -98,10 +103,10 @@ public class IPTask {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// 获取返回结果中的实体
 		HttpEntity entity = response.getEntity();
-		
+
 		// 将返回的实体输出
 		try {
 			String[] ss = EntityUtils.toString(entity).split("\n");
@@ -119,7 +124,7 @@ public class IPTask {
 						break;
 					}
 				}
-
+				
 				if (a) {
 					list.add(info);
 					// 驗證
@@ -127,7 +132,7 @@ public class IPTask {
 					alistCompletableFuture.add(createOrder);
 				}
 			}
-
+			
 			// 创建结果信息
 			list = new ArrayList<>();
 			// 创建完成信息
@@ -154,9 +159,9 @@ public class IPTask {
 			e.printStackTrace();
 		}
 		return result;
-
+		
 	}
-	
+
 	private int parseGit() {
 		int result = 0;
 		// https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list
@@ -171,10 +176,10 @@ public class IPTask {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// 获取返回结果中的实体
 		HttpEntity entity = response.getEntity();
-		
+
 		// 将返回的实体输出
 		try {
 			String[] ss = EntityUtils.toString(entity).split("\n");
@@ -192,7 +197,7 @@ public class IPTask {
 						break;
 					}
 				}
-
+				
 				if (a) {
 					list.add(info);
 					// 驗證
@@ -200,7 +205,7 @@ public class IPTask {
 					alistCompletableFuture.add(createOrder);
 				}
 			}
-
+			
 			// 创建结果信息
 			list = new ArrayList<>();
 			// 创建完成信息
@@ -228,7 +233,7 @@ public class IPTask {
 		}
 		return result;
 	}
-
+	
 	@Scheduled(cron = "0 0 0/1 * * ? ")
 	// @Scheduled(fixedRate = 1000)
 	public void runDelete() {
