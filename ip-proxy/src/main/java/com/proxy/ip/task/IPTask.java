@@ -69,11 +69,7 @@ public class IPTask {
 				}
 
 				// 多个代理 格式 ip:port 每行一个
-				String[] urls = {
-				        // kingdaili
-				        "http://www.kingdaili.com:3314/laofu.aspx?action=GetIPAPI&OrderNumber=eb8d57cb9e1e41064b8104143cde52b6&poolIndex=1615439468&poolnumber=0&cache=1&qty=" + userConfig.getPageSize(),
-				        // 66daili
-				        "http://api.66daili.cn/API/GetSecretProxy/?orderid=O87O848l5ZZOlOO393l&num=20&token=66daili&format=text&line_separator=win&protocol=http&region=domestic" };
+				List<String> urls = userConfig.getUrls();
 				while (c > 0) {
 					// StartKingdaili
 					if (userConfig.getStartKingdaili()) {
@@ -82,6 +78,12 @@ public class IPTask {
 							// 第er个免费代理信息录入
 							int a = parsekingdaili(url);
 							c -= a;
+						}
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 						logger.info("最小备用数据缺少 {}个，5s后继续补充", c);
 					}

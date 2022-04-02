@@ -12,3 +12,8 @@ user:
   # 校验地址url= https://www.baidu.com/
   #check-url: "http://www.gsxt.gov.cn/socialuser-use-register.html?aaa="
   check-url: "https://www.baidu.com"
+  
+  # ip:port 类型的代理地址服务
+  urls:
+    #- "http://www.kingdaili.com:3314/laofu.aspx?action=GetIPAPI&OrderNumber=eb8d57cb9e1e41064b8104143cde52b6&poolIndex=1615439468&poolnumber=0&cache=1&qty="
+    - "http://api.66daili.cn/API/GetSecretProxy/?orderid=O87O848l5ZZOlOO393l&num=20&token=66daili&format=text&line_separator=win&protocol=http&region=domestic"
