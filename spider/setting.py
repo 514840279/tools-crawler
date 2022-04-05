@@ -4,11 +4,11 @@ import os
 # import sys
 #
 # # MYSQL
-MYSQL_IP = "192.168.0.103"
+MYSQL_IP = "81.68.182.134"
 MYSQL_PORT = 3306
 MYSQL_DB = "application"
 MYSQL_USER_NAME = "root"
-MYSQL_USER_PASS = "Root@123"
+MYSQL_USER_PASS = "514840279@qq.com"
 #
 # # MONGODB
 # MONGO_IP = "localhost"
