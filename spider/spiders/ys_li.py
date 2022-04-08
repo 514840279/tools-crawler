@@ -52,7 +52,8 @@ class YsLi(feapder.AirSpider):
 
                     item.房源id = request.id
                     item.lid = request.lid
-                    dlf = 单元楼层房号.replace('--','负-').split('-')
+
+                    dlf = 单元楼层房号.replace('--','-负').split('-')
 
                     item.单元 = dlf[0].strip()
                     item.楼层 = dlf[1].strip()
