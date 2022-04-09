@@ -16,18 +16,20 @@ class YsLi(feapder.AirSpider):
     def start_requests(self):
         db = MysqlDB()
         sql = "select id,工程链接 from 不动产登记中心_商品房预售房源 where delete_flag = 0"
-        flag = True
-        while flag:
-            try:
-                rows = db.find(sql=sql, limit=1000, to_json=True)
+        limit = 500  # 分页 大于1
+        timeout = 2000  # 超时
+        try:
+            rows = db.find(sql=sql, limit=limit, to_json=True)
+            while len(rows) > 0:
                 for row in rows:
                     id = row['id']
                     url = row['工程链接']
                     lid = url.replace('http://124.93.228.101:8087/bd/tgxm/getLi?lid=','')
-                    yield feapder.Request(url,id=id,lid=lid)
-            finally:
-                flag = False
-                pass
+                    yield feapder.Request(url,id=id,lid=lid,is_abandoned=True,timeout=timeout)
+                rows = db.find(sql=sql, limit=limit, to_json=True)
+        finally:
+            flag = False
+            pass
 
     def parse(self, request, response):
         trs = response.xpath('//table[@class="table table-bordered FCtable"]/tr')
@@ -50,7 +52,7 @@ class YsLi(feapder.AirSpider):
 
                     item.房源id = request.id
                     item.lid = request.lid
-                    dlf = 单元楼层房号.replace('--','-').split('-')
+                    dlf = 单元楼层房号.replace('--','负-').split('-')
 
                     item.单元 = dlf[0].strip()
                     item.楼层 = dlf[1].strip()
