@@ -9,11 +9,13 @@ user:
   min-size: 500
   # ip有效时间，库中ip从入库开始算最长保留时间 /s
   long-time: 200
+  # 获取ip：port的地址访问间隔 /ms
+  url-time: 10000
   # 校验地址url= https://www.baidu.com/
   #check-url: "http://www.gsxt.gov.cn/socialuser-use-register.html?aaa="
   check-url: "https://www.baidu.com"
   
   # ip:port 类型的代理地址服务
   urls:
-    #- "http://www.kingdaili.com:3314/laofu.aspx?action=GetIPAPI&OrderNumber=eb8d57cb9e1e41064b8104143cde52b6&poolIndex=1615439468&poolnumber=0&cache=1&qty="
-    - "http://api.66daili.cn/API/GetSecretProxy/?orderid=O87O848l5ZZOlOO393l&num=20&token=66daili&format=text&line_separator=win&protocol=http&region=domestic"
+    #- "http://api.66daili.cn/API/GetCommonProxy/?orderid=2470759292101414120&num=50&token=66daili&format=text&line_separator=win&protocol=http&anonymous=elite,anonymous,transparent&proxytype=http&speed=fast,quick,slow#api"
+    - "http://api.66daili.cn/API/GetSecretProxy/?orderid=1O1O9O3Z6ZZO1OO3985&num=20&token=66daili&format=text&line_separator=win&protocol=http&region=domestic"

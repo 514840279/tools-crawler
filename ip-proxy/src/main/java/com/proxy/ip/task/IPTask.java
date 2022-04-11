@@ -80,7 +80,7 @@ public class IPTask {
 							c -= a;
 						}
 						try {
-							Thread.sleep(5000);
+							Thread.sleep(userConfig.getUrlTime());
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

@@ -32,7 +32,9 @@ public class CheckIpProxy {
 		// 查詢目的去重
 		IpProxyInfo s = ipProxyInfoDao.findOneByIpAndPort(ip, port);
 		if (s != null) {
-			return CompletableFuture.completedFuture(null);
+//			return CompletableFuture.completedFuture(null);
+			info = s;
+			info.setDeleteFlag(0);
 		}
 		
 		URL url = null;

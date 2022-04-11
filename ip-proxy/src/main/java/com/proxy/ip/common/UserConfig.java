@@ -32,6 +32,9 @@ public class UserConfig {
 	// ip有效时间，库中ip从入库开始算最长保留时间 /s
 	private Long			longTime		= 240l;
 	
+	// 获取ip：port的地址访问间隔 /ms
+	private Long			urlTime			= 5000l;
+	
 	private String			checkUrl		= "https://www.baidu.com";
 	// ip:port 类型的代理地址服务
 	private List<String>	urls			= new ArrayList<>();
