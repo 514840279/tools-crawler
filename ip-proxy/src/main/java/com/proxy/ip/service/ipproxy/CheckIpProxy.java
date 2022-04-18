@@ -65,4 +65,17 @@ public class CheckIpProxy {
 		
 	}
 	
+	@Async
+	public CompletableFuture<IpProxyInfo> checkData(IpProxyInfo info) {
+		String ip = info.getIp();
+		Integer port = info.getPort();
+		// 查詢目的去重
+		IpProxyInfo s = ipProxyInfoDao.findOneByIpAndPort(ip, port);
+		if (s != null) {
+			info = s;
+			info.setDeleteFlag(0);
+		}
+		return CompletableFuture.completedFuture(info);
+	}
+	
 }

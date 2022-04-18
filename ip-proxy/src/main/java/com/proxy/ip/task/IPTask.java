@@ -80,12 +80,12 @@ public class IPTask {
 							c -= a;
 						}
 						try {
+							logger.info("最小备用数据缺少 {}个，{}s后继续补充", c, userConfig.getUrlTime() / 1000);
 							Thread.sleep(userConfig.getUrlTime());
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						logger.info("最小备用数据缺少 {}个，5s后继续补充", c);
 					}
 				}
 			}
@@ -113,28 +113,39 @@ public class IPTask {
 		try {
 			String[] ss = EntityUtils.toString(entity).split("\n");
 			List<IpProxyInfo> list = new ArrayList<>();
+
 			// 创建异步信息
 			List<CompletableFuture<IpProxyInfo>> alistCompletableFuture = new ArrayList<>();
 			for (String string : ss) {
-				String[] st = string.split(":");
-				IpProxyInfo info = new IpProxyInfo(st[0].trim(), Integer.parseInt(st[1].trim()), 0);
-				Boolean a = true;
-				// 去重
-				for (IpProxyInfo info2 : list) {
-					if (info.getIp().equals(info2.getIp()) && info.getPort().equals(info2.getPort())) {
-						a = false;
-						break;
+				if (string.contains(":")) {
+					String[] st = string.split(":");
+					IpProxyInfo info = new IpProxyInfo(st[0].trim(), Integer.parseInt(st[1].trim()), 0);
+					Boolean a = true;
+					// 去重
+					for (IpProxyInfo info2 : list) {
+						if (info.getIp().equals(info2.getIp()) && info.getPort().equals(info2.getPort())) {
+							a = false;
+							break;
+						}
 					}
-				}
-				
-				if (a) {
-					list.add(info);
-					// 驗證
-					CompletableFuture<IpProxyInfo> createOrder = checkIpProxy.check(info);
-					alistCompletableFuture.add(createOrder);
+
+					if (a) {
+						list.add(info);
+						CompletableFuture<IpProxyInfo> createOrder = null;
+						if (userConfig.getCheckIp()) {
+							// 驗證
+							createOrder = checkIpProxy.check(info);
+						} else {
+							createOrder = checkIpProxy.checkData(info);
+						}
+						alistCompletableFuture.add(createOrder);
+					}
+				} else {
+					logger.error("{}:当前请求间隔(UrlTime){}ms", string, userConfig.getUrlTime());
+					return 0;
 				}
 			}
-			
+
 			// 创建结果信息
 			list = new ArrayList<>();
 			// 创建完成信息
@@ -146,11 +157,13 @@ public class IPTask {
 					list.add(info);
 				}
 			}
+
 			if (list.size() > 0) {
 				ipProxyInfoDao.saveAllAndFlush(list);
 				result = list.size();
 			}
 			EntityUtils.consume(entity);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -161,7 +174,7 @@ public class IPTask {
 			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
 
 	private int parseGit() {
