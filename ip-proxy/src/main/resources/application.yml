@@ -11,7 +11,8 @@ spring:
     charset: utf-8
   profiles:
     active:
-    - h2
+    - mysql
+#    - h2
     - jpa
     - hikari
     - excutor
