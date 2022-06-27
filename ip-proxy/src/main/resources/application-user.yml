@@ -8,9 +8,9 @@ user:
   # 库中最小保留可用ip
   min-size: 500
   # ip有效时间，库中ip从入库开始算最长保留时间 /s
-  long-time: 200
+  long-time: 1800
   # 获取ip：port的地址访问间隔 /ms
-  url-time: 10000
+  url-time: 5000
   # 是否开启ip数据验证有效
   check-ip: false
   # 校验地址url= https://www.baidu.com/

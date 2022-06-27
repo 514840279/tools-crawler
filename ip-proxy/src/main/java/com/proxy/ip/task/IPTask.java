@@ -254,10 +254,10 @@ public class IPTask {
 	@Scheduled(fixedRate = 1000)
 	public void runDelete() {
 		logger.info("runDelete {}", DateUtils.getDateTimeStr());
-		Date d = new Date();
-		Long time = d.getTime() - userConfig.getLongTime();
-		d.setTime(time.intValue());
+		long startTime = System.currentTimeMillis(); // 获取开始时间
+		Long time = startTime - userConfig.getLongTime() * 1000;
+		Date d = new Date(time);
 		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		ipProxyInfoDao.deleteAllByDeleteFlag(1, myFormatter.format(d));
+		ipProxyInfoDao.deleteAllByDeleteFlag(2, myFormatter.format(d));
 	}
 }
