@@ -1,0 +1,14 @@
+server:
+  port: 19011
+  
+
+spring:
+  application:    name: dafengqi
+  banner:    charset: utf-8
+  
+  profiles:
+    active:
+    - mysql
+    - hikari
+    - mybatis
+#    - redis

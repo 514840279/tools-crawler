@@ -15,13 +15,13 @@ import com.proxy.ip.po.IpProxyInfo;
 
 @Service
 public class IpProxyService {
-	
+
 	@Autowired
 	IpProxyInfoDao	ipProxyInfoDao;
-	
+
 	@Autowired
 	UserConfig		userConfig;
-
+	
 	public List<IpProxyInfo> findList(Integer size, Integer longTime) {
 		Date d = new Date();
 		Long time = d.getTime() - longTime;
@@ -29,23 +29,27 @@ public class IpProxyService {
 		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		List<IpProxyInfo> list = ipProxyInfoDao.findList(size, myFormatter.format(d));
 		if (list == null || list.size() < size) {
-			
+
 		}
 		return list;
 	}
-
+	
 	public void update(Integer id, Integer deleteFlag) {
 		ipProxyInfoDao.update(id, deleteFlag);
 	}
-
+	
 	public void deleteAllByDeleteFlag(Integer deleteFlag) {
-		ipProxyInfoDao.deleteAllByDeleteFlag(deleteFlag);
+		Date d = new Date();
+		Long time = d.getTime() - userConfig.getLongTime();
+		d.setTime(time.intValue());
+		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ipProxyInfoDao.deleteAllByDeleteFlag(deleteFlag, myFormatter.format(d));
 	}
-
+	
 	public void deleteOne(Integer id) {
 		ipProxyInfoDao.deleteOne(id);
 	}
-	
+
 	@Transactional
 	public String radom() {
 		Date d = new Date();
@@ -61,5 +65,5 @@ public class IpProxyService {
 			return radom();
 		}
 	}
-	
+
 }

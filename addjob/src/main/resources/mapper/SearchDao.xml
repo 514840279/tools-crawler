@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.search.SearchDao">
+   
+   <select id="annualList"  resultType="com.example.demo.search.AnnualReport">
+		SELECT *
+		FROM `single_point_query`.`gongshang_annual_report_list` a
+		<where>
+	       <if test="base.creditCode!=null and base.creditCode!=''">
+	       		and credit_code= #{base.creditCode}
+	       </if>
+	       <if test="base.registrationNumber!=null and base.registrationNumber!=''">
+	       		and registration_number= #{base.registrationNumber}
+	       </if>
+       </where>
+    </select>
+    
+    
+     <select id="companyInfo"  resultType="com.example.demo.search.Base">
+		SELECT *
+		FROM `single_point_query`.`gongshang_base` a
+		<where>
+	       <if test="job.regno!=null and job.regno!=''">
+	       		and (credit_code= #{job.regno}
+	       		or company_name = #{job.regno})
+	       </if>
+	       <if test="job.companyName!=null and job.companyName!=''">
+	       		and company_name= #{job.companyName}
+	       </if>
+       </where>
+       limit 1 
+    </select>
+    
+    
+    
+   <select id="reportList"  resultType="com.example.demo.search.AnnualReportSummary">
+		SELECT *
+		FROM `single_point_query`.`gongshang_annual_report_summary` a
+		<where>
+	       <if test="annualReport.anCheId!=null and annualReport.anCheId!=''">
+	       		and (anCheId= #{annualReport.anCheId} 
+	       		or #{annualReport.anCheId} like concat('%',anCheId,'%') )
+	       </if>
+	       <if test="annualReport.anCheYear!=null ">
+	       		and anCheYear= ${annualReport.anCheYear}
+	       </if>
+       </where>
+       limit 1
+    </select>
+	
+	
+
+</mapper>
