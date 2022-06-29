@@ -60,9 +60,11 @@ public class IpProxyService {
 		if (info != null) {
 			ipProxyInfoDao.update(info.getId(), 2);
 			return info.getIp() + ":" + info.getPort();
-		} else {
+		} else if (userConfig.getStartUpd()) {
 			ipProxyInfoDao.updateDuring(userConfig.getBeforTime(), 2);
 			return radom();
+		} else {
+			return "沒有ip";
 		}
 	}
 	

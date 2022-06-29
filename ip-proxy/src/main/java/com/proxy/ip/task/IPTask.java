@@ -35,13 +35,13 @@ public class IPTask {
 	private static final Logger	logger	= LoggerFactory.getLogger(IPTask.class);
 	@Autowired
 	UserConfig					userConfig;
-	
-	@Autowired
-	IpProxyInfoDao				ipProxyInfoDao;
 
 	@Autowired
-	CheckIpProxy				checkIpProxy;
+	IpProxyInfoDao				ipProxyInfoDao;
 	
+	@Autowired
+	CheckIpProxy				checkIpProxy;
+
 	//
 //	@Scheduled(cron = "0/30 0/1 * * * ? ")
 	@Scheduled(fixedRate = 1000)
@@ -50,14 +50,14 @@ public class IPTask {
 		// 判断总开关
 		if (userConfig.getStart()) {
 			// 判断有效IP量
-
+			
 			long startTime = System.currentTimeMillis(); // 获取开始时间
 			Long time = startTime - userConfig.getLongTime() * 1000;
 			Date d = new Date(time);
 			SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			List<IpProxyInfo> list = ipProxyInfoDao.findList(userConfig.getMinSize(), myFormatter.format(d));
 			if (list == null || list.size() < userConfig.getMinSize()) {
-				int c = userConfig.getMinSize() - list.size();
+				int c = userConfig.getMinSize() - (list == null ? 0 : list.size());
 				// 免费的
 				if (userConfig.getStartFree()) {
 					try {
@@ -68,7 +68,7 @@ public class IPTask {
 					} catch (Exception e) {
 					}
 				}
-
+				
 				// 多个代理 格式 ip:port 每行一个
 				List<String> urls = userConfig.getUrls();
 				while (c > 0) {
@@ -92,7 +92,7 @@ public class IPTask {
 			}
 		}
 	}
-	
+
 	private int parsekingdaili(String url) {
 		int result = 0;
 		// 建立一个新的请求客户端
@@ -106,15 +106,15 @@ public class IPTask {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		// 获取返回结果中的实体
 		HttpEntity entity = response.getEntity();
-
+		
 		// 将返回的实体输出
 		try {
 			String[] ss = EntityUtils.toString(entity).split("\n");
 			List<IpProxyInfo> list = new ArrayList<>();
-
+			
 			// 创建异步信息
 			List<CompletableFuture<IpProxyInfo>> alistCompletableFuture = new ArrayList<>();
 			for (String string : ss) {
@@ -129,7 +129,7 @@ public class IPTask {
 							break;
 						}
 					}
-
+					
 					if (a) {
 						list.add(info);
 						CompletableFuture<IpProxyInfo> createOrder = null;
@@ -146,7 +146,7 @@ public class IPTask {
 					return 0;
 				}
 			}
-
+			
 			// 创建结果信息
 			list = new ArrayList<>();
 			// 创建完成信息
@@ -158,13 +158,13 @@ public class IPTask {
 					list.add(info);
 				}
 			}
-
+			
 			if (list.size() > 0) {
 				ipProxyInfoDao.saveAllAndFlush(list);
 				result = list.size();
 			}
 			EntityUtils.consume(entity);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -175,9 +175,9 @@ public class IPTask {
 			e.printStackTrace();
 		}
 		return result;
-
+		
 	}
-
+	
 	private int parseGit() {
 		int result = 0;
 		// https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list
@@ -192,10 +192,10 @@ public class IPTask {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		// 获取返回结果中的实体
 		HttpEntity entity = response.getEntity();
-
+		
 		// 将返回的实体输出
 		try {
 			String[] ss = EntityUtils.toString(entity).split("\n");
@@ -213,7 +213,7 @@ public class IPTask {
 						break;
 					}
 				}
-				
+
 				if (a) {
 					list.add(info);
 					// 驗證
@@ -221,7 +221,7 @@ public class IPTask {
 					alistCompletableFuture.add(createOrder);
 				}
 			}
-			
+
 			// 创建结果信息
 			list = new ArrayList<>();
 			// 创建完成信息
@@ -249,7 +249,7 @@ public class IPTask {
 		}
 		return result;
 	}
-	
+
 //	@Scheduled(cron = "0 0 0/1 * * ? ")
 	@Scheduled(fixedRate = 1000)
 	public void runDelete() {

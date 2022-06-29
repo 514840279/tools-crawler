@@ -20,7 +20,12 @@ user:
   # ip:port 类型的代理地址服务
   urls:
     - "http://api.66daili.cn/API/GetSecretProxy/?orderid=lO8l537l6ZZOlOO3989&num=20&token=66daili&format=text&line_separator=win&protocol=http&region=domestic"
-
+  # 允許更新
+  start-upd: false
+  # 更新3分钟内的del 2 》》 0
   befor-time: 180
+  # 控制删除
   start-del: true
+  
+  
       
