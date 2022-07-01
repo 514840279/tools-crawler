@@ -43,7 +43,9 @@ public class ReplService {
 		List<String> newList = new ArrayList<>();
 		newList.add(repl.getCompanyName());
 		for (int i = 0; i < repl.getLevel(); i++) {
-			newList = replLevel(oldList, data, nodes, newList);
+			if (newList.size() > 0) {
+				newList = replLevel(oldList, data, nodes, newList);
+			}
 		}
 		
 		map.put("data", data);
@@ -65,64 +67,73 @@ public class ReplService {
 	 * @throws
 	 */
 	private List<String> replLevel(List<String> oldList, List<String[]> data, List<Map<String, String>> nodes, List<String> newList) {
+
 		// 求股东
 		List<Replcation> relList = replDao.repl(newList);
 		List<String> oth = new ArrayList<>();
 		for (Replcation replcation : relList) {
 			String[] replaStrings = new String[] { replcation.getPersonName(), replcation.getCompanyName() };
-			if (!data.contains(replaStrings)) {
+			boolean r = true;
+			for (String[] string : data) {
+				if (replaStrings[0].equals(string[0]) && replaStrings[1].equals(string[1])) {
+					r = false;
+				}
+			}
+			if (r) {
 				data.add(replaStrings);
 			}
-			
-			if (!oldList.contains(replcation.getCompanyName())) {
+
+			if (!oldList.contains(replcation.getCompanyName()) && !oth.contains(replcation.getCompanyName())) {
 				Map<String, String> nodemap = new HashMap<>();
 				nodemap.put("id", replcation.getCompanyName());
-				nodemap.put("title", replcation.getCompanyName());
+//				nodemap.put("title", replcation.getCompanyName());
 				nodemap.put("name", replcation.getCompanyName());
-				oldList.add(replcation.getCompanyName());
 				nodes.add(nodemap);
 				oth.add(replcation.getCompanyName());
 			}
 
-			if (!oldList.contains(replcation.getPersonName())) {
+			if (!oldList.contains(replcation.getPersonName()) && !oth.contains(replcation.getPersonName())) {
 				Map<String, String> nodemap = new HashMap<>();
 				nodemap.put("id", replcation.getPersonName());
-				nodemap.put("title", replcation.getPersonName());
+//				nodemap.put("title", replcation.getPersonName());
 				nodemap.put("name", replcation.getPersonName());
-				oldList.add(replcation.getPersonName());
+				nodemap.put("subscribedAmount", replcation.getSubscribedAmount());
 				nodes.add(nodemap);
 				oth.add(replcation.getPersonName());
 			}
 		}
 		// 求投资
-		relList = replDao.repl2(relList);
-		
-		for (Replcation replcation : relList) {
-			String[] replaStrings = new String[] { replcation.getPersonName(), replcation.getCompanyName() };
-			if (!data.contains(replaStrings)) {
-				data.add(replaStrings);
-			}
-			
-			if (!oldList.contains(replcation.getCompanyName())) {
-				Map<String, String> nodemap = new HashMap<>();
-				nodemap.put("id", replcation.getCompanyName());
-				nodemap.put("title", replcation.getCompanyName());
-				nodemap.put("name", replcation.getCompanyName());
-				oldList.add(replcation.getCompanyName());
-				nodes.add(nodemap);
-				oth.add(replcation.getCompanyName());
-			}
+//		relList = replDao.repl2(newList);
+//
+//		for (Replcation replcation : relList) {
+//			String[] replaStrings = new String[] { replcation.getPersonName(), replcation.getCompanyName() };
+//			if (!data.contains(replaStrings)) {
+//				data.add(replaStrings);
+//			}
+//
+//			if (!oldList.contains(replcation.getCompanyName())) {
+//				Map<String, String> nodemap = new HashMap<>();
+//				nodemap.put("id", replcation.getCompanyName());
+//				nodemap.put("title", replcation.getCompanyName());
+//				nodemap.put("name", replcation.getCompanyName());
+//				oldList.add(replcation.getCompanyName());
+//				nodes.add(nodemap);
+//				oth.add(replcation.getCompanyName());
+//			}
+//
+//			if (!oldList.contains(replcation.getPersonName())) {
+//				Map<String, String> nodemap = new HashMap<>();
+//				nodemap.put("id", replcation.getPersonName());
+//				nodemap.put("title", replcation.getPersonName());
+//				nodemap.put("name", replcation.getPersonName());
+//				oldList.add(replcation.getPersonName());
+//				nodes.add(nodemap);
+//				oth.add(replcation.getPersonName());
+//			}
+//		}
 
-			if (!oldList.contains(replcation.getPersonName())) {
-				Map<String, String> nodemap = new HashMap<>();
-				nodemap.put("id", replcation.getPersonName());
-				nodemap.put("title", replcation.getPersonName());
-				nodemap.put("name", replcation.getPersonName());
-				oldList.add(replcation.getPersonName());
-				nodes.add(nodemap);
-				oth.add(replcation.getPersonName());
-			}
-		}
+		oldList.addAll(oth);
+
 		return oth;
 	}
 

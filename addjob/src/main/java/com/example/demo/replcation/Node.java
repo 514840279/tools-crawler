@@ -16,6 +16,7 @@ public class Node {
 	private String	companyName;
 	private String	creditCode;
 	private String	lawPerson;
+	private String	subscribedAmount;
 	private String	level;
 	private String	type;
 	
@@ -125,6 +126,24 @@ public class Node {
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	/**
+	 * 方法名 ： getSubscribedAmount
+	 * 功 能 ： 返回变量 subscribedAmount 的值
+	 *
+	 * @return: String
+	 */
+	public String getSubscribedAmount() {
+		return subscribedAmount;
+	}
+	
+	/**
+	 * 方法名 ： setSubscribedAmount
+	 * 功 能 ： 设置变量 subscribedAmount 的值
+	 */
+	public void setSubscribedAmount(String subscribedAmount) {
+		this.subscribedAmount = subscribedAmount;
 	}
 	
 }

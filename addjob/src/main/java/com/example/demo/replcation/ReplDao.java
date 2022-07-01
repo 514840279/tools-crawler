@@ -17,7 +17,7 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface ReplDao {
-	
+
 	/**
 	 * 方法名： repl
 	 * 功 能： TODO(这里用一句话描述这个方法的作用)
@@ -28,7 +28,7 @@ public interface ReplDao {
 	 * @throws
 	 */
 	List<Replcation> repl(@Param("list") List<String> newList);
-
+	
 	/**
 	 * 方法名： repl2
 	 * 功 能： TODO(这里用一句话描述这个方法的作用)
@@ -38,6 +38,6 @@ public interface ReplDao {
 	 * 作 者 ： Administrator
 	 * @throws
 	 */
-	List<Replcation> repl2(@Param("list") List<Replcation> relList);
-
+	List<Replcation> repl2(@Param("list") List<String> relList);
+	
 }

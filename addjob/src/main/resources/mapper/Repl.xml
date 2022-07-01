@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.replcation.ReplDao">
+   
+   <select id="repl"  resultType="com.example.demo.replcation.Replcation">
+		SELECT *
+		FROM `data`.`base_view` a
+		where company_name in
+		 
+        <foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
+       		 #{item} 
+        </foreach>
+        
+    </select>
+    
+    
+    
+    
+       
+   <select id="repl2"  resultType="com.example.demo.replcation.Replcation">
+		SELECT *
+		FROM `data`.`base_view` a
+		where person_name in
+		 
+        <foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
+       		 #{item} 
+        </foreach>
+        
+    </select>
+
+</mapper>

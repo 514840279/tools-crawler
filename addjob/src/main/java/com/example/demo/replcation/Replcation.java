@@ -17,7 +17,7 @@ public class Replcation {
 	private String	creditCode;
 	private String	lawPerson;
 	private Integer	level;
-
+	private String	subscribedAmount;
 	private String	companyId;
 
 	private String	personName;
@@ -128,6 +128,24 @@ public class Replcation {
 	 */
 	public void setPersonName(String personName) {
 		this.personName = personName;
+	}
+	
+	/**
+	 * 方法名 ： getSubscribedAmount
+	 * 功 能 ： 返回变量 subscribedAmount 的值
+	 *
+	 * @return: String
+	 */
+	public String getSubscribedAmount() {
+		return subscribedAmount;
+	}
+	
+	/**
+	 * 方法名 ： setSubscribedAmount
+	 * 功 能 ： 设置变量 subscribedAmount 的值
+	 */
+	public void setSubscribedAmount(String subscribedAmount) {
+		this.subscribedAmount = subscribedAmount;
 	}
 	
 }
