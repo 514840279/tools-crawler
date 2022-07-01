@@ -23,6 +23,7 @@ for (const name in ElementPlusIcons){
 app.use(ElementPlus, { size: 'small', zIndex: 3000, locale });
 app.use(VueAxios, axios);
 app.use(router);
-app.use(createPinia())
+app.use(createPinia());
+
 
 app.mount('#app');

@@ -89,6 +89,7 @@ const asides: Array<Aside> = [
         icon: "AddLocation",
         data: [
           { index: "0-1-1", text: "任务", icon: "CoffeeCup", link: "job" },
+          { index: "0-1-2", text: "关系图", icon: "CoffeeCup", link: "repl" },
         ]
       },
     ]

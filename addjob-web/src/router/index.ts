@@ -65,6 +65,10 @@ const routes = [
     path: '/job',
     name: "job",
     component: () => import('../views/task/job/Index.vue'),
+  }, {
+    path: '/repl',
+    name: "repl",
+    component: () => import('../views/repl/Index.vue'),
   },{
     path: '/error',
     name: "error",
