@@ -38,12 +38,12 @@ public class IpProxyService {
 		ipProxyInfoDao.update(id, deleteFlag);
 	}
 
-	public void deleteAllByDeleteFlag(Integer deleteFlag) {
+	public void deleteAllByDeleteFlag() {
 		long startTime = System.currentTimeMillis(); // 获取开始时间
 		Long time = startTime - userConfig.getLongTime() * 1000;
 		Date d = new Date(time);
 		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		ipProxyInfoDao.deleteAllByDeleteFlag(deleteFlag, myFormatter.format(d));
+		ipProxyInfoDao.deleteAllByDeleteFlag(myFormatter.format(d));
 	}
 
 	public void deleteOne(Integer id) {
