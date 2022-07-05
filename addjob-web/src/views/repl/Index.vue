@@ -15,7 +15,7 @@
     <h1>关系</h1>
     <p v-for=" (ite, ind) in datas.data" :key="ind">{{ ite[0] + '->' + ite[1] }}</p>
     <h1>节点</h1>
-    <p v-for=" (ite, ind) in datas.nodes" :key="ind">{{ ite.id + "(" + ite.creditCode + ")" + ":" + ite.subscribedAmount }}</p>
+    <p v-for=" (ite, ind) in datas.nodes" :key="ind">{{ ite.id + (ite.creditCode == null ? "" : ("(" + ite.creditCode + ")")) + ":" + ite.subscribedAmount }}</p>
   </div>
 
   <div id="container"></div>
