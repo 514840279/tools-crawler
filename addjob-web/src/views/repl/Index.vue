@@ -15,7 +15,7 @@
     <h1>关系</h1>
     <p v-for=" (ite, ind) in datas.data" :key="ind">{{ ite[0] + '->' + ite[1] }}</p>
     <h1>节点</h1>
-    <p v-for=" (ite, ind) in datas.nodes" :key="ind">{{ ite.id + ":" + ite.subscribedAmount }}</p>
+    <p v-for=" (ite, ind) in datas.nodes" :key="ind">{{ ite.id + "(" + ite.creditCode + ")" + ":" + ite.subscribedAmount }}</p>
   </div>
 
   <div id="container"></div>
@@ -57,11 +57,11 @@ function chart(dat: any) {
       inverted: true
     },
     title: {
-      text: '惠多利农资有限公司 组织结构'
+      text: param.value.companyName + ' 组织结构'
     },
     series: [{
       type: 'organization',
-      name: '惠多利农资有限公司',
+      name: param.value.companyName,
       keys: ['from', 'to'],
       data: dat.data,
       levels: [{

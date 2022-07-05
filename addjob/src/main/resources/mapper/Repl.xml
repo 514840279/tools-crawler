@@ -10,7 +10,7 @@
         <foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
        		 #{item} 
         </foreach>
-        
+        order by subscribed_amount desc
     </select>
     
     
@@ -25,7 +25,7 @@
         <foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
        		 #{item} 
         </foreach>
-        
+        order by subscribed_amount desc
     </select>
 
 </mapper>

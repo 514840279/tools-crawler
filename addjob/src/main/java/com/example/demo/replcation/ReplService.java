@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class ReplService {
 	@Autowired
 	ReplDao replDao;
-	
+
 	/**
 	 * 方法名： chart
 	 * 功 能： TODO(这里用一句话描述这个方法的作用)
@@ -47,13 +47,13 @@ public class ReplService {
 				newList = replLevel(oldList, data, nodes, newList);
 			}
 		}
-		
+
 		map.put("data", data);
 		map.put("nodes", nodes);
-
+		
 		return map;
 	}
-
+	
 	/**
 	 * @return
 	 * 方法名： replLevel
@@ -67,7 +67,7 @@ public class ReplService {
 	 * @throws
 	 */
 	private List<String> replLevel(List<String> oldList, List<String[]> data, List<Map<String, String>> nodes, List<String> newList) {
-
+		
 		// 求股东
 		List<Replcation> relList = replDao.repl(newList);
 		List<String> oth = new ArrayList<>();
@@ -82,16 +82,18 @@ public class ReplService {
 			if (r) {
 				data.add(replaStrings);
 			}
-
+			
 			if (!oldList.contains(replcation.getCompanyName()) && !oth.contains(replcation.getCompanyName())) {
 				Map<String, String> nodemap = new HashMap<>();
 				nodemap.put("id", replcation.getCompanyName());
 //				nodemap.put("title", replcation.getCompanyName());
 				nodemap.put("name", replcation.getCompanyName());
+				nodemap.put("companyId", replcation.getCompanyId());
+				nodemap.put("creditCode", replcation.getCreditCode());
 				nodes.add(nodemap);
 				oth.add(replcation.getCompanyName());
 			}
-
+			
 			if (!oldList.contains(replcation.getPersonName()) && !oth.contains(replcation.getPersonName())) {
 				Map<String, String> nodemap = new HashMap<>();
 				nodemap.put("id", replcation.getPersonName());
@@ -131,10 +133,10 @@ public class ReplService {
 //				oth.add(replcation.getPersonName());
 //			}
 //		}
-
+		
 		oldList.addAll(oth);
-
+		
 		return oth;
 	}
-
+	
 }
