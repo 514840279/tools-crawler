@@ -39,5 +39,29 @@ public interface ReplDao {
 	 * @throws
 	 */
 	List<Replcation> repl2(@Param("list") List<String> relList);
+
+	Node company(@Param("companyName") String companyName);
+	
+	/**
+	 * 方法名： toCNode
+	 * 功 能： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param temp
+	 * 参 数： @return
+	 * 返 回： List<Node>
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	List<Node> toCNode(@Param("node") Node temp);
+
+	/**
+	 * 方法名： toPNode
+	 * 功 能： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param temp
+	 * 参 数： @return
+	 * 返 回： List<Node>
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	List<Node> toPNode(@Param("node") Node temp);
 	
 }

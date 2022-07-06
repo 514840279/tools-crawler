@@ -90,7 +90,7 @@ class ServiceRequest {
   }
 }
 const  http:ServiceRequest = new ServiceRequest({
-  timeout: 1500 // 可适当调整
+  timeout: 225000 // 可适当调整
 });
 
 export default http;

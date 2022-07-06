@@ -12,21 +12,46 @@
   <el-button type="primary" @click="init()">确定</el-button>
 
   <div>
-    <h1>关系</h1>
-    <p v-for=" (ite, ind) in datas.data" :key="ind">{{ ite[0] + '->' + ite[1] }}</p>
-    <h1>节点</h1>
-    <p v-for=" (ite, ind) in datas.nodes" :key="ind">{{ ite.id + (ite.creditCode == null ? "" : ("(" + ite.creditCode + ")")) + ":" + ite.subscribedAmount }}</p>
+    <h1>企业》企业股东 关系</h1>
+    <!-- <p v-for=" (ite, ind) in datas.data1" :key="ind">{{ ite.personName + (ite.subscribedAmount == null ? "" : ":" + ite.subscribedAmount) + (ite.pers == null ? "" : ("(" + (ite.pers * 100) + "%)")) + '->' + ite.companyName }}</p> -->
+    <RelTree :datas="datas.data1"></RelTree>
   </div>
 
-  <div id="container"></div>
+  <div id="container" style="height: 800px;width: 100%; border: 1px solid;"></div>
+
+  <div>
+    <h1>企业》投资企业 关系</h1>
+    <!-- <p v-for=" (ite, ind) in datas.rel2" :key="ind">{{ ite.personName + (ite.subscribedAmount == null ? "" : ":" + ite.subscribedAmount) + (ite.pers == null ? "" : ("(" + (ite.pers * 100) + "%)")) + '->' + ite.companyName }}</p>
+    <h1>节点</h1>
+    <p v-for=" (ite, ind) in datas.nodes2" :key="ind">{{ ite.id + (ite.creditCode == null ? "" : ("(" + ite.creditCode + ")")) }}</p> -->
+    <RelTree :datas="datas.data2"></RelTree>
+  </div>
+  <div id="container2" style="height:800px ;width:100%; border: 1px solid;"></div>
 </template>
 
 <script setup lang="ts">
-import Rel from './Rel.vue'
-import Load from './Load.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import http from '../../plugins/http'
-import { ChartView } from 'echarts';
+import RelTree from '../../components/tree/RelTree.vue'
+
+
+
+import * as echarts from 'echarts';
+
+type EChartsOption = echarts.EChartsOption;
+var option: EChartsOption;
+
+var myChart1: any = null;
+var myChart2: any = null;
+
+
+onMounted(() => {
+  var chartDom = document.getElementById('container')!;
+  myChart1 = echarts.init(chartDom);
+
+  var chartDom2 = document.getElementById('container2')!;
+  myChart2 = echarts.init(chartDom2);
+})
 
 let param = ref<any>({
   companyName: "北京磐石如金投资管理有限公司",
@@ -36,73 +61,112 @@ let param = ref<any>({
 let datas = ref<any>([]);
 
 function init() {
-  http.post<any>('/repl/chart', param.value).then((response) => {
+  http.post<any>('/repl/echart1', param.value).then((response) => {
     if (response.data != null && response.code == 200) {
+
       datas.value = response.data;
-      chart(response.data);
+      console.log(datas.value)
+      chart1(response.data);
+      chart2(response.data);
     }
   }).catch((err) => {
     // TODO
   });
 
 }
+// 投资
+function chart2(dat: any) {
+  myChart2.hideLoading();
 
-
-
-function chart(dat: any) {
-  // JS 代码 
-  Highcharts.chart('container', {
-    chart: {
-      height: 2200,
-      inverted: true
-    },
-    title: {
-      text: param.value.companyName + ' 组织结构'
-    },
-    series: [{
-      type: 'organization',
-      name: param.value.companyName,
-      keys: ['from', 'to'],
-      data: dat.data,
-      levels: [{
-        level: 0,
-        color: 'silver',
-        height: 25
-      }, {
-        level: 1,
-        color: 'silver',
-        height: 25
-      }, {
-        level: 2,
-        color: 'silver'
-      }, {
-        level: 3,
-        color: 'silver'
-      }, {
-        level: 4,
-        color: 'silver'
-      }, {
-        level: 5,
-        color: 'silver'
-      }],
-      nodes: dat.nodes,
-      colorByPoint: false,
-      color: '#007ad0',
-      dataLabels: {
-        color: 'white'
+  myChart2.setOption(
+    (option = {
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
       },
-      borderColor: 'white',
-      nodeWidth: 300
-    }],
-    tooltip: {
-      outside: true
-    },
-    exporting: {
-      allowHTML: true,
-      sourceWidth: 1200,
-      sourceHeight: 1200
-    }
-  });
+      series: [
+        {
+          type: 'tree',
+
+          data: [dat.data2],
+
+          left: '2%',
+          right: '2%',
+          top: '8%',
+          bottom: '20%',
+
+          symbol: 'emptyCircle',
+
+          orient: 'vertical',
+
+          expandAndCollapse: true,
+
+          label: {
+            position: 'top',
+            rotate: -90,
+            verticalAlign: 'middle',
+            align: 'right',
+            fontSize: 9
+          },
+
+          leaves: {
+            label: {
+              position: 'bottom',
+              rotate: -90,
+              verticalAlign: 'middle',
+              align: 'left'
+            }
+          },
+
+          animationDurationUpdate: 750
+        }
+      ]
+    })
+  );
+}
+
+// 股东
+function chart1(dat: any) {
+  myChart1.hideLoading();
+  myChart1.setOption(
+    (option = {
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
+      },
+      series: [
+        {
+          type: 'tree',
+          data: [dat.data1],
+          left: '2%',
+          right: '2%',
+          top: '20%',
+          bottom: '8%',
+          symbol: 'emptyCircle',
+          orient: 'BT',
+          expandAndCollapse: true,
+          label: {
+            position: 'bottom',
+            rotate: 90,
+            verticalAlign: 'middle',
+            align: 'right'
+          },
+          leaves: {
+            label: {
+              position: 'top',
+              rotate: 90,
+              verticalAlign: 'middle',
+              align: 'left'
+            }
+          },
+          emphasis: {
+            focus: 'descendant'
+          },
+          animationDurationUpdate: 750
+        }
+      ]
+    })
+  );
 }
 
 

@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.replcation.ReplDao">
+
+
+	<select id="company" parameterType="java.lang.String" resultType="com.example.demo.replcation.Node">
+		select a.company_id,a.company_name as name,a.credit_code,0 as level
+		 from  `data`.base_company_8_3 a
+		where a.company_name =#{companyName}
+	
+	</select>
    
    <select id="repl"  resultType="com.example.demo.replcation.Replcation">
-		SELECT *
-		FROM `data`.`base_view` a
-		where company_name in
+		SELECT
+	`basic_one`.`company_name` AS `company_name`,
+	`basic_one`.`credit_code` AS `credit_code`,
+	`basic_one`.`company_id` AS `company_id`,
+	`owner_one`.`person_name` AS `person_name`,
+	`owner_one`.`types_of` AS `types_of`,
+	`owner_one`.`subscribed_amount` AS `subscribed_amount`
+	,(SELECT	round(( `owner_one`.`subscribed_amount` / sum( `b`.`subscribed_amount` )), 4 ) 	FROM	`data`.`base_owner` `b` 	WHERE	( `b`.`company_id` = `owner_one`.`company_id` )
+	and  b.company_id in 
+	<foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
+       		 #{item} 
+        </foreach>
+	) AS `pers`,
+	`owner_two`.`company_id` AS `person_id`,
+	`owner_two`.`credit_code` AS `person_code` 
+FROM
+	`data`.`base_company_8_3` `basic_one`
+	LEFT JOIN `data`.`base_owner` `owner_one` ON `basic_one`.`company_id` = `owner_one`.`company_id`
+	LEFT JOIN `data`.`base_company_8_3` `owner_two` ON `owner_one`.`person_name` = `owner_two`.`company_name`
+		where basic_one.company_id in
 		 
         <foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
        		 #{item} 
@@ -18,14 +43,66 @@
     
        
    <select id="repl2"  resultType="com.example.demo.replcation.Replcation">
-		SELECT *
-		FROM `data`.`base_view` a
-		where person_name in
-		 
+	SELECT
+		`basic_one`.`company_name` AS `company_name`,
+		`basic_one`.`credit_code` AS `credit_code`,
+		`basic_one`.`company_id` AS `company_id`,
+		`owner_one`.`person_name` AS `person_name`,
+		`owner_one`.`types_of` AS `types_of`,
+		`owner_one`.`subscribed_amount` AS `subscribed_amount`
+		,(SELECT	round(( `owner_one`.`subscribed_amount` / sum( `b`.`subscribed_amount` )), 4 ) 	FROM	`data`.`base_owner` `b` 	WHERE	( `b`.`company_id` = `owner_one`.`company_id` )
+		and  b.company_id in 
+		<foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
+	       		 #{item} 
+	        </foreach>
+		) AS `pers`,
+		`owner_two`.`company_id` AS `person_id`,
+		`owner_two`.`credit_code` AS `person_code` 
+	FROM
+	`data`.`base_company_8_3` `basic_one`
+	LEFT JOIN `data`.`base_owner` `owner_one` ON `basic_one`.`company_id` = `owner_one`.`company_id`
+	LEFT JOIN `data`.`base_company_8_3` `owner_two` ON `owner_one`.`person_name` = `owner_two`.`company_name`
+		where owner_two.company_id in
         <foreach collection="list" item="item"  index="idIndex" open="(" separator="," close=")" >
        		 #{item} 
         </foreach>
         order by subscribed_amount desc
+    </select>
+    
+    
+    <select id="toCNode" resultType="com.example.demo.replcation.Node">
+	    SELECT
+			`basic_one`.`company_name` AS `name`,
+			`basic_one`.`credit_code` AS `credit_code`,
+			`basic_one`.`company_id` AS `company_id`,
+		
+			`owner_one`.`subscribed_amount` AS `value`
+			,(SELECT	round(( `owner_one`.`subscribed_amount` / sum( `b`.`subscribed_amount` )), 4 ) 	FROM	`data`.`base_owner` `b` 	WHERE	( `b`.`company_id` = `owner_one`.`company_id` ) and  b.company_id =#{node.companyId}) AS `pers`
+			,${node.level}+1 as level
+		FROM
+		`data`.`base_company_8_3` `basic_one`
+		LEFT JOIN `data`.`base_owner` `owner_one` ON `basic_one`.`company_id` = `owner_one`.`company_id`
+		LEFT JOIN `data`.`base_company_8_3` `owner_two` ON `owner_one`.`person_name` = `owner_two`.`company_name`
+			where owner_two.company_id =#{node.companyId}
+        order by subscribed_amount desc
+    
+    </select>
+    
+    <select id="toPNode" resultType="com.example.demo.replcation.Node">
+ 		SELECT
+			`owner_one`.`person_name` AS `name`
+			,`owner_one`.`subscribed_amount` AS `value`
+			,(SELECT	round(( `owner_one`.`subscribed_amount` / sum( `b`.`subscribed_amount` )), 4 ) 	FROM	`data`.`base_owner` `b` 	WHERE	( `b`.`company_id` = `owner_one`.`company_id` )	and  b.company_id = #{node.companyId}) AS `pers`
+			,`owner_two`.`company_id` AS `company_id`
+			,`owner_two`.`credit_code` AS `credit_code` 
+			,${node.level}+1 as level
+		FROM
+	 		`data`.`base_owner` `owner_one`
+		LEFT JOIN `data`.`base_company_8_3` `owner_two` ON `owner_one`.`person_name` = `owner_two`.`company_name`
+		where owner_one.company_id = #{node.companyId}
+        order by subscribed_amount desc
+    	
+    	
     </select>
 
 </mapper>

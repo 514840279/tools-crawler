@@ -1,5 +1,7 @@
 package com.example.demo.replcation;
 
+import java.util.List;
+
 /**
  * 文件名 ： Node.java
  * 包 名 ： com.example.demo.replcation
@@ -11,14 +13,38 @@ package com.example.demo.replcation;
  * 版 本 ： V1.0
  */
 public class Node {
-
-	private String	companyId;
-	private String	companyName;
-	private String	creditCode;
-	private String	lawPerson;
-	private String	subscribedAmount;
-	private String	level;
-	private String	type;
+	
+	private String		companyId;
+	private String		name;
+	private String		creditCode;
+	private String		value;
+	private Float		pers;
+	private int			level;
+	private List<Node>	children;
+	
+	/**
+	 * 构造方法：
+	 * 描 述： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数：
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	public Node() {
+	}
+	
+	/**
+	 * 构造方法：
+	 * 描 述： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param node
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	public Node(Node node) {
+		this.companyId = node.companyId;
+		this.creditCode = node.creditCode;
+		this.level = node.level;
+		this.name = node.name;
+	}
 	
 	/**
 	 * 方法名 ： getCompanyId
@@ -29,7 +55,7 @@ public class Node {
 	public String getCompanyId() {
 		return companyId;
 	}
-	
+
 	/**
 	 * 方法名 ： setCompanyId
 	 * 功 能 ： 设置变量 companyId 的值
@@ -39,21 +65,21 @@ public class Node {
 	}
 	
 	/**
-	 * 方法名 ： getCompanyName
-	 * 功 能 ： 返回变量 companyName 的值
+	 * 方法名 ： getName
+	 * 功 能 ： 返回变量 name 的值
 	 *
 	 * @return: String
 	 */
-	public String getCompanyName() {
-		return companyName;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 方法名 ： setCompanyName
-	 * 功 能 ： 设置变量 companyName 的值
+	 * 方法名 ： setName
+	 * 功 能 ： 设置变量 name 的值
 	 */
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	/**
@@ -65,7 +91,7 @@ public class Node {
 	public String getCreditCode() {
 		return creditCode;
 	}
-	
+
 	/**
 	 * 方法名 ： setCreditCode
 	 * 功 能 ： 设置变量 creditCode 的值
@@ -75,75 +101,75 @@ public class Node {
 	}
 	
 	/**
-	 * 方法名 ： getLawPerson
-	 * 功 能 ： 返回变量 lawPerson 的值
+	 * 方法名 ： getValue
+	 * 功 能 ： 返回变量 value 的值
 	 *
 	 * @return: String
 	 */
-	public String getLawPerson() {
-		return lawPerson;
+	public String getValue() {
+		return value;
 	}
 	
 	/**
-	 * 方法名 ： setLawPerson
-	 * 功 能 ： 设置变量 lawPerson 的值
+	 * 方法名 ： setValue
+	 * 功 能 ： 设置变量 value 的值
 	 */
-	public void setLawPerson(String lawPerson) {
-		this.lawPerson = lawPerson;
+	public void setValue(String value) {
+		this.value = value;
 	}
 	
+	/**
+	 * 方法名 ： getPers
+	 * 功 能 ： 返回变量 pers 的值
+	 *
+	 * @return: Float
+	 */
+	public Float getPers() {
+		return pers;
+	}
+	
+	/**
+	 * 方法名 ： setPers
+	 * 功 能 ： 设置变量 pers 的值
+	 */
+	public void setPers(Float pers) {
+		this.pers = pers;
+	}
+	
+	/**
+	 * 方法名 ： getChildren
+	 * 功 能 ： 返回变量 children 的值
+	 *
+	 * @return: List<Node>
+	 */
+	public List<Node> getChildren() {
+		return children;
+	}
+	
+	/**
+	 * 方法名 ： setChildren
+	 * 功 能 ： 设置变量 children 的值
+	 */
+	public void setChildren(List<Node> children) {
+		this.children = children;
+	}
+
 	/**
 	 * 方法名 ： getLevel
 	 * 功 能 ： 返回变量 level 的值
 	 *
-	 * @return: String
+	 * @return: int
 	 */
-	public String getLevel() {
+	public int getLevel() {
 		return level;
 	}
-	
+
 	/**
 	 * 方法名 ： setLevel
 	 * 功 能 ： 设置变量 level 的值
 	 */
-	public void setLevel(String level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
-	
-	/**
-	 * 方法名 ： getType
-	 * 功 能 ： 返回变量 type 的值
-	 *
-	 * @return: String
-	 */
-	public String getType() {
-		return type;
-	}
-	
-	/**
-	 * 方法名 ： setType
-	 * 功 能 ： 设置变量 type 的值
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	/**
-	 * 方法名 ： getSubscribedAmount
-	 * 功 能 ： 返回变量 subscribedAmount 的值
-	 *
-	 * @return: String
-	 */
-	public String getSubscribedAmount() {
-		return subscribedAmount;
-	}
-	
-	/**
-	 * 方法名 ： setSubscribedAmount
-	 * 功 能 ： 设置变量 subscribedAmount 的值
-	 */
-	public void setSubscribedAmount(String subscribedAmount) {
-		this.subscribedAmount = subscribedAmount;
-	}
-	
+
 }

@@ -12,15 +12,16 @@ package com.example.demo.replcation;
  */
 public class Replcation {
 
-	private String	companyName;
-
-	private String	creditCode;
-	private String	lawPerson;
-	private Integer	level;
-	private String	subscribedAmount;
 	private String	companyId;
-
+	private String	companyName;
+	private String	creditCode;
+	
+	private String	personId;
+	private String	personCode;
 	private String	personName;
+	private String	typesOf;
+	private Float	subscribedAmount;
+	private Float	pers;
 	
 	/**
 	 * 方法名 ： getCompanyName
@@ -57,43 +58,7 @@ public class Replcation {
 	public void setCreditCode(String creditCode) {
 		this.creditCode = creditCode;
 	}
-	
-	/**
-	 * 方法名 ： getLawPerson
-	 * 功 能 ： 返回变量 lawPerson 的值
-	 *
-	 * @return: String
-	 */
-	public String getLawPerson() {
-		return lawPerson;
-	}
-	
-	/**
-	 * 方法名 ： setLawPerson
-	 * 功 能 ： 设置变量 lawPerson 的值
-	 */
-	public void setLawPerson(String lawPerson) {
-		this.lawPerson = lawPerson;
-	}
-	
-	/**
-	 * 方法名 ： getLevel
-	 * 功 能 ： 返回变量 level 的值
-	 *
-	 * @return: Integer
-	 */
-	public Integer getLevel() {
-		return level;
-	}
-	
-	/**
-	 * 方法名 ： setLevel
-	 * 功 能 ： 设置变量 level 的值
-	 */
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-	
+
 	/**
 	 * 方法名 ： getCompanyId
 	 * 功 能 ： 返回变量 companyId 的值
@@ -136,7 +101,7 @@ public class Replcation {
 	 *
 	 * @return: String
 	 */
-	public String getSubscribedAmount() {
+	public Float getSubscribedAmount() {
 		return subscribedAmount;
 	}
 	
@@ -144,8 +109,80 @@ public class Replcation {
 	 * 方法名 ： setSubscribedAmount
 	 * 功 能 ： 设置变量 subscribedAmount 的值
 	 */
-	public void setSubscribedAmount(String subscribedAmount) {
+	public void setSubscribedAmount(Float subscribedAmount) {
 		this.subscribedAmount = subscribedAmount;
 	}
 	
+	/**
+	 * 方法名 ： getPersonId
+	 * 功 能 ： 返回变量 personId 的值
+	 *
+	 * @return: String
+	 */
+	public String getPersonId() {
+		return personId;
+	}
+	
+	/**
+	 * 方法名 ： setPersonId
+	 * 功 能 ： 设置变量 personId 的值
+	 */
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+	
+	/**
+	 * 方法名 ： getPersonCode
+	 * 功 能 ： 返回变量 personCode 的值
+	 *
+	 * @return: String
+	 */
+	public String getPersonCode() {
+		return personCode;
+	}
+	
+	/**
+	 * 方法名 ： setPersonCode
+	 * 功 能 ： 设置变量 personCode 的值
+	 */
+	public void setPersonCode(String personCode) {
+		this.personCode = personCode;
+	}
+	
+	/**
+	 * 方法名 ： getTypesOf
+	 * 功 能 ： 返回变量 typesOf 的值
+	 *
+	 * @return: String
+	 */
+	public String getTypesOf() {
+		return typesOf;
+	}
+
+	/**
+	 * 方法名 ： setTypesOf
+	 * 功 能 ： 设置变量 typesOf 的值
+	 */
+	public void setTypesOf(String typesOf) {
+		this.typesOf = typesOf;
+	}
+
+	/**
+	 * 方法名 ： getPers
+	 * 功 能 ： 返回变量 pers 的值
+	 *
+	 * @return: Float
+	 */
+	public Float getPers() {
+		return pers;
+	}
+
+	/**
+	 * 方法名 ： setPers
+	 * 功 能 ： 设置变量 pers 的值
+	 */
+	public void setPers(Float pers) {
+		this.pers = pers;
+	}
+
 }

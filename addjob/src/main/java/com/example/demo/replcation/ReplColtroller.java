@@ -25,10 +25,10 @@ import com.example.demo.common.ResultUtil;
 @RequestMapping("/repl")
 @RestController
 public class ReplColtroller {
-	
+
 	@Autowired
 	ReplService replService;
-	
+
 	@PostMapping("/chart")
 	public BaseResult<Map<String, List<?>>> chart(@RequestBody Replcation repl) {
 		try {
@@ -38,5 +38,15 @@ public class ReplColtroller {
 			return ResultUtil.error(e.getMessage());
 		}
 	}
-	
+
+	@PostMapping("/echart1")
+	public BaseResult<Map<String, ?>> echart1(@RequestBody Replcation repl) {
+		try {
+			Map<String, ?> map = replService.echart1(repl);
+			return ResultUtil.success(map);
+		} catch (Exception e) {
+			return ResultUtil.error(e.getMessage());
+		}
+	}
+
 }
