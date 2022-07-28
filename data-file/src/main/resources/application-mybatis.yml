@@ -1,0 +1,8 @@
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml 
+  configuration:
+    # Mybatis实体类属性与数据库表列名对应规则：驼峰转换
+    mapUnderscoreToCamelCase: true
+    callSettersOnNulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

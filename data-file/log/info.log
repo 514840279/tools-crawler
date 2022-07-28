@@ -1,0 +1,295 @@
+2022-07-28 13:28:12.159 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 9964 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:28:12.160 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 3 profiles are active: "data-mysql", "hikari", "mybatis"
+2022-07-28 13:28:12.213 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 13:28:12.213 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 13:28:15.809 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18005 (http)
+2022-07-28 13:28:15.824 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:28:15.825 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:28:15.933 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:28:15.939 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3725 ms
+2022-07-28 13:28:16.434 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Stopping service [Tomcat]
+2022-07-28 13:28:16.455 [restartedMain] [INFO ] o.s.b.a.l.ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-07-28 13:29:10.013 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 3776 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:29:10.015 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 3 profiles are active: "data-mysql", "hikari", "mybatis"
+2022-07-28 13:29:10.121 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 13:29:10.121 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 13:29:11.435 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:29:11.448 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:29:11.448 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:29:11.527 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:29:11.528 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1406 ms
+2022-07-28 13:29:12.043 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Stopping service [Tomcat]
+2022-07-28 13:29:12.063 [restartedMain] [INFO ] o.s.b.a.l.ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-07-28 13:29:51.966 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 1052 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:29:51.968 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 3 profiles are active: "mysql", "hikari", "mybatis"
+2022-07-28 13:29:52.107 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 13:29:52.107 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 13:29:53.190 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:29:53.203 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:29:53.204 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:29:53.277 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:29:53.278 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1170 ms
+2022-07-28 13:29:53.992 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:29:54.023 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:29:54.034 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 2.643 seconds (JVM running for 3.408)
+2022-07-28 13:31:50.468 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 1052 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:31:50.468 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:31:50.702 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:31:50.703 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:31:50.703 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:31:50.721 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:31:50.721 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 248 ms
+2022-07-28 13:31:50.901 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:31:50.909 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:31:50.918 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 0.533 seconds (JVM running for 120.292)
+2022-07-28 13:31:50.921 [restartedMain] [INFO ] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-07-28 13:34:35.472 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 1052 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:34:35.473 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:34:35.702 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:34:35.703 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:34:35.703 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:34:35.732 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:34:35.732 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 255 ms
+2022-07-28 13:34:35.876 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Stopping service [Tomcat]
+2022-07-28 13:34:35.883 [restartedMain] [INFO ] o.s.b.a.l.ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-07-28 13:34:38.378 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 1052 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:34:38.379 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:34:38.585 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:34:38.586 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:34:38.586 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:34:38.597 [restartedMain] [INFO ] o.a.c.c.C.[Tomcat-1].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:34:38.597 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 212 ms
+2022-07-28 13:34:38.765 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:34:38.779 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:34:38.785 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 0.45 seconds (JVM running for 288.158)
+2022-07-28 13:34:38.793 [restartedMain] [INFO ] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-07-28 13:35:23.583 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 1052 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:35:23.583 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:35:23.788 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:35:23.789 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:35:23.789 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:35:23.800 [restartedMain] [INFO ] o.a.c.c.C.[Tomcat-2].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:35:23.800 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 215 ms
+2022-07-28 13:35:28.980 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 7768 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:35:28.982 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:35:29.093 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 13:35:29.094 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 13:35:30.049 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 13:35:30.061 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JDBC repository interfaces.
+2022-07-28 13:35:30.708 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:35:30.721 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:35:30.721 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:35:30.849 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:35:30.849 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1754 ms
+2022-07-28 13:35:31.835 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 13:35:32.083 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 13:35:32.234 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:35:32.240 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 13:35:32.293 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:35:32.310 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 3.896 seconds (JVM running for 4.664)
+2022-07-28 13:35:34.072 [RMI TCP Connection(3)-127.0.0.1] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-28 13:35:34.073 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2022-07-28 13:35:34.075 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 2 ms
+2022-07-28 13:36:21.726 [Thread-8] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 13:36:21.733 [Thread-8] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 13:36:21.986 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 7768 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:36:21.986 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:36:22.318 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 13:36:22.320 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 JDBC repository interfaces.
+2022-07-28 13:36:22.407 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:36:22.408 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:36:22.409 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:36:22.427 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:36:22.428 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 438 ms
+2022-07-28 13:36:22.716 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 13:36:22.726 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 13:36:22.743 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:36:22.748 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 13:36:22.770 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:36:22.783 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 0.861 seconds (JVM running for 55.137)
+2022-07-28 13:36:22.789 [restartedMain] [INFO ] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-07-28 13:36:33.617 [Thread-14] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 13:36:33.620 [Thread-14] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 13:36:33.902 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 7768 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:36:33.903 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:36:34.273 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 13:36:34.276 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JDBC repository interfaces.
+2022-07-28 13:36:34.337 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:36:34.338 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:36:34.338 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:36:34.356 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:36:34.356 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 449 ms
+2022-07-28 13:36:34.611 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 13:36:34.622 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 13:36:34.636 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:36:34.641 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 13:36:34.662 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:36:34.678 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 0.848 seconds (JVM running for 67.032)
+2022-07-28 13:36:34.681 [restartedMain] [INFO ] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-07-28 13:47:50.478 [Thread-20] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 13:47:50.482 [Thread-20] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 13:47:50.719 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 7768 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 13:47:50.719 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 13:47:50.991 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 13:47:50.994 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JDBC repository interfaces.
+2022-07-28 13:47:51.071 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 13:47:51.072 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 13:47:51.072 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 13:47:51.084 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 13:47:51.084 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 362 ms
+2022-07-28 13:47:51.310 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 13:47:51.324 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 13:47:51.335 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 13:47:51.338 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 13:47:51.351 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 13:47:51.360 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 0.703 seconds (JVM running for 743.71)
+2022-07-28 13:47:51.364 [restartedMain] [INFO ] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-07-28 14:05:00.111 [Thread-26] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 14:05:00.116 [Thread-26] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 14:05:00.360 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 7768 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 14:05:00.360 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 14:05:00.683 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 14:05:00.685 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 JDBC repository interfaces.
+2022-07-28 14:05:00.782 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 14:05:00.782 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 14:05:00.782 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 14:05:00.795 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 14:05:00.795 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 433 ms
+2022-07-28 14:05:01.027 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 14:05:01.037 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 14:05:01.049 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 14:05:01.052 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 14:05:01.065 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 14:05:01.077 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 0.767 seconds (JVM running for 1773.422)
+2022-07-28 14:05:01.082 [restartedMain] [INFO ] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-07-28 14:05:02.925 [RMI TCP Connection(46)-127.0.0.1] [INFO ] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-07-28 14:05:03.045 [RMI TCP Connection(46)-127.0.0.1] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 14:05:03.048 [RMI TCP Connection(46)-127.0.0.1] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 16:27:56.824 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 10716 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 16:27:56.826 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 16:27:56.920 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 16:27:56.921 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 16:27:57.890 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 16:27:57.906 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 JDBC repository interfaces.
+2022-07-28 16:27:58.576 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 16:27:58.589 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 16:27:58.589 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 16:27:58.703 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 16:27:58.703 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1781 ms
+2022-07-28 16:28:00.188 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 16:28:00.391 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 16:28:00.563 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 16:28:00.571 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 16:28:00.634 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 16:28:00.640 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 4.384 seconds (JVM running for 5.131)
+2022-07-28 16:28:00.642 [RMI TCP Connection(3)-127.0.0.1] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-28 16:28:00.642 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2022-07-28 16:28:00.645 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 3 ms
+2022-07-28 16:28:00.654 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描_<<
+2022-07-28 16:28:00.666 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描开始_//
+2022-07-28 16:28:00.667 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描结束_//
+2022-07-28 16:29:27.652 [RMI TCP Connection(11)-127.0.0.1] [INFO ] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-07-28 16:29:27.733 [RMI TCP Connection(11)-127.0.0.1] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 16:29:27.742 [RMI TCP Connection(11)-127.0.0.1] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 16:29:33.368 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 12024 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 16:29:33.370 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 16:29:33.438 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 16:29:33.438 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 16:29:34.639 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 16:29:34.657 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JDBC repository interfaces.
+2022-07-28 16:29:35.554 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 16:29:35.568 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 16:29:35.569 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 16:29:35.663 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 16:29:35.664 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2225 ms
+2022-07-28 16:29:37.280 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 16:29:37.541 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 16:29:37.724 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 16:29:37.731 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 16:29:37.799 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 16:29:37.816 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 5.221 seconds (JVM running for 6.411)
+2022-07-28 16:29:37.826 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描_<<
+2022-07-28 16:29:39.569 [RMI TCP Connection(3)-127.0.0.1] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-28 16:29:39.569 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2022-07-28 16:29:39.571 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 2 ms
+2022-07-28 16:29:53.733 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描开始_//
+2022-07-28 16:32:19.759 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描结束_//
+2022-07-28 16:32:21.956 [RMI TCP Connection(9)-127.0.0.1] [INFO ] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-07-28 16:32:22.061 [RMI TCP Connection(9)-127.0.0.1] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 16:32:22.075 [RMI TCP Connection(9)-127.0.0.1] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 16:32:30.502 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 13112 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 16:32:30.503 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 16:32:30.572 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 16:32:30.573 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 16:32:31.784 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 16:32:31.802 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JDBC repository interfaces.
+2022-07-28 16:32:32.729 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 16:32:32.751 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 16:32:32.752 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 16:32:32.873 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 16:32:32.874 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2298 ms
+2022-07-28 16:32:34.500 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 16:32:34.756 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 16:32:34.939 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 16:32:34.947 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 16:32:35.014 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 16:32:35.041 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 5.39 seconds (JVM running for 6.578)
+2022-07-28 16:32:35.939 [RMI TCP Connection(3)-127.0.0.1] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-28 16:32:35.939 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2022-07-28 16:32:35.940 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 1 ms
+2022-07-28 16:33:17.767 [Thread-8] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 16:33:17.780 [Thread-8] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
+2022-07-28 16:33:18.057 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 13112 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 16:33:18.057 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 16:33:46.862 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 12064 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 16:33:46.863 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 16:33:46.930 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 16:33:46.930 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 16:33:48.109 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 16:33:48.126 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 JDBC repository interfaces.
+2022-07-28 16:33:48.938 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 16:33:48.949 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 16:33:48.950 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 16:33:49.036 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 16:33:49.038 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2107 ms
+2022-07-28 16:33:50.566 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 16:33:50.809 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 16:33:50.980 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 16:33:50.989 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 16:33:51.050 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 16:33:51.069 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 4.933 seconds (JVM running for 5.998)
+2022-07-28 16:33:51.623 [RMI TCP Connection(3)-127.0.0.1] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-28 16:33:51.623 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2022-07-28 16:33:51.625 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 2 ms
+2022-07-28 16:33:53.296 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描_<<
+2022-07-28 16:34:03.414 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描开始_//
+2022-07-28 16:40:19.506 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Starting DataFileApplication using Java 1.8.0_151 on PC-20180711QXFQ with PID 2896 (D:\git\data-file\target\classes started by Administrator in D:\git\data-file)
+2022-07-28 16:40:19.507 [restartedMain] [INFO ] com.example.demo.DataFileApplication : The following 4 profiles are active: "mysql", "hikari", "mybatis", "user"
+2022-07-28 16:40:19.566 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-28 16:40:19.567 [restartedMain] [INFO ] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-28 16:40:20.716 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-07-28 16:40:20.734 [restartedMain] [INFO ] o.s.d.r.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 JDBC repository interfaces.
+2022-07-28 16:40:21.588 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 18020 (http)
+2022-07-28 16:40:21.602 [restartedMain] [INFO ] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2022-07-28 16:40:21.603 [restartedMain] [INFO ] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-28 16:40:21.699 [restartedMain] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring embedded WebApplicationContext
+2022-07-28 16:40:21.699 [restartedMain] [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2131 ms
+2022-07-28 16:40:23.213 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Starting...
+2022-07-28 16:40:23.459 [restartedMain] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Start completed.
+2022-07-28 16:40:23.626 [restartedMain] [INFO ] o.s.b.d.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2022-07-28 16:40:23.634 [restartedMain] [INFO ] o.s.b.actuate.endpoint.web.EndpointLinksResolver : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-28 16:40:23.698 [restartedMain] [INFO ] o.s.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 18020 (http) with context path '/data'
+2022-07-28 16:40:23.724 [restartedMain] [INFO ] com.example.demo.DataFileApplication : Started DataFileApplication in 4.931 seconds (JVM running for 6.014)
+2022-07-28 16:40:24.749 [RMI TCP Connection(3)-127.0.0.1] [INFO ] o.a.c.c.ContainerBase.[Tomcat].[localhost].[/data] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-28 16:40:24.749 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2022-07-28 16:40:24.750 [RMI TCP Connection(3)-127.0.0.1] [INFO ] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 1 ms
+2022-07-28 16:40:24.946 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描_<<
+2022-07-28 16:40:29.944 [restartedMain] [INFO ] com.example.demo.run.LoadFile : >>_扫描开始_//
+2022-07-28 16:40:36.433 [SpringApplicationShutdownHook] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown initiated...
+2022-07-28 16:40:36.450 [SpringApplicationShutdownHook] [INFO ] com.zaxxer.hikari.HikariDataSource : DatebookHikariCP - Shutdown completed.
