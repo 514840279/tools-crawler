@@ -80,10 +80,11 @@ const parents = withDefaults(defineProps<{
             sizes: [10, 20, 50, 100],
             pageSize: 10,
             totalElements: 0,
+            info: {}
         }
     },
     columns: () => [],
-    optionBtn: () => { }
+    optionBtn: () => { return {} }
 
 });
 
@@ -119,7 +120,8 @@ let localOptionBtn = ref<OptionBtn>({
         pageNumber: 1,
         sizes: [10, 20, 50, 100],
         pageSize: 10,
-        totalElements: 0
+        totalElements: 0,
+        info: {}
     },
     // 表加载
     loading = ref<Boolean>(true);

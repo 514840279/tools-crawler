@@ -65,6 +65,14 @@ const routes = [
     path: '/databasetype',
     name: "databasetype",
     component: () => import('../views/database/type/Index.vue'),
+  }, {
+    path: '/loadIndex',
+    name: "loadIndex",
+    component: () => import('../views/loadFile/Index.vue'),
+  }, {
+    path: '/fileinfo',
+    name: "fileinfo",
+    component: () => import('../views/loadFile/LoadFileInfo.vue'),
   },{
     path: '/error',
     name: "error",

@@ -9,13 +9,12 @@ import {router} from './router'
 import * as ElementPlusIcons from '@element-plus/icons'
 import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale/lang/zh-cn'
-
 import App from './App.vue'
 
 
- 
-const app = createApp(App)
 
+
+const app = createApp(App)
 for (const name in ElementPlusIcons){
 	app.component(name,(ElementPlusIcons as any)[name])
 }

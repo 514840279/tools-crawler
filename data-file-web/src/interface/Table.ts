@@ -3,7 +3,7 @@ export interface PageParam{
     sizes: Array<Number>,
     pageSize: Number,
     totalElements: Number,
-    info?: Object,
+    info: Object,
     sortList?: Array<SortColumn>,
     searchList?: Array<SearchParamters>
 }
