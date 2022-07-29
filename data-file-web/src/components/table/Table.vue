@@ -37,7 +37,7 @@
                     <div v-if="localOptionBtn.page" class="apagination">
                         <el-row>
                             <el-col :span="12" :offset="12">
-                                <el-pagination class="pagex" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="param.pageNumber" :page-sizes="page.sizes" :page-size="param.pageSize" :pager-count="3" layout="total, sizes, prev, pager, next, jumper" :total="param.totalElements">
+                                <el-pagination class="pagex" style="float: right;" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="param.pageNumber" :page-sizes="page.sizes" :page-size="param.pageSize" :pager-count="3" layout="total, sizes, prev, pager, next, jumper" :total="param.totalElements">
                                 </el-pagination>
                             </el-col>
                         </el-row>

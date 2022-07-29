@@ -2,6 +2,7 @@ package com.example.demo.po;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.chuxue.application.common.base.MybatisBaseEntity;
@@ -37,6 +38,12 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	// 文件类型
 	@TableField(value = "file_type")
 	private String				fileType;
+	
+	@TableField(value = "file_sheet_name")
+	private String				fileSheetName;
+	
+	@TableField(value = "file_sheet_index")
+	private String				fileSheetIndex;
 
 	// 文件大小
 	@TableField(value = "file_size")
@@ -47,19 +54,19 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	private String				fileState;
 
 	// 字符集
-	@TableField(value = "characterset")
+	@TableField(value = "`characterset`")
 	private String				characterset;
 
 	// 跳过
-	@TableField(value = "skip")
+	@TableField(value = "`skip`")
 	private Integer				skip;
 
 	// 分割符号
-	@TableField(value = "separator")
+	@TableField(value = "`separator`")
 	private String				separator;
 
 	// 限定符号，字段包围的符号
-	@TableField(value = "enclosed")
+	@TableField(value = "`enclosed`")
 	private String				enclosed;
 
 	// 首行是标题
@@ -67,7 +74,7 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	private String				hasHead;
 
 	// 事务提交的限制
-	@TableField(value = "rows")
+	@TableField(value = "`rows`")
 	private Integer				rows;
 
 	/**
@@ -79,6 +86,8 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	 */
 	public SysLoadFileInfo() {
 	}
+
+	static String[] extensions = { ".xls", ".xlsx", ".csv", ".txt" };
 
 	/**
 	 * 构造方法：
@@ -93,6 +102,14 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 		this.uuid = uuid == null ? UUID.randomUUID().toString() : uuid;
 		this.path = path;
 		this.fileName = fileName;
+		this.fileType = fileName.substring(fileName.lastIndexOf("."));
+		this.fileState = "未配置";
+		this.deleteFlag = 0;
+		if (Arrays.asList(extensions).contains(this.fileType)) {
+			this.deleteFlag = 0;
+		} else {
+			this.deleteFlag = 1;
+		}
 		BigDecimal size = BigDecimal.valueOf(fileSize);
 		if (fileSize / 1024 < 1) {
 			this.fileSize = fileSize + "Byte";
