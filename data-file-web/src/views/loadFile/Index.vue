@@ -29,10 +29,13 @@ const ocli = function () {
   gotoFile();
 }
 
-document.onkeydown = function () {
-  show.value = !show.value;
-  gotoFile();
-}
+// let index = document.getElementById("#load-index");
+// if (index != null) {
+//   index.onkeydown = function () {
+//     show.value = !show.value;
+//     gotoFile();
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>

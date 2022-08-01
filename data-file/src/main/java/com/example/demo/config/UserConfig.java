@@ -23,9 +23,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserConfig {
-	
+
 	private Boolean	readfile	= true;
 	private String	fileDir		= "import/";
 	private String	errorDir	= "importError/";
-	
+
+	private Integer	readRows	= 10;
+	private Integer	commitRows	= 10;
+
 }

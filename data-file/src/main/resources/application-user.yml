@@ -2,3 +2,6 @@ user:
   readfile: true
   file-dir: file/import/
   error-dir: file/export/
+  read-rows: 10 
+  commit-rows: 1000
+  

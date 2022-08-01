@@ -1,11 +1,14 @@
 <template >
   <div id="load-data">
-    <el-collapse-transition>
-      <!-- 路由匹配到的组件将渲染在这里 -->
+    <!-- 路由匹配到的组件将渲染在这里 -->
 
-      <router-view></router-view>
-    </el-collapse-transition>
+    <!-- <router-view></router-view> -->
 
+    <router-view v-slot="{ Component }">
+      <el-collapse-transition>
+        <component :is="Component" />
+      </el-collapse-transition>
+    </router-view>
   </div>
 </template>
 

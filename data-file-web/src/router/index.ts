@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router";
 
 // import Index from '../views/index.vue'
 // import Admin from '../views/Admin.vue'
@@ -17,7 +17,7 @@ import Err from '../views/Error.vue'
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
-const routes = [
+const routes:RouteRecordRaw[] = [
   {
   //   path: '/',
   //   redirect: '/index'   //重定向
@@ -29,7 +29,7 @@ const routes = [
   //   path: '/admin',
   //   name: "admin",
   //   component: Admin,
-  }, {
+  // }, {
     path: '/home0',
     name: "home0",
     component: Home0,
@@ -73,6 +73,10 @@ const routes = [
     path: '/fileinfo',
     name: "fileinfo",
     component: () => import('../views/loadFile/LoadFileInfo.vue'),
+  }, {
+    path: '/columnset',
+    name: "columnset",
+    component: () => import('../views/loadFile/columnset/Index.vue'),
   },{
     path: '/error',
     name: "error",
@@ -90,5 +94,5 @@ export const router = createRouter({
   // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
   // history: createWebHashHistory(),
   history: createWebHistory(),
-  routes, // `routes: routes` 的缩写
+  routes: routes, // `routes: routes` 的缩写
 })

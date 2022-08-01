@@ -1,3 +1,9 @@
 addjob/log/
 data-file/log
 
+data-file/file/import/base_change.xls
+data-file/file/import/base_company_2014.csv
+data-file/file/import/base_company_2019.txt
+data-file/file/import/base_company_area.xml
+data-file/file/import/base_manager.json
+data-file/file/import/base_owner.xlsx

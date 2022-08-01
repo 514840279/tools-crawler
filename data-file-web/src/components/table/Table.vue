@@ -27,17 +27,18 @@
                         </el-table-column>
                         <el-table-column fixed="right" label="操作" width="124" v-if="localOptionBtn.opt">
                             <template #default="scope">
-                                <el-button @click="handleUpd(scope.row)" v-if="localOptionBtn.optbtn.upd" type="success" icon="Edit" circle size="small" title="修改"></el-button>
-                                <el-button @click="handleStateToDown(scope.row)" v-if="localOptionBtn.optbtn.state && scope.row.deleteFlag == 0 || scope.row.deleteFlag == null" type="warning" icon="View" circle size="small" title="已启用"></el-button>
-                                <el-button @click="handleStateToUp(scope.row)" v-if="localOptionBtn.optbtn.state && scope.row.deleteFlag == 1" type="info" icon="View" circle size="small" title="已禁用"></el-button>
-                                <el-button @click="handleDelete(scope.row)" v-if="localOptionBtn.optbtn.del" type="danger" icon="Delete" circle size="small" title="删除"></el-button>
+                                <el-button @click="handleClick(scope.row)" v-if="localOptionBtn.optbtn?.option" type="success" icon="Edit" circle size="small" title="配置"></el-button>
+                                <el-button @click="handleUpd(scope.row)" v-if="localOptionBtn.optbtn?.upd" type="success" icon="Edit" circle size="small" title="修改"></el-button>
+                                <el-button @click="handleStateToDown(scope.row)" v-if="localOptionBtn.optbtn?.state && scope.row.deleteFlag == 0 || scope.row.deleteFlag == null" type="warning" icon="View" circle size="small" title="已启用"></el-button>
+                                <el-button @click="handleStateToUp(scope.row)" v-if="localOptionBtn.optbtn?.state && scope.row.deleteFlag == 1" type="info" icon="View" circle size="small" title="已禁用"></el-button>
+                                <el-button @click="handleDelete(scope.row)" v-if="localOptionBtn.optbtn?.del" type="danger" icon="Delete" circle size="small" title="删除"></el-button>
                             </template>
                         </el-table-column>
                     </el-table>
                     <div v-if="localOptionBtn.page" class="apagination">
                         <el-row>
                             <el-col :span="12" :offset="12">
-                                <el-pagination class="pagex" style="float: right;" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="param.pageNumber" :page-sizes="page.sizes" :page-size="param.pageSize" :pager-count="3" layout="total, sizes, prev, pager, next, jumper" :total="param.totalElements">
+                                <el-pagination class="pagex" style="float: right;" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="param.pageNumber" :page-sizes="page.sizes" :page-size="param.pageSize" :pager-count="5" layout="total, sizes, prev, pager, next, jumper" :total="param.totalElements">
                                 </el-pagination>
                             </el-col>
                         </el-row>
@@ -106,6 +107,7 @@ let localOptionBtn = ref<OptionBtn>({
     page: true, // 翻页
     opt: true, // 每条数据后端操作搭配optbtn使用
     optbtn: { // 
+        option: true, // 详细 暂时无用
         info: true, // 详细 暂时无用
         upd: true, // 修改
         state: true, // 修改表中应有固定字段 delete_flag 默认值为0 逻辑删除字段 执行update 
@@ -159,6 +161,8 @@ let dataList = ref<Array<any>>([]),
     sortParameters = ref<Array<SortColumn>>([]),
     sortBtnType = ref<String>(),
     showSort = ref<Boolean>(false);
+
+const emit = defineEmits(["onClickRow"]);
 
 onBeforeMount(() => {
     // innt
@@ -218,9 +222,15 @@ function initTable(): void {
     loading.value = true;
     param.sortList = sortParameters.value;
     param.searchList = searchParameters.value;
-
+    param.searchList.push({
+        operator: "and",
+        column: "deleteFlag",
+        title: "删除",
+        symbol: "eq",
+        data: "0",
+        showdata: true
+    })
     http.post<any>(url.page, param).then((reponse) => {
-        debugger
         if (reponse.data != null && reponse.code == 200) {
             dataList.value = reponse.data.content;
             var size = reponse.data.totalElements;
@@ -285,7 +295,7 @@ function handleSave(): void {
 function handleDelete(row: Object): void {
     loading.value = true;
     http.delete(url.del, row).then((reponse: any) => {
-        if (reponse.data != null && reponse.code == 200) {
+        if (reponse.code == 200) {
             initTable();
         }
     }).catch((err) => {
@@ -337,6 +347,9 @@ function resetTable(): void {
     initTable();
     // showSort = true;
     // showSearch.value = false;
+}
+function handleClick(row: any) {
+    emit("onClickRow", row);
 }
 // 打印表格
 function printTable(): void {

@@ -8,7 +8,7 @@ export interface PageParam{
     searchList?: Array<SearchParamters>
 }
 export interface Column{
-    name: String,
+    name: string,
     title: String,
     width?: Number,
     resizable?: Boolean,
@@ -66,6 +66,7 @@ export interface OptionBtn{
     optbtn?: Optbtn
 }
 interface Optbtn{
+    option?: boolean, // 点击事件
     info?: boolean, // 详细 暂时无用
     upd?: boolean, // 修改
     state?: boolean, // 修改表中应有固定字段 delete_flag 默认值为0 逻辑删除字段 执行update 
