@@ -5,6 +5,7 @@ import org.chuxue.application.common.base.MybatisBaseConrollerImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dao.SysDbmsTabsColsInfoDao;
 import com.example.demo.po.SysDbmsTabsColsInfo;
 
 /**
@@ -17,6 +18,6 @@ import com.example.demo.po.SysDbmsTabsColsInfo;
  */
 @RestController
 @RequestMapping("/sysDbmsTabsColsInfo")
-public class SysDbmsTabsColsInfoController extends MybatisBaseConrollerImpl<SysDbmsTabsColsInfo> implements BaseController<SysDbmsTabsColsInfo> {
-
+public class SysDbmsTabsColsInfoController extends MybatisBaseConrollerImpl<SysDbmsTabsColsInfoDao, SysDbmsTabsColsInfo> implements BaseController<SysDbmsTabsColsInfo> {
+	
 }

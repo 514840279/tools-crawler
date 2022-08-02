@@ -5,8 +5,9 @@ import { SysDbmsTabsCols, SysDbmsTabsTableInfo } from '../interface/SysDbms';
 let fileInfo :SysLoadFileInfo;
 let fileColumns: Array<SysLoadFileColsInfo>;
 let fileColsMapping: Array<SysLoadFileColsMapping>;
-let tableInfo: SysDbmsTabsTableInfo;
+let tableInfo: SysDbmsTabsTableInfo|undefined;
 let tableColumnsInfo: Array<SysDbmsTabsCols>
+let tables: Array<SysDbmsTabsTableInfo>;
 
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
@@ -18,7 +19,8 @@ export const loadStore = defineStore('load', {
       fileColumns:fileColumns,
       fileColsMapping:fileColsMapping,
       tableInfo:tableInfo,
-      tableColumnsInfo:tableColumnsInfo
+      tableColumnsInfo:tableColumnsInfo,
+      tables:tables
     }
 },
 

@@ -5,6 +5,7 @@ import org.chuxue.application.common.base.MybatisBaseConrollerImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dao.SysLoadFileColsMappingDao;
 import com.example.demo.po.SysLoadFileColsMapping;
 
 /**
@@ -17,6 +18,6 @@ import com.example.demo.po.SysLoadFileColsMapping;
  */
 @RestController
 @RequestMapping("/sysLoadFileColsMapping")
-public class SysLoadFileColsMappingController extends MybatisBaseConrollerImpl<SysLoadFileColsMapping> implements BaseController<SysLoadFileColsMapping> {
-	
+public class SysLoadFileColsMappingController extends MybatisBaseConrollerImpl<SysLoadFileColsMappingDao, SysLoadFileColsMapping> implements BaseController<SysLoadFileColsMapping> {
+
 }

@@ -23,23 +23,26 @@ import lombok.Setter;
 @TableName(value = "`sys_load_file_cols_info`")
 public class SysLoadFileColsInfo extends MybatisBaseEntity implements Serializable {
 	private static final long	serialVersionUID	= 1L;
-	
+
 	// 文件id
 	@TableField(value = "file_uuid")
 	private String				fileUuid;
-	
+
 	// 字段名
 	@TableField(value = "column_name")
 	private String				columnName;
-	
+
+	@TableField(value = "column_desc")
+	private String				columnDesc;
+
 	// 字段类型，默认是text
 	@TableField(value = "column_type")
 	private String				columnType;
-	
+
 	// 字段长度
 	@TableField(value = "column_length")
 	private Integer				columnLength;
-	
+
 	/**
 	 * 构造方法：
 	 * 描 述： 默认构造函数
@@ -49,5 +52,5 @@ public class SysLoadFileColsInfo extends MybatisBaseEntity implements Serializab
 	 */
 	public SysLoadFileColsInfo() {
 	}
-	
+
 }

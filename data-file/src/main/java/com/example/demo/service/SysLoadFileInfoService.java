@@ -1,10 +1,16 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.chuxue.application.common.base.MybatisBaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.demo.dao.SysLoadFileInfoDao;
 import com.example.demo.po.FileType;
+import com.example.demo.po.SysLoadFileColsInfo;
 import com.example.demo.po.SysLoadFileInfo;
 import com.example.demo.service.readFile.CsvFileRead;
 import com.example.demo.service.readFile.DataFileRead;
@@ -24,28 +30,31 @@ import com.example.demo.vo.SysLoadFileInfoVo;
  * @版本 V1.0
  */
 @Service
-public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileInfo> {
+public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileInfoDao, SysLoadFileInfo> {
 	
 	@Autowired
-	XlsFileRead		xlsFileRead;
+	XlsFileRead					xlsFileRead;
 
 	@Autowired
-	XlsxFileRead	xlsxFileRead;
+	XlsxFileRead				xlsxFileRead;
 
 	@Autowired
-	CsvFileRead		csvFileRead;
+	CsvFileRead					csvFileRead;
 
 	@Autowired
-	TxtFileRead		txtFileRead;
+	TxtFileRead					txtFileRead;
 
 	@Autowired
-	XmlFileRead		xmlFileRead;
+	XmlFileRead					xmlFileRead;
 
 	@Autowired
-	JsonFileRead	jsonFileRead;
+	JsonFileRead				jsonFileRead;
 
 	@Autowired
-	DataFileRead	dataFileRead;
+	DataFileRead				dataFileRead;
+
+	@Autowired
+	SysLoadFileColsInfoService	sysLoadFileColsInfoService;
 	
 	/**
 	 * 方法名： readFile
@@ -84,6 +93,28 @@ public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileIn
 				System.err.println("没有支持的类型");
 				break;
 		}
+	}
+
+	/**
+	 * 方法名： saveFileConfig
+	 * 功 能： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param vo
+	 * 返 回： void
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	@Transactional
+	public void saveFileConfig(SysLoadFileInfoVo vo) {
+		SysLoadFileInfo info = vo.getInfo();
+		SysLoadFileColsInfo cols = new SysLoadFileColsInfo();
+		cols.setFileUuid(info.getUuid());
+		QueryWrapper<SysLoadFileColsInfo> queryWrapper = new QueryWrapper<>(cols);
+		List<SysLoadFileColsInfo> reList = sysLoadFileColsInfoService.list(queryWrapper);
+		if (reList != null && reList.size() > 0) {
+			sysLoadFileColsInfoService.removeBatchByIds(reList);
+		}
+		saveOrUpdate(info);
+		sysLoadFileColsInfoService.saveBatch(vo.getColumns());
 	}
 	
 }

@@ -12,17 +12,16 @@
 import ColumnSet from './ColumnSet.vue'
 import FileLogsVue from './FileLogs.vue';
 
-// 使普通数据变响应式的函数
-import { storeToRefs } from "pinia";
-import { loadStore } from "../../../stone/LoadFile";
-import { SysLoadFileInfo } from '../../../interface/LoadFile';
 import { onBeforeMount, ref } from "vue";
 import http from '../../../plugins/http';
 
+// 使普通数据变响应式的函数
+import { storeToRefs } from "pinia";
+import { loadStore } from "../../../stone/LoadFile";
 // 实例化仓库
 const store = loadStore();
 // 解构并使数据具有响应式
-const { fileInfo, fileColumns, fileColsMapping, tableInfo, tableColumnsInfo } = storeToRefs(store);
+const { fileInfo, fileColumns, fileColsMapping, tables, tableInfo, tableColumnsInfo } = storeToRefs(store);
 
 // showPage: 1: 配置页面，2，日志页面
 let showPage = ref<string>("1");
@@ -31,6 +30,8 @@ let title = ref<string>("配置信息");
 onBeforeMount(() => {
   // 初始化 配置完成 页面展示日志页面，没有配置完的展示配置页面
   init();
+  // 全部配置的表信息
+  initAllTables();
 })
 // 初始化 配置完成 页面展示日志页面，没有配置完的展示配置页面
 const init = function () {
@@ -106,6 +107,18 @@ const initColumns = function () {
 // 加载对应表的字段信息
 const initLogs = function () {
 
+}
+
+// 全部配置的表信息
+const initAllTables = function () {
+  let param = {}
+  http.post<any>("/serve/sysDbmsTabsTableInfo/findAll", param).then((reponse) => {
+    if (reponse.code == 200) {
+      tables.value = reponse.data;
+    }
+  }).catch((err) => {
+    // TODO
+  });
 }
 
 const showLogPage = function (value: string) {

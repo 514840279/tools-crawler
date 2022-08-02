@@ -5,6 +5,7 @@ import org.chuxue.application.common.base.MybatisBaseConrollerImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dao.SysLoadFileLogInfoDao;
 import com.example.demo.po.SysLoadFileLogInfo;
 
 /**
@@ -17,6 +18,6 @@ import com.example.demo.po.SysLoadFileLogInfo;
  */
 @RestController
 @RequestMapping("/sysLoadFileLogInfo")
-public class SysLoadFileLogInfoController extends MybatisBaseConrollerImpl<SysLoadFileLogInfo> implements BaseController<SysLoadFileLogInfo> {
-	
+public class SysLoadFileLogInfoController extends MybatisBaseConrollerImpl<SysLoadFileLogInfoDao, SysLoadFileLogInfo> implements BaseController<SysLoadFileLogInfo> {
+
 }

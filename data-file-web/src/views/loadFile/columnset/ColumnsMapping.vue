@@ -9,6 +9,16 @@
 </template>
 
 <script setup lang="ts">
+
+// 使普通数据变响应式的函数
+import { storeToRefs } from "pinia";
+import { loadStore } from "../../../stone/LoadFile";
+// 实例化仓库
+const store = loadStore();
+// 解构并使数据具有响应式
+const { fileInfo, fileColumns, fileColsMapping, tables, tableInfo, tableColumnsInfo } = storeToRefs(store);
+
+
 const emit = defineEmits(["next"]);
 
 </script>

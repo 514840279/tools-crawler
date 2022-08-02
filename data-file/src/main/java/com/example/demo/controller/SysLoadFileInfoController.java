@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dao.SysLoadFileInfoDao;
 import com.example.demo.po.SysLoadFileInfo;
 import com.example.demo.service.SysLoadFileInfoService;
 import com.example.demo.vo.SysLoadFileInfoVo;
@@ -26,7 +27,7 @@ import com.example.demo.vo.SysLoadFileInfoVo;
  */
 @RestController
 @RequestMapping("/sysLoadFileInfo")
-public class SysLoadFileInfoController extends MybatisBaseConrollerImpl<SysLoadFileInfo> implements BaseController<SysLoadFileInfo> {
+public class SysLoadFileInfoController extends MybatisBaseConrollerImpl<SysLoadFileInfoDao, SysLoadFileInfo> implements BaseController<SysLoadFileInfo> {
 	
 	static Logger			logger	= LoggerFactory.getLogger(SysLoadFileInfoController.class);
 	
@@ -42,6 +43,19 @@ public class SysLoadFileInfoController extends MybatisBaseConrollerImpl<SysLoadF
 			return ResultUtil.success(vo);
 		} catch (Exception e) {
 			logger.error("<readFile> error:{} ", e.getMessage());
+			return ResultUtil.error(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/saveFileConfig", method = RequestMethod.POST)
+	public BaseResult<String> saveFileConfig(@RequestBody SysLoadFileInfoVo vo) {
+		logger.info("<saveFileConfig> param info:{} ", vo.toString());
+		try {
+			// 简单分页查询
+			sysLoadFileInfoService.saveFileConfig(vo);
+			return ResultUtil.success("配置信息修改成功。");
+		} catch (Exception e) {
+			logger.error("<saveFileConfig> error:{} ", e.getMessage());
 			return ResultUtil.error(e.getMessage());
 		}
 	}

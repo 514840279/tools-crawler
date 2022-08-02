@@ -78,8 +78,9 @@ export interface SysLoadFileColsMapping{
 // `chuxue`.`sys_load_file_cols_info` 加载数据文件的字段信息  
 export interface SysLoadFileColsInfo{
   uuid: string,
-  fileUuid?: string,
-  columnName?: string,
+  fileUuid: string,
+  columnName: string,
+  columnDesc?: string,
   columnType?: string,
   columnLength?: number,
   discription?: string,

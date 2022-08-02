@@ -8,7 +8,7 @@ export interface SysDbmsTabsTableInfo{
   jdbcUuid?: string,
   sort?: number,
   tabsDesc?: string,
-  tabsName?: string,
+  tabsName: string,
   tabsRows?: number,
   tabsSpace?: string,
   typeCode?: string,

@@ -22,8 +22,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SysLoadFileInfoVo {
-	
+
 	private SysLoadFileInfo				info;
 	private List<SysLoadFileColsInfo>	columns;
 	private List<Map<String, String>>	datas;
+	private List<SysLoadFileInfo>		sheets;
 }

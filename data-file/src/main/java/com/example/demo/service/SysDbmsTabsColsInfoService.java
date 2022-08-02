@@ -3,6 +3,7 @@ package com.example.demo.service;
 import org.chuxue.application.common.base.MybatisBaseServiceImpl;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dao.SysDbmsTabsColsInfoDao;
 import com.example.demo.po.SysDbmsTabsColsInfo;
 
 /**
@@ -14,6 +15,6 @@ import com.example.demo.po.SysDbmsTabsColsInfo;
  * @版本 V1.0
  */
 @Service
-public class SysDbmsTabsColsInfoService extends MybatisBaseServiceImpl<SysDbmsTabsColsInfo> {
-	
+public class SysDbmsTabsColsInfoService extends MybatisBaseServiceImpl<SysDbmsTabsColsInfoDao, SysDbmsTabsColsInfo> {
+
 }
