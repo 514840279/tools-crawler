@@ -75,7 +75,9 @@ public class TxtFileRead {
 	 */
 	private void fileReadConfTopTen(File file, SysLoadFileInfoVo vo) {
 		List<String> rows = readTxtFileTopData(file, vo.getInfo());
-		columnsSet(rows, vo);
+		if (vo.getColumns() == null || vo.getColumns().size() == 0) {
+			columnsSet(rows, vo);
+		}
 		rowsToDatas(rows, vo, vo.getColumns());
 
 	}
@@ -226,31 +228,33 @@ public class TxtFileRead {
 				}
 
 				// columns
-				List<SysLoadFileColsInfo> columns = new ArrayList<>();
-				for (int i = 0; i < frow_arr.length; i++) {
-					String string = frow_arr[i].replace(vo.getInfo().getEnclosed(), "");
-
-					SysLoadFileColsInfo colsInfo = new SysLoadFileColsInfo();
-					colsInfo.setUuid(UUID.randomUUID().toString());
-					if ("Y".equals(vo.getInfo().getHasHead())) {
-						colsInfo.setColumnName(string);
-						colsInfo.setColumnDesc(string);
-					} else {
-						colsInfo.setColumnName("A_" + i);
-						colsInfo.setColumnDesc("A_" + i);
+				if (vo.getColumns() == null || vo.getColumns().size() == 0) {
+					List<SysLoadFileColsInfo> columns = new ArrayList<>();
+					for (int i = 0; i < frow_arr.length; i++) {
+						String string = frow_arr[i].replace(vo.getInfo().getEnclosed(), "");
+						
+						SysLoadFileColsInfo colsInfo = new SysLoadFileColsInfo();
+						colsInfo.setUuid(UUID.randomUUID().toString());
+						if ("Y".equals(vo.getInfo().getHasHead())) {
+							colsInfo.setColumnName(string);
+							colsInfo.setColumnDesc(string);
+						} else {
+							colsInfo.setColumnName("A_" + i);
+							colsInfo.setColumnDesc("A_" + i);
+						}
+						colsInfo.setColumnLength(string.length() * 5);
+						colsInfo.setColumnType("text");
+						colsInfo.setDeleteFlag(0);
+						colsInfo.setSort(i);
+						colsInfo.setFileUuid(vo.getInfo().getUuid());
+						
+						columns.add(colsInfo);
 					}
-					colsInfo.setColumnLength(string.length() * 5);
-					colsInfo.setColumnType("text");
-					colsInfo.setDeleteFlag(0);
-					colsInfo.setSort(i);
-					colsInfo.setFileUuid(vo.getInfo().getUuid());
-
-					columns.add(colsInfo);
+					vo.setColumns(columns);
+					
+					rowsToDatas(rows, vo, columns);
+//					vo.getInfo().setFileState(FileState.CONFIG);
 				}
-				vo.setColumns(columns);
-
-				rowsToDatas(rows, vo, columns);
-				vo.getInfo().setFileState(FileState.CONFIG);
 			} else {
 				fileReadTopTen(file, vo);
 			}

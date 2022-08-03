@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.chuxue.application.common.base.MybatisBaseDao;
 
 import com.example.demo.po.SysLoadFileInfo;
@@ -16,4 +17,14 @@ import com.example.demo.po.SysLoadFileInfo;
 @Mapper
 public interface SysLoadFileInfoDao extends MybatisBaseDao<SysLoadFileInfo> {
 	
+	/**
+	 * 方法名： createTable
+	 * 功 能： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param sqlText
+	 * 返 回： void
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	void createTable(@Param("sql") String sqlText);
+
 }

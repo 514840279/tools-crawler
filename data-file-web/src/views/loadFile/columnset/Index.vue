@@ -24,7 +24,7 @@ const store = loadStore();
 const { fileInfo, fileColumns, fileColsMapping, tables, tableInfo, tableColumnsInfo } = storeToRefs(store);
 
 // showPage: 1: 配置页面，2，日志页面
-let showPage = ref<string>("1");
+let showPage = ref<string>();
 let title = ref<string>("配置信息");
 
 onBeforeMount(() => {
@@ -35,9 +35,14 @@ onBeforeMount(() => {
 })
 // 初始化 配置完成 页面展示日志页面，没有配置完的展示配置页面
 const init = function () {
-  switch (fileInfo.value.fileState) {
+  fileColumns.value = [];
+  fileColsMapping.value = [];
+  tables.value = [];
+  tableInfo.value = null;
+  tableColumnsInfo.value = [];
+
+  switch (fileInfo.value.fileMappingState) {
     case "未配置":
-      showPage.value = "1";
       title.value = "配置信息";
       // 加载已经配置的文件字段信息,
       initFileColumn();
@@ -52,14 +57,16 @@ const init = function () {
 }
 // 加载已经配置的文件字段信息,
 const initFileColumn = function () {
-  let param = { fileUuid: fileInfo.value.uuid }
-  http.post<any>("/serve/sysLoadFileColsInfo/findAll", param).then((reponse) => {
-    if (reponse.code == 200) {
+  let param = { info: { fileUuid: fileInfo.value.uuid }, sortList: [{ sortIndex: 1, sortOrder: "asc", sortName: "sort", }] }
+  http.post<any>("/serve/sysLoadFileColsInfo/findAllBySort", param).then((reponse) => {
+    if (reponse.code == 200 && reponse.data.length > 0) {
       fileColumns.value = reponse.data;
-      if (reponse.data != null) {
+      if (reponse.data != null && reponse.data.length > 0) {
         // 加载字段映射信息 
         initMapping();
       }
+    } else {
+      showPage.value = "1";
     }
   }).catch((err) => {
     // TODO
@@ -69,7 +76,7 @@ const initFileColumn = function () {
 const initMapping = function () {
   let param = { fileUuid: fileInfo.value.uuid }
   http.post<any>("/serve/sysLoadFileColsMapping/findAll", param).then((reponse) => {
-    if (reponse.code == 200) {
+    if (reponse.code == 200 && reponse.data.length > 0) {
       fileColsMapping.value = reponse.data;
       if (reponse.data != null) {
         // 加载对应表信息
@@ -77,6 +84,8 @@ const initMapping = function () {
         // 加载对应表的字段信息
         initColumns();
       }
+    } else {
+      showPage.value = "1";
     }
   }).catch((err) => {
     // TODO
@@ -86,8 +95,10 @@ const initMapping = function () {
 const initTables = function () {
   let param = { uuid: fileColsMapping.value[0].tabsUuid }
   http.post<any>("/serve/sysDbmsTabsTableInfo/findOne", param).then((reponse) => {
-    if (reponse.code == 200) {
+    if (reponse.code == 200 && reponse.data.length > 0) {
       tableInfo.value = reponse.data;
+    } else {
+      showPage.value = "1";
     }
   }).catch((err) => {
     // TODO
@@ -97,8 +108,10 @@ const initTables = function () {
 const initColumns = function () {
   let param = { tabsUuid: fileColsMapping.value[0].tabsUuid }
   http.post<any>("/serve/sysDbmsTabsColsInfo/findAll", param).then((reponse) => {
-    if (reponse.code == 200) {
+    if (reponse.code == 200 && reponse.data.length > 0) {
       tableColumnsInfo.value = reponse.data;
+    } else {
+      showPage.value = "1";
     }
   }).catch((err) => {
     // TODO

@@ -17,7 +17,7 @@
             <el-input v-model="fileInfo.enclosed" placeholder="限定符号:通常以单引号，双引号，反引号包围字段" @change="readFile" />
           </el-descriptions-item>
           <el-descriptions-item label="首行标题">
-            <el-switch v-model="fileInfo.hasHead" class="ml-2" inline-prompt style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" active-text="Y" inactive-text="N" active-value="Y" inactive-value="N" @change="readFile" />
+            <el-switch v-model="fileInfo.hasHead" class="ml-2" inline-prompt style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" active-text="Y" inactive-text="N" active-value="Y" inactive-value="N" @change="readHeadFile" />
           </el-descriptions-item>
         </el-descriptions>
         <div style="text-align: center;margin-top:8px">
@@ -62,13 +62,21 @@ onMounted(() => {
   })
 })
 
+
+// 读取文件信息
 function readFile() {
-  // showdata.value = false;
-  datas.value = null;
-  let param = {
+
+  let param =
+  {
     info: fileInfo.value,
     columns: fileColumns.value
   }
+  readFileData(param);
+}
+
+function readFileData(param: any) {
+  // showdata.value = false;
+  datas.value = null;
   http.post<any>("/serve/sysLoadFileInfo/readFile", param).then((reponse) => {
     if (reponse.code == 200) {
       fileColumns.value = reponse.data.columns;
@@ -81,6 +89,17 @@ function readFile() {
   });
 }
 
+
+function readHeadFile() {
+  let param =
+  {
+    info: fileInfo.value,
+  }
+  readFileData(param);
+}
+
+
+// 提交配置信息
 function saveFileConfig() {
   let param = {
     info: fileInfo.value,
@@ -92,6 +111,7 @@ function saveFileConfig() {
         message: reponse.data,
         type: 'success',
       })
+
     }
   }).catch((err) => {
     // TODO

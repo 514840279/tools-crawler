@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 import { SysLoadFileColsInfo, SysLoadFileColsMapping, SysLoadFileInfo } from '../interface/LoadFile'
 import { SysDbmsTabsCols, SysDbmsTabsTableInfo } from '../interface/SysDbms';
 
-let fileInfo :SysLoadFileInfo;
+let fileInfo: SysLoadFileInfo;
 let fileColumns: Array<SysLoadFileColsInfo>;
 let fileColsMapping: Array<SysLoadFileColsMapping>;
-let tableInfo: SysDbmsTabsTableInfo|undefined;
+let tableInfo: SysDbmsTabsTableInfo | null;
 let tableColumnsInfo: Array<SysDbmsTabsCols>
 let tables: Array<SysDbmsTabsTableInfo>;
 
@@ -15,15 +15,15 @@ export const loadStore = defineStore('load', {
   // other options...
   state: () => {
     return {
-      fileInfo:fileInfo,
-      fileColumns:fileColumns,
-      fileColsMapping:fileColsMapping,
-      tableInfo:tableInfo,
-      tableColumnsInfo:tableColumnsInfo,
-      tables:tables
+      fileInfo: fileInfo,
+      fileColumns: fileColumns,
+      fileColsMapping: fileColsMapping,
+      tableInfo: tableInfo,
+      tableColumnsInfo: tableColumnsInfo,
+      tables: tables
     }
-},
+  },
 
-getters: {},
-actions: {}
+  getters: {},
+  actions: {}
 })

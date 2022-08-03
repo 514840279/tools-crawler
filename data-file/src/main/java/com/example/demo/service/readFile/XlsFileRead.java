@@ -3,6 +3,7 @@ package com.example.demo.service.readFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,10 +43,10 @@ import com.example.demo.vo.SysLoadFileInfoVo;
 @Component
 @Order(11)
 public class XlsFileRead {
-
+	
 	@Autowired
 	UserConfig userConfig;
-	
+
 	/**
 	 * 方法名： readFileXls
 	 * 功 能： TODO(这里用一句话描述这个方法的作用)
@@ -70,7 +71,7 @@ public class XlsFileRead {
 			throw new BaseException(-1, "没有找到文件");
 		}
 	}
-
+	
 	/**
 	 * @throws IOException
 	 * 方法名： fileReadConfTopTen
@@ -83,11 +84,13 @@ public class XlsFileRead {
 	 */
 	private void fileReadConfTopTen(File file, SysLoadFileInfoVo vo) throws IOException {
 		List<List<String>> rows = readXlsFileTopData(file, vo);
-		columnsSet(rows, vo);
+		if (vo.getColumns() == null || vo.getColumns().size() == 0) {
+			columnsSet(rows, vo);
+		}
 		rowsToDatas(rows, vo, vo.getColumns());
 		vo.getInfo().setFileState(FileState.CONFIG);
 	}
-	
+
 	/**
 	 * 方法名： rowsToDatas
 	 * 功 能： TODO(这里用一句话描述这个方法的作用)
@@ -103,20 +106,34 @@ public class XlsFileRead {
 		List<Map<String, String>> datas = new ArrayList<>();
 		for (int i = 0; i < rows.size(); i++) {
 			List<String> row = rows.get(i);
-
+			
 			if (i == 0 && "Y".equals(vo.getInfo().getHasHead())) {
 				continue;
 			}
 			Map<String, String> dataMap = new HashMap<>();
 			for (int j = 0; j < row.size(); j++) {
 				String string = row.get(j);
-
+				
 //				string = string.replace(vo.getInfo().getEnclosed(), "");
 				if ("Y".equals(vo.getInfo().getHasHead())) {
-					SysLoadFileColsInfo colsInfo = columns.get(j);
-					if (colsInfo != null) {
-						dataMap.put(columns.get(j).getColumnName(), string);
-					} else {
+					try {
+						SysLoadFileColsInfo colsInfo = columns.get(j);
+						if (colsInfo != null) {
+							dataMap.put(columns.get(j).getColumnName(), string);
+						} else {
+							dataMap.put("A_" + j, string);
+						}
+					} catch (Exception e) {
+						SysLoadFileColsInfo colsInfo = new SysLoadFileColsInfo();
+						colsInfo.setUuid(UUID.randomUUID().toString());
+						colsInfo.setColumnName("A_" + j);
+						colsInfo.setColumnDesc("A_" + j);
+						colsInfo.setColumnLength(string.length() * 5);
+						colsInfo.setColumnType("text");
+						colsInfo.setDeleteFlag(0);
+						colsInfo.setSort(j);
+						colsInfo.setFileUuid(vo.getInfo().getUuid());
+						columns.add(colsInfo);
 						dataMap.put("A_" + j, string);
 					}
 				} else {
@@ -126,9 +143,9 @@ public class XlsFileRead {
 			datas.add(dataMap);
 		}
 		vo.setDatas(datas);
-
+		
 	}
-	
+
 	/**
 	 * 方法名： columnsSet
 	 * 功 能： TODO(这里用一句话描述这个方法的作用)
@@ -145,17 +162,17 @@ public class XlsFileRead {
 		int a = 0;
 		for (int i = 0; i < frow_arr.size(); i++) {
 			String key = frow_arr.get(i);
-			
+
 			SysLoadFileColsInfo colsInfo = new SysLoadFileColsInfo();
 			colsInfo.setUuid(UUID.randomUUID().toString());
-			if ("Y".equals(vo.getInfo().getHasHead())) {
+			if ("Y".equals(vo.getInfo().getHasHead()) && key != null) {
 				colsInfo.setColumnName(key);
 				colsInfo.setColumnDesc(key);
+				colsInfo.setColumnLength(key.length() * 5);
 			} else {
 				colsInfo.setColumnName("A_" + i);
 				colsInfo.setColumnDesc("A_" + i);
 			}
-			colsInfo.setColumnLength(key.length() * 5);
 			colsInfo.setColumnType("text");
 			colsInfo.setDeleteFlag(0);
 			colsInfo.setSort(a++);
@@ -163,9 +180,9 @@ public class XlsFileRead {
 			columns.add(colsInfo);
 		}
 		vo.setColumns(columns);
-
+		
 	}
-	
+
 	/**
 	 * @throws IOException
 	 * @param sysLoadFileInfo
@@ -194,57 +211,81 @@ public class XlsFileRead {
 			vo.getInfo().setFileSheetName(sheets.get(0).getFileSheetName());
 			vo.getInfo().setFileSheetIndex(sheets.get(0).getFileSheetIndex());
 			Sheet sheet = workbook.getSheet(vo.getInfo().getFileSheetName());
-			
+
 			Integer rownum = sheet.getFirstRowNum();
 			allString = new ArrayList<>();
 			Row row = null;
 			Cell cell = null;
-			
+			int arow = vo.getInfo().getSkip();
+
 			for (int intRow = rownum; intRow <= sheet.getLastRowNum() && allString.size() < userConfig.getReadRows(); intRow++) {
-				row = sheet.getRow(intRow);
-				List<String> adataList = new ArrayList<>();
-				for (int intCol = 0; intCol < row.getLastCellNum(); intCol++) {
-					cell = row.getCell(intCol);
-					if (cell != null) {
-						
-						// 不同数据类型处理
-						CellType cellType = cell.getCellType();
-//					cellTo.setCellType(cellFromType);
-						if (cellType == CellType.NUMERIC) {
-							if (DateUtil.isCellDateFormatted(cell)) {
-								adataList.add(cell.getDateCellValue().toString());
-							} else {
-								adataList.add(Double.toString(cell.getNumericCellValue()));
-							}
-						} else if (cellType == CellType.STRING) {
-							RichTextString s = cell.getRichStringCellValue();
-							if (s != null) {
-								adataList.add(s.getString());
-							} else {
+				if (arow <= intRow) {
+					row = sheet.getRow(intRow);
+					List<String> adataList = new ArrayList<>();
+					for (int intCol = 0; intCol < row.getLastCellNum(); intCol++) {
+						cell = row.getCell(intCol);
+						if (cell != null) {
+
+							// 不同数据类型处理
+							CellType cellType = cell.getCellType();
+							if (cellType == CellType.NUMERIC) {
+								if (DateUtil.isCellDateFormatted(cell)) {
+									short format = cell.getCellStyle().getDataFormat();
+									String cellValue = "";
+									SimpleDateFormat sdf = null;
+									if (format == 20 || format == 32) {
+										sdf = new SimpleDateFormat("HH:mm");
+									} else if (format == 14 || format == 31 || format == 57 || format == 58 || format == 176) {
+										// 处理自定义日期格式：m月d日(通过判断单元格的格式id解决，id的值是58)
+										sdf = new SimpleDateFormat("yyyy-MM-dd");
+									} else {// 日期
+										sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+									}
+									try {
+										cellValue = sdf.format(cell.getDateCellValue());// 日期
+										adataList.add(cellValue);
+									} catch (Exception e) {
+										try {
+											throw new Exception("exception on get date data !".concat(e.toString()));
+										} catch (Exception e1) {
+											e1.printStackTrace();
+										}
+									} finally {
+										sdf = null;
+									}
+								} else {
+									adataList.add(Double.toString(cell.getNumericCellValue()));
+								}
+							} else if (cellType == CellType.STRING) {
+								RichTextString s = cell.getRichStringCellValue();
+								if (s != null) {
+									adataList.add(s.getString());
+								} else {
+									adataList.add(null);
+								}
+							} else if (cellType == CellType.BLANK) {
 								adataList.add(null);
+							} else if (cellType == CellType.BOOLEAN) {
+								adataList.add(Boolean.toString(cell.getBooleanCellValue()));
+							} else if (cellType == CellType.ERROR) {
+								adataList.add(Integer.valueOf(cell.getErrorCellValue()).toString());
+							} else if (cellType == CellType.FORMULA) {
+								if (cell.getCachedFormulaResultType().equals(CellType.FORMULA)) {
+									Double d = cell.getNumericCellValue();
+									adataList.add(d.toString());
+								} else if (cell.getCachedFormulaResultType().equals(CellType.STRING)) {
+									String v = cell.getRichStringCellValue().toString();
+									adataList.add(v.toString());
+								}
+
+							} else { // nothing29
 							}
-						} else if (cellType == CellType.BLANK) {
+						} else {
 							adataList.add(null);
-						} else if (cellType == CellType.BOOLEAN) {
-							adataList.add(Boolean.toString(cell.getBooleanCellValue()));
-						} else if (cellType == CellType.ERROR) {
-							adataList.add(Integer.valueOf(cell.getErrorCellValue()).toString());
-						} else if (cellType == CellType.FORMULA) {
-							if (cell.getCachedFormulaResultType().equals(CellType.FORMULA)) {
-								Double d = cell.getNumericCellValue();
-								adataList.add(d.toString());
-							} else if (cell.getCachedFormulaResultType().equals(CellType.STRING)) {
-								String v = cell.getRichStringCellValue().toString();
-								adataList.add(v.toString());
-							}
-							
-						} else { // nothing29
 						}
-					} else {
-						adataList.add(null);
 					}
+					allString.add(adataList);
 				}
-				allString.add(adataList);
 			}
 			return allString;
 		} catch (Exception e) {
@@ -252,5 +293,5 @@ public class XlsFileRead {
 		}
 		return allString;
 	}
-	
+
 }

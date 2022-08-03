@@ -26,57 +26,61 @@ import lombok.Setter;
 @TableName(value = "`sys_load_file_info`")
 public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	private static final long	serialVersionUID	= 1L;
-	
+
 	// 路径
 	@TableField(value = "path")
 	private String				path;
-	
+
 	// 文件名
 	@TableField(value = "file_name")
 	private String				fileName;
-	
+
 	// 文件类型
 	@TableField(value = "file_type")
 	private String				fileType;
-
+	
 	@TableField(value = "file_sheet_name")
 	private String				fileSheetName;
-
+	
 	@TableField(value = "file_sheet_index")
 	private Integer				fileSheetIndex;
-	
+
 	// 文件大小
 	@TableField(value = "file_size")
 	private String				fileSize;
-	
+
 	// 状态
 	@TableField(value = "file_state")
 	private String				fileState;
-	
+
+	// 状态
+	@TableField(value = "file_mapping_state")
+	private String				fileMappingState;
+
 	// 字符集
 	@TableField(value = "`characterset`")
 	private String				characterset;
-	
+
 	// 跳过
 	@TableField(value = "`skip`")
 	private Integer				skip;
-	
+
 	// 分割符号
 	@TableField(value = "`separator`")
 	private String				separator;
-	
+
 	// 限定符号，字段包围的符号
 	@TableField(value = "`enclosed`")
 	private String				enclosed;
-	
+
 	// 首行是标题
 	@TableField(value = "has_head")
 	private String				hasHead;
-	
+
 	// 事务提交的限制
 	@TableField(value = "`rows`")
 	private Integer				rows;
-	
+
 	/**
 	 * 构造方法：
 	 * 描 述： 默认构造函数
@@ -86,9 +90,9 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	 */
 	public SysLoadFileInfo() {
 	}
-	
+
 	static String[] extensions = { ".xls", ".xlsx", ".csv", ".txt" };
-	
+
 	/**
 	 * 构造方法：
 	 * 描 述： TODO(这里用一句话描述这个方法的作用)
@@ -104,7 +108,9 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 		this.fileName = fileName;
 		this.fileType = fileName.substring(fileName.lastIndexOf("."));
 		this.fileState = "未配置";
+		this.fileMappingState = "未配置";
 		this.deleteFlag = 0;
+		this.skip = 0;
 		if (Arrays.asList(extensions).contains(this.fileType)) {
 			this.deleteFlag = 0;
 		} else {
@@ -121,7 +127,7 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 			this.fileSize = size.divide(BigDecimal.valueOf(1024), 2, BigDecimal.ROUND_HALF_DOWN).divide(BigDecimal.valueOf(1024), 2, BigDecimal.ROUND_HALF_DOWN).divide(BigDecimal.valueOf(1024), 2, BigDecimal.ROUND_HALF_DOWN) + "GB";
 		}
 	}
-
+	
 	/**
 	 * 构造方法：
 	 * 描 述： TODO(这里用一句话描述这个方法的作用)
@@ -132,7 +138,7 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	public SysLoadFileInfo(String path) {
 		this.path = path;
 	}
-	
+
 	/**
 	 * 构造方法：
 	 * 描 述： TODO(这里用一句话描述这个方法的作用)
@@ -145,5 +151,5 @@ public class SysLoadFileInfo extends MybatisBaseEntity implements Serializable {
 	public SysLoadFileInfo(String absolutePath, String name, long length) {
 		this(null, absolutePath, name, length);
 	}
-	
+
 }

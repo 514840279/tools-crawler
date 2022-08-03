@@ -1,13 +1,13 @@
-export enum FileStateTypes{
-  "未配置","配置中"
+export enum FileStateTypes {
+  "未配置", "配置中"
 }
 
-export enum RunStateType{
-  "未运行","运行中","运行成功","运行失败"
+export enum RunStateType {
+  "未运行", "运行中", "运行成功", "运行失败"
 }
 
-export enum FileType{
-  XLSX= ".xlsx",
+export enum FileType {
+  XLSX = ".xlsx",
   XLS = ".xls",
   CSV = ".csv",
   TXT = ".txt",
@@ -16,7 +16,7 @@ export enum FileType{
 }
 
 // `chuxue`.`sys_load_file_log_info` 数据文件导入时运行信息  
-export interface SysLoadFileLogInfo{
+export interface SysLoadFileLogInfo {
   fileUuid?: string,
   complateRows?: number,
   errorRows?: number,
@@ -34,7 +34,7 @@ export interface SysLoadFileLogInfo{
 
 
 // `chuxue`.`sys_load_file_info` 数据文件信息  
-export interface SysLoadFileInfo{
+export interface SysLoadFileInfo {
   uuid: string,
   path?: string,
   fileName?: string,
@@ -54,11 +54,12 @@ export interface SysLoadFileInfo{
   enclosed?: string,
   hasHead?: string,
   rows?: number,
+  fileMappingState?: string
 }
 
 
 // `chuxue`.`sys_load_file_cols_mapping` 数据文件与数据表映射关系  
-export interface SysLoadFileColsMapping{
+export interface SysLoadFileColsMapping {
   uuid: string,
   fileUuid?: string,
   fileColumnUuid?: string,
@@ -76,7 +77,7 @@ export interface SysLoadFileColsMapping{
 
 
 // `chuxue`.`sys_load_file_cols_info` 加载数据文件的字段信息  
-export interface SysLoadFileColsInfo{
+export interface SysLoadFileColsInfo {
   uuid: string,
   fileUuid: string,
   columnName: string,

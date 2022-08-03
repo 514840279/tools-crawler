@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.chuxue.application.common.base.MybatisBaseServiceImpl;
@@ -9,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.dao.SysLoadFileInfoDao;
+import com.example.demo.po.FileState;
 import com.example.demo.po.FileType;
+import com.example.demo.po.SysDbmsTabsColsInfo;
+import com.example.demo.po.SysDbmsTabsTableInfo;
 import com.example.demo.po.SysLoadFileColsInfo;
 import com.example.demo.po.SysLoadFileInfo;
 import com.example.demo.service.readFile.CsvFileRead;
@@ -55,6 +59,15 @@ public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileIn
 
 	@Autowired
 	SysLoadFileColsInfoService	sysLoadFileColsInfoService;
+
+	@Autowired
+	SysLoadFileInfoDao			sysLoadFileInfoDao;
+
+	@Autowired
+	SysDbmsTabsColsInfoService	sysDbmsTabsColsInfoService;
+
+	@Autowired
+	SysDbmsTabsTableInfoService	sysDbmsTabsTableInfoService;
 	
 	/**
 	 * 方法名： readFile
@@ -113,8 +126,35 @@ public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileIn
 		if (reList != null && reList.size() > 0) {
 			sysLoadFileColsInfoService.removeBatchByIds(reList);
 		}
+		info.setFileState(FileState.CONFIG);
 		saveOrUpdate(info);
 		sysLoadFileColsInfoService.saveBatch(vo.getColumns());
+	}
+
+	/**
+	 * 方法名： sqlText
+	 * 功 能： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param vo
+	 * 返 回： void
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	@Transactional
+	public SysDbmsTabsTableInfo sqlText(SysLoadFileInfoVo vo) {
+		sysLoadFileInfoDao.createTable(vo.getSqlText());
+		String table = vo.getSqlText().split("\r\n")[0];
+		String tableName = table.replaceAll("CREATE|TABLE|IF|NOT|EXISTS|\\(| ", "").trim();
+
+		SysDbmsTabsTableInfo tab = new SysDbmsTabsTableInfo(vo.getInfo().getFileName(), tableName);
+		List<SysDbmsTabsColsInfo> colsInfos = new ArrayList<>();
+		for (SysLoadFileColsInfo fileColsInfo : vo.getColumns()) {
+			SysDbmsTabsColsInfo tabsColsInfo = new SysDbmsTabsColsInfo(fileColsInfo.getColumnDesc(), fileColsInfo.getColumnName(), fileColsInfo.getColumnType(), tab.getUuid());
+			colsInfos.add(tabsColsInfo);
+		}
+
+		sysDbmsTabsTableInfoService.save(tab);
+		sysDbmsTabsColsInfoService.saveBatch(colsInfos);
+		return tab;
 	}
 	
 }

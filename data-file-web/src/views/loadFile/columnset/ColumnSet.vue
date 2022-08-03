@@ -9,8 +9,8 @@
     </el-card>
     <el-card class="box-card">
       <FileConfig v-if="confStep == 0" @next="confStep = 1"> </FileConfig>
-      <TableSelect v-if="confStep == 1" @next="confStep = 2"></TableSelect>
-      <ColumnsMapping v-if="confStep == 2" @next="$emit('showPage', '2')"></ColumnsMapping>
+      <TableSelect v-if="confStep == 1" @next="confStep = 2" @goto-befor="confStep = 0"></TableSelect>
+      <ColumnsMapping v-if="confStep == 2" @next="$emit('showPage', '2')" @goto-befor="confStep = 1"></ColumnsMapping>
     </el-card>
   </el-space>
 </template>

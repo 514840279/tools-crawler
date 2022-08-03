@@ -83,6 +83,7 @@ let localOptionBtn = ref<OptionBtn>({
 function onClickRow(row: SysLoadFileInfo) {
   show.value = false;
   setTimeout(function () {
+    row.skip == null ? row.skip = 0 : null;
     fileInfo.value = row;
     router.push({ path: "/columnset" })
   }, 300) //

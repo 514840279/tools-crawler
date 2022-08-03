@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.SysLoadFileInfoDao;
+import com.example.demo.po.SysDbmsTabsTableInfo;
 import com.example.demo.po.SysLoadFileInfo;
 import com.example.demo.service.SysLoadFileInfoService;
 import com.example.demo.vo.SysLoadFileInfoVo;
@@ -56,6 +57,20 @@ public class SysLoadFileInfoController extends MybatisBaseConrollerImpl<SysLoadF
 			return ResultUtil.success("配置信息修改成功。");
 		} catch (Exception e) {
 			logger.error("<saveFileConfig> error:{} ", e.getMessage());
+			return ResultUtil.error(e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/sqlText", method = RequestMethod.POST)
+	public BaseResult<SysDbmsTabsTableInfo> sqlText(@RequestBody SysLoadFileInfoVo vo) {
+		logger.info("<sqlText> param info:{} ", vo.toString());
+		try {
+			// 简单分页查询
+			SysDbmsTabsTableInfo tab = sysLoadFileInfoService.sqlText(vo);
+			
+			return ResultUtil.success(tab);
+		} catch (Exception e) {
+			logger.error("<sqlText> error:{} ", e.getMessage());
 			return ResultUtil.error(e.getMessage());
 		}
 	}
