@@ -7,10 +7,13 @@
                         <TableSearch v-if="localOptionBtn.search" :searchColumns="searchColumns" v-model:searchParameters="searchParameters" @searchTable="initTable"></TableSearch>
                     </el-col>
                     <el-col :span="6">
+
+
                         <div style="text-align: right; margin-right: 10px;">
+                            <slot name="rightBtn"></slot>
                             <el-button title="查询" v-if="localOptionBtn.searchParam" @click="handleShowShearch()" :type="searchBtnType" icon="Search" circle size="small"></el-button>
                             <el-button title="排序" v-if="localOptionBtn.sort" @click="handleShowSort()" :type="sortBtnType" icon="Sort" circle size="small"></el-button>
-                            <el-button title="重置" @click="resetTable()" icon="Setting" circle size="small"></el-button>
+                            <el-button title="重置" v-if="localOptionBtn.reset" @click="resetTable()" icon="Setting" circle size="small"></el-button>
                             <el-button title="添加" v-if="localOptionBtn.add" @click="handleAdd()" type="success" icon="CirclePlusFilled" circle size="small"></el-button>
                             <el-button title="刷新" @click="initTable()" icon="Refresh" circle size="small"></el-button>
                             <!-- <el-button title="打印" @click="printTable()" icon="Printer" circle size="small"  ></el-button> -->
@@ -38,7 +41,7 @@
                     <div v-if="localOptionBtn.page" class="apagination">
                         <el-row>
                             <el-col :span="12" :offset="12">
-                                <el-pagination class="pagex" style="float: right;" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="param.pageNumber" :page-sizes="page.sizes" :page-size="param.pageSize" :pager-count="5" layout="total, sizes, prev, pager, next, jumper" :total="param.totalElements">
+                                <el-pagination class="pagex" style="float: right;" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="param.pageNumber" :page-sizes="page.sizes" :page-size="param.pageSize" :pager-count="5" layout="total, sizes, prev, pager, next, jumper" :total="param.totalElements" :hide-on-single-page="true">
                                 </el-pagination>
                             </el-col>
                         </el-row>
@@ -106,6 +109,7 @@ let localOptionBtn = ref<OptionBtn>({
     add: true, // 添加
     page: true, // 翻页
     opt: true, // 每条数据后端操作搭配optbtn使用
+    reset: false,
     optbtn: { // 
         option: true, // 详细 暂时无用
         info: true, // 详细 暂时无用
@@ -124,6 +128,7 @@ let localOptionBtn = ref<OptionBtn>({
         pageSize: 10,
         totalElements: 0,
         info: {}
+
     },
     // 表加载
     loading = ref<Boolean>(true);
@@ -204,6 +209,7 @@ function init(): void {
                 "searchPlaceholder": "请输入" + item.title,
             });
         }
+
         // 默认值设置
         item.show = item.show == null ? true : item.show;
     });
@@ -222,14 +228,7 @@ function initTable(): void {
     loading.value = true;
     param.sortList = sortParameters.value;
     param.searchList = searchParameters.value;
-    param.searchList.push({
-        operator: "and",
-        column: "deleteFlag",
-        title: "删除",
-        symbol: "eq",
-        data: "0",
-        showdata: true
-    })
+
     http.post<any>(url.page, param).then((reponse) => {
         if (reponse.data != null && reponse.code == 200) {
             dataList.value = reponse.data.content;

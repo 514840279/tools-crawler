@@ -30,6 +30,7 @@ export interface SysLoadFileLogInfo {
   updateTime?: Date,
   updateUser?: string,
   runState?: string,
+  errorMessage?: string,
 }
 
 
@@ -64,12 +65,12 @@ export interface SysLoadFileColsMapping {
   fileUuid?: string,
   fileColumnUuid?: string,
   columnFormat?: string,
-  tabsUuid?: number,
+  tabsUuid?: string,
   tabsColumnUuid?: string,
   discription?: string,
   deleteFlag?: number,
   sort?: number,
-  createTime?: Date,
+  createTime?: string,
   createUser?: string,
   updateTime?: Date,
   updateUser?: string,

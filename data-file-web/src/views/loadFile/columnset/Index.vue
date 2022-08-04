@@ -1,11 +1,13 @@
 <template>
-  <div id="load-conf">
-    <h1 class="title">{{ title }}</h1>
-    <el-card class="box-card" shadow="always">
+  <el-collapse-transition>
+    <div id="load-conf">
+      <h1 class="title">{{ title }}</h1>
+      <!-- <el-card class="box-card" shadow="always"> -->
       <ColumnSet v-if="showPage == '1'" @showPage="showLogPage"></ColumnSet>
       <FileLogsVue v-if="showPage == '2'" @showPage="showLogPage"></FileLogsVue>
-    </el-card>
-  </div>
+      <!-- </el-card> -->
+    </div>
+  </el-collapse-transition>
 </template>
 
 <script setup lang="ts">
@@ -38,7 +40,7 @@ const init = function () {
   fileColumns.value = [];
   fileColsMapping.value = [];
   tables.value = [];
-  tableInfo.value = null;
+  tableInfo.value = { uuid: "", tabsName: "" };
   tableColumnsInfo.value = [];
 
   switch (fileInfo.value.fileMappingState) {
@@ -47,7 +49,7 @@ const init = function () {
       // 加载已经配置的文件字段信息,
       initFileColumn();
       break;
-    case "已配置":
+    case "配置完":
       showPage.value = "2";
       title.value = "日志信息"
       initLogs();
@@ -81,8 +83,8 @@ const initMapping = function () {
       if (reponse.data != null) {
         // 加载对应表信息
         initTables();
-        // 加载对应表的字段信息
-        initColumns();
+        // // 加载对应表的字段信息
+        // initColumns();
       }
     } else {
       showPage.value = "1";
@@ -95,28 +97,27 @@ const initMapping = function () {
 const initTables = function () {
   let param = { uuid: fileColsMapping.value[0].tabsUuid }
   http.post<any>("/serve/sysDbmsTabsTableInfo/findOne", param).then((reponse) => {
-    if (reponse.code == 200 && reponse.data.length > 0) {
+    if (reponse.code == 200 && reponse.data != null) {
       tableInfo.value = reponse.data;
-    } else {
       showPage.value = "1";
     }
   }).catch((err) => {
     // TODO
   });
 }
-// 加载对应表的字段信息
-const initColumns = function () {
-  let param = { tabsUuid: fileColsMapping.value[0].tabsUuid }
-  http.post<any>("/serve/sysDbmsTabsColsInfo/findAll", param).then((reponse) => {
-    if (reponse.code == 200 && reponse.data.length > 0) {
-      tableColumnsInfo.value = reponse.data;
-    } else {
-      showPage.value = "1";
-    }
-  }).catch((err) => {
-    // TODO
-  });
-}
+// // 加载对应表的字段信息
+// const initColumns = function () {
+//   let param = { info: { tabsUuid: fileColsMapping.value[0].tabsUuid }, sortList: [{ sortIndex: 1, sortOrder: "asc", sortName: "sort", }] }
+//   http.post<any>("/serve/sysDbmsTabsColsInfo/findAllBySort", param).then((reponse) => {
+//     if (reponse.code == 200 && reponse.data.length > 0) {
+//       tableColumnsInfo.value = reponse.data;
+//     } else {
+//       showPage.value = "1";
+//     }
+//   }).catch((err) => {
+//     // TODO
+//   });
+// }
 // 加载对应表的字段信息
 const initLogs = function () {
 

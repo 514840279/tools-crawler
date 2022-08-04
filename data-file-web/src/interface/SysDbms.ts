@@ -1,5 +1,5 @@
 // `chuxue`.`sys_dbms_tabs_table_info`   
-export interface SysDbmsTabsTableInfo{
+export interface SysDbmsTabsTableInfo {
   createTime?: Date,
   createUser?: string,
   deleteFlag?: number,
@@ -14,10 +14,10 @@ export interface SysDbmsTabsTableInfo{
   typeCode?: string,
   updateTime?: Date,
   updateUser?: string,
-  uuid?: string,
+  uuid: string,
 }
 
-export interface SysDbmsTabsCols{
+export interface SysDbmsTabsCols {
   uuid: string,
   updateTime?: Date,
   createTime?: Date,
@@ -32,14 +32,14 @@ export interface SysDbmsTabsCols{
   colsValign?: string,
   colsLength?: string,
   nullable?: string,
-  colsSwitchable: string,
-  colsName: string,
-  deleteFlag: number,
-  dataPrecision: string,
+  colsSwitchable?: string,
+  colsName?: string,
+  deleteFlag?: number,
+  dataPrecision?: string,
   colsDesc?: string,
-  dataScale: string,
-  colsType: string,
+  dataScale?: string,
+  colsType?: string,
   createUser?: string,
   dataType?: string,
-  colsAlign: string,
+  colsAlign?: string,
 }

@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div style="float: right;">
-      <el-input v-model="searchText" :autofocus="true" label="赛选表" placeholder="输入表名或者表注释进行筛选。"></el-input>
-    </div>
-    <el-table ref="singleTableRef" :data="searchTable(tables)" highlight-current-row style="width: 100%" @current-change="handleCurrentChange">
-      <el-table-column v-for="(column, index) in activeColumns" :key="index" :property="column.name" :label="column.title">
-      </el-table-column>
-    </el-table>
+    <el-row>
+      <el-col>
+        <div style="text-align: right;">
+          <el-input v-model="searchText" :autofocus="true" label="赛选表" placeholder="输入表名或者表注释进行筛选。" style="width: 180px;"></el-input>
+        </div>
+      </el-col>
+    </el-row>
+    <el-scrollbar height="400px">
+      <el-table ref="singleTableRef" :data="searchTable(tables)" :highlight-current-row="true" style="width: 100%" @current-change="handleCurrentChange" :setCurrentRow="tableInfo">
+        <el-table-column v-for="(column, index) in activeColumns" :key="index" :property="column.name" :label="column.title">
+        </el-table-column>
+      </el-table>
+    </el-scrollbar>
     <div style="text-align: center;margin-top:8px">
       <el-button type="primary" @click="$emit('gotoBefor')"> 上一项</el-button>
       <el-button type="primary" @click="toShowDialog">创建新表</el-button>
@@ -28,8 +34,9 @@
 
 <script setup lang="ts">
 // 使普通数据变响应式的函数
+import { ElTable } from "element-plus";
 import { storeToRefs } from "pinia";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { SysDbmsTabsTableInfo } from "../../../interface/SysDbms";
 import { Column } from "../../../interface/Table";
 import http from "../../../plugins/http";
@@ -63,6 +70,19 @@ const columns: Array<Column> = [{
 let searchText = ref<string>();
 let showDialog = ref<boolean>(false);
 let sqlText = ref<string>("");
+
+let singleTableRef = ref<InstanceType<typeof ElTable>>();
+
+onMounted(() => {
+  // nextTick(() => {
+  tables.value.forEach(tab => {
+    if (tab.uuid == tableInfo.value.uuid) {
+      // console.log(tableInfo.value, '21321', tab)
+      singleTableRef.value!.setCurrentRow(tab)
+    }
+  });
+  // })
+})
 
 const handleCurrentChange = (val: SysDbmsTabsTableInfo | undefined) => {
   tableInfo.value = val;
@@ -102,8 +122,8 @@ const emit = defineEmits(["next", "gotoBefor"]);
 
 // 加载对应表的字段信息
 function gotoNext() {
-  let param = { tabsUuid: tableInfo.value?.uuid }
-  http.post<any>("/serve/sysDbmsTabsColsInfo/findAll", param).then((reponse) => {
+  let param = { info: { tabsUuid: tableInfo.value?.uuid }, sortList: [{ sortIndex: 1, sortOrder: "asc", sortName: "sort", }] }
+  http.post<any>("/serve/sysDbmsTabsColsInfo/findAllBySort", param).then((reponse) => {
     if (reponse.code == 200) {
       tableColumnsInfo.value = reponse.data;
       emit('next')

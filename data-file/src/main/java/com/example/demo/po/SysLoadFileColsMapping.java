@@ -23,27 +23,27 @@ import lombok.Setter;
 @TableName(value = "`sys_load_file_cols_mapping`")
 public class SysLoadFileColsMapping extends MybatisBaseEntity implements Serializable {
 	private static final long	serialVersionUID	= 1L;
-	
+
 	// 文件id
 	@TableField(value = "file_uuid")
 	private String				fileUuid;
-	
+
 	// 字段id
 	@TableField(value = "file_column_uuid")
 	private String				fileColumnUuid;
-	
+
 	// 字段格式化
 	@TableField(value = "column_format")
 	private String				columnFormat;
-	
+
 	// 表id
 	@TableField(value = "tabs_uuid")
-	private Integer				tabsUuid;
-	
+	private String				tabsUuid;
+
 	// 表字段
 	@TableField(value = "tabs_column_uuid")
 	private String				tabsColumnUuid;
-	
+
 	/**
 	 * 构造方法：
 	 * 描 述： 默认构造函数
@@ -53,5 +53,5 @@ public class SysLoadFileColsMapping extends MybatisBaseEntity implements Seriali
 	 */
 	public SysLoadFileColsMapping() {
 	}
-	
+
 }

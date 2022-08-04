@@ -122,10 +122,11 @@ public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileIn
 		SysLoadFileColsInfo cols = new SysLoadFileColsInfo();
 		cols.setFileUuid(info.getUuid());
 		QueryWrapper<SysLoadFileColsInfo> queryWrapper = new QueryWrapper<>(cols);
-		List<SysLoadFileColsInfo> reList = sysLoadFileColsInfoService.list(queryWrapper);
-		if (reList != null && reList.size() > 0) {
-			sysLoadFileColsInfoService.removeBatchByIds(reList);
-		}
+//		List<SysLoadFileColsInfo> reList = sysLoadFileColsInfoService.list(queryWrapper);
+//		if (reList != null && reList.size() > 0) {
+//			sysLoadFileColsInfoService.removeBatchByIds(reList);
+//		}
+		sysLoadFileColsInfoService.remove(queryWrapper);
 		info.setFileState(FileState.CONFIG);
 		saveOrUpdate(info);
 		sysLoadFileColsInfoService.saveBatch(vo.getColumns());
@@ -148,7 +149,7 @@ public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileIn
 		SysDbmsTabsTableInfo tab = new SysDbmsTabsTableInfo(vo.getInfo().getFileName(), tableName);
 		List<SysDbmsTabsColsInfo> colsInfos = new ArrayList<>();
 		for (SysLoadFileColsInfo fileColsInfo : vo.getColumns()) {
-			SysDbmsTabsColsInfo tabsColsInfo = new SysDbmsTabsColsInfo(fileColsInfo.getColumnDesc(), fileColsInfo.getColumnName(), fileColsInfo.getColumnType(), tab.getUuid());
+			SysDbmsTabsColsInfo tabsColsInfo = new SysDbmsTabsColsInfo(fileColsInfo.getColumnDesc(), fileColsInfo.getColumnName(), fileColsInfo.getColumnType(), tab.getUuid(), fileColsInfo.getSort());
 			colsInfos.add(tabsColsInfo);
 		}
 

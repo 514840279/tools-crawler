@@ -26,7 +26,7 @@
         </div>
       </div>
       <div v-if="datas != null" style="width: 100%">
-        <el-table :data="datas" :border="true" height="400" style="width: 100%">
+        <el-table :data="datas" :border="true" height="350" style="width: 100%">
           <el-table-column v-for="(column, index) in fileColumns" :key="index" :prop="column.columnName" :label="column.columnDesc" width="150">
             <template #header>
               <el-input v-model="column.columnDesc" :title="'name:' + column.columnName + ',desc:' + column.columnDesc" />
@@ -65,7 +65,6 @@ onMounted(() => {
 
 // 读取文件信息
 function readFile() {
-
   let param =
   {
     info: fileInfo.value,

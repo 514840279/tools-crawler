@@ -5,8 +5,8 @@ import { SysDbmsTabsCols, SysDbmsTabsTableInfo } from '../interface/SysDbms';
 let fileInfo: SysLoadFileInfo;
 let fileColumns: Array<SysLoadFileColsInfo>;
 let fileColsMapping: Array<SysLoadFileColsMapping>;
-let tableInfo: SysDbmsTabsTableInfo | null;
-let tableColumnsInfo: Array<SysDbmsTabsCols>
+let tableInfo: SysDbmsTabsTableInfo;
+let tableColumnsInfo: Array<SysDbmsTabsCols>;
 let tables: Array<SysDbmsTabsTableInfo>;
 
 // useStore could be anything like useUser, useCart
