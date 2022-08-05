@@ -14,17 +14,14 @@
             </div>
           </el-col>
         </el-row>
-        <el-popover placement="top-start" title="Title" :width="200" trigger="hover" content="this is content, this is content, this is content">
-          阿斯顿撒
-        </el-popover>
         <el-table id="tableid" v-loading="loading" :data="dataList" style="width: 100%">
-          <el-table-column prop="runState" label="状态" width="150" />
           <el-table-column prop="complateRows" label="执行提交行" width="150" />
           <el-table-column prop="errorRows" label="执行失败行" width="150" />
-          <el-table-column prop="errorMessage" label="失败消息" width="550" />
-          <el-table-column prop="errorFile" label="失败文件保存位置" width="550" />
-          <el-table-column prop="updateTime" label="更新时间" width="150" />
+          <el-table-column prop="errorMessage" label="失败消息" width="150" />
+          <el-table-column prop="errorFile" label="失败文件保存位置" />
+          <el-table-column prop="runState" label="状态" width="150" />
           <el-table-column prop="createTime" label="创建时间" width="150" />
+          <el-table-column prop="updateTime" label="更新时间" width="150" />
         </el-table>
         <el-row>
           <el-col :span="12" :offset="12">
@@ -39,9 +36,9 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
-import Table from '../../../components/table/Table.vue'
-import { Column, OptionBtn, PageParam } from '../../../interface/Table'
+import { PageParam } from '../../../interface/Table'
 import http from '../../../plugins/http';
+import { ElMessage } from 'element-plus'
 
 // 使普通数据变响应式的函数
 import { storeToRefs } from "pinia";
@@ -52,8 +49,6 @@ const store = loadStore();
 const { fileInfo } = storeToRefs(store);
 
 const emit = defineEmits(["showPage"]);
-
-let show = ref<boolean>(true);
 
 
 // 请求参数
@@ -79,11 +74,6 @@ let param: PageParam = {
     showdata: true,
   }],
   sortList: [{
-    sortIndex: 1,
-    sortTitle: "updateTime",
-    sortOrder: "desc",
-    sortName: "updateTime"
-  }, {
     sortIndex: 2,
     sortTitle: "createTime",
     sortOrder: "desc",
@@ -103,23 +93,71 @@ onBeforeMount(() => {
 
 // 初始化表格
 function initTable() {
-  let rootUrl: string = '/serve/sysLoadFileLogInfo';
+  dataList.value = [];
+  loading.value = true;
+  http.post<any>("/serve/sysLoadFileLogInfo/page", param).then((reponse) => {
+    if (reponse.code == 200) {
+      dataList.value = reponse.data.content;
+      param.totalElements = reponse.data.totalElements;
+    }
+    loading.value = false;
+  }).catch((err) => {
+    // TODO
+  });
+
 
 }
 
 // 重启一个任务
 function reStartJob() {
-
+  http.post<any>("/serve/sysLoadFileLogInfo/reStartJob", fileInfo.value).then((reponse) => {
+    if (reponse.code == 200) {
+      ElMessage({
+        message: reponse.data,
+        type: 'success',
+      })
+      setTimeout(function () {
+        initTable()
+      }, 1000) // 
+    }
+  }).catch((err) => {
+    // TODO
+  });
 }
 
 // 停止任务
 function stopJob() {
+  http.post<any>("/serve/sysLoadFileLogInfo/stopJob", fileInfo.value).then((reponse) => {
+    if (reponse.code == 200) {
+      ElMessage({
+        message: reponse.data,
+        type: 'success',
+      })
+      setTimeout(function () {
+        initTable()
+      }, 1000) // 
 
+    }
+  }).catch((err) => {
+    // TODO
+  });
 }
 
 // 继续执行job
 function continueJob() {
-
+  http.post<any>("/serve/sysLoadFileLogInfo/continueJob", fileInfo.value).then((reponse) => {
+    if (reponse.code == 200) {
+      ElMessage({
+        message: reponse.data,
+        type: 'success',
+      })
+      setTimeout(function () {
+        initTable()
+      }, 1000) // 
+    }
+  }).catch((err) => {
+    // TODO
+  });
 }
 
 // 每页大小

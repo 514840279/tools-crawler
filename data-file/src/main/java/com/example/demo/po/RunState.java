@@ -11,5 +11,5 @@ package com.example.demo.po;
  * 版 本 ： V1.0
  */
 public abstract class RunState {
-	public static final String STRAT = "准备", RUNNING = "运行中", STOPED = "停止", END = "结束", ERROR = "有错误";
+	public static final String STRAT = "准备", RUNNING = "运行中", STOPED = "停止", END = "结束", CLOSED = "关闭", ERROR = "有错误";
 }

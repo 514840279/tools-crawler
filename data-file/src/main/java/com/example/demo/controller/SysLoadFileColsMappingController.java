@@ -31,7 +31,7 @@ public class SysLoadFileColsMappingController extends MybatisBaseConrollerImpl<S
 	static Logger					logger	= LoggerFactory.getLogger(SysLoadFileColsMappingController.class);
 	@Autowired
 	SysLoadFileColsMappingService	sysLoadFileColsMappingService;
-
+	
 	@RequestMapping(value = "/saveFileMappingConfig", method = RequestMethod.POST)
 	public BaseResult<String> saveFileMappingConfig(@RequestBody SysLoadFileColsMappingVo vo) {
 		logger.info("<saveFileConfig> param info:{} ", vo.toString());
@@ -44,4 +44,5 @@ public class SysLoadFileColsMappingController extends MybatisBaseConrollerImpl<S
 			return ResultUtil.error(e.getMessage());
 		}
 	}
+	
 }

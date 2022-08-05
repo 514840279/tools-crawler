@@ -1,6 +1,8 @@
 package com.example.demo.po;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.UUID;
 
 import org.chuxue.application.common.base.MybatisBaseEntity;
 
@@ -30,11 +32,11 @@ public class SysLoadFileLogInfo extends MybatisBaseEntity implements Serializabl
 
 	// 成功行
 	@TableField(value = "complate_rows")
-	private Integer				complateRows;
+	private Long				complateRows;
 
 	// 错误行
 	@TableField(value = "error_rows")
-	private Integer				errorRows;
+	private Long				errorRows;
 
 	// 错误文件位置
 	@TableField(value = "error_file")
@@ -56,6 +58,39 @@ public class SysLoadFileLogInfo extends MybatisBaseEntity implements Serializabl
 	 * @throws
 	 */
 	public SysLoadFileLogInfo() {
+	}
+
+	/**
+	 * 构造方法：
+	 * 描 述： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param fileUuid
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	public SysLoadFileLogInfo(String fileUuid) {
+		this.fileUuid = fileUuid;
+	}
+
+	/**
+	 * 构造方法：
+	 * 描 述： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param fileUuid
+	 * 参 数： @param complateRows
+	 * 参 数： @param errorRows
+	 * 参 数： @param errorFile
+	 * 参 数： @param runState
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	public SysLoadFileLogInfo(String fileUuid, Long complateRows, Long errorRows, String errorFile, String runState) {
+		this.uuid = UUID.randomUUID().toString();
+		this.createTime = new Date();
+		this.deleteFlag = 0;
+		this.fileUuid = fileUuid;
+		this.complateRows = complateRows;
+		this.errorRows = errorRows;
+		this.errorFile = errorFile;
+		this.runState = runState;
 	}
 
 }

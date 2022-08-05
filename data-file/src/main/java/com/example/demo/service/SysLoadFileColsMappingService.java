@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.dao.SysLoadFileColsMappingDao;
 import com.example.demo.po.FileState;
+import com.example.demo.po.RunState;
 import com.example.demo.po.SysLoadFileColsMapping;
 import com.example.demo.po.SysLoadFileInfo;
+import com.example.demo.po.SysLoadFileLogInfo;
 import com.example.demo.vo.SysLoadFileColsMappingVo;
 
 /**
@@ -24,7 +26,10 @@ import com.example.demo.vo.SysLoadFileColsMappingVo;
 public class SysLoadFileColsMappingService extends MybatisBaseServiceImpl<SysLoadFileColsMappingDao, SysLoadFileColsMapping> {
 	
 	@Autowired
-	SysLoadFileInfoService sysLoadFileInfoService;
+	SysLoadFileInfoService		sysLoadFileInfoService;
+	
+	@Autowired
+	SysLoadFileLogInfoService	sysLoadFileLogInfoService;
 	
 	/**
 	 * 方法名： saveFileMappingConfig
@@ -46,7 +51,16 @@ public class SysLoadFileColsMappingService extends MybatisBaseServiceImpl<SysLoa
 		saveBatch(vo.getMappings());
 		info.setFileMappingState(FileState.CONFIG);
 		sysLoadFileInfoService.saveOrUpdate(info);
-
+		
+		SysLoadFileLogInfo log = new SysLoadFileLogInfo(info.getUuid());
+		QueryWrapper<SysLoadFileLogInfo> logWrapper = new QueryWrapper<>(log);
+		logWrapper.orderByDesc("create_time");
+		logWrapper.last(" limit 1");
+		log = sysLoadFileLogInfoService.getOne(logWrapper);
+		if (log == null) {
+			log = new SysLoadFileLogInfo(info.getUuid(), 0L, 0L, null, RunState.STRAT);
+			sysLoadFileLogInfoService.save(log);
+		}
 	}
 
 }
