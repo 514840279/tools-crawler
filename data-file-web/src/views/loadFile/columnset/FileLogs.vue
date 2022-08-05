@@ -11,6 +11,7 @@
                 <el-button type="info" @click="continueJob">继续</el-button>
               </el-button-group>
               <el-button type="info" @click="showPage">修改配置</el-button>
+              <el-button title="刷新，每5s自动更新一次" @click.prevent="setTimeinitTable()" circle :icon="iconBtn" size="small" :color="color"></el-button>
             </div>
           </el-col>
         </el-row>
@@ -51,6 +52,8 @@ const { fileInfo } = storeToRefs(store);
 const emit = defineEmits(["showPage"]);
 
 
+
+
 // 请求参数
 let param: PageParam = {
   pageNumber: 1,
@@ -87,14 +90,18 @@ let loading = ref<Boolean>(true);
 // 表格数据
 let dataList = ref<Array<any>>([]);
 
+let intervalo: number | null = null;
+let color = ref<string>("");
+let iconBtn = ref<string>("VideoPlay");
+
 onBeforeMount(() => {
   initTable();
 })
 
 // 初始化表格
 function initTable() {
-  dataList.value = [];
-  loading.value = true;
+  // dataList.value = [];
+  // loading.value = true;
   http.post<any>("/serve/sysLoadFileLogInfo/page", param).then((reponse) => {
     if (reponse.code == 200) {
       dataList.value = reponse.data.content;
@@ -106,6 +113,19 @@ function initTable() {
   });
 
 
+}
+
+function setTimeinitTable(): void {
+  if (intervalo == null) {
+    intervalo = setInterval(initTable, 5000);
+    color.value = "#626aef";
+    iconBtn.value = "VideoPause";
+  } else {
+    clearInterval(intervalo);
+    color.value = "";
+    iconBtn.value = "VideoPlay";
+    intervalo = null;
+  }
 }
 
 // 重启一个任务
