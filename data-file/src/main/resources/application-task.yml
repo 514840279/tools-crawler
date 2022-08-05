@@ -1,0 +1,11 @@
+spring:  
+  task:
+    execution:
+      thread-name-prefix: load-file-task-
+      pool:
+        core-size: 5
+        max-size: 10
+        queue-capacity: 100
+    scheduling:
+      pool:
+        size: 10

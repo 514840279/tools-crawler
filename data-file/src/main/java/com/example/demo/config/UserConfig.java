@@ -29,6 +29,6 @@ public class UserConfig {
 	private String	errorDir	= "importError/";
 
 	private Integer	readRows	= 10;
-	private Integer	commitRows	= 10;
+	private Long	commitRows	= 1000L;
 
 }

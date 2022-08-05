@@ -28,10 +28,12 @@ import com.example.demo.vo.SysLoadFileColsMappingVo;
 @RestController
 @RequestMapping("/sysLoadFileColsMapping")
 public class SysLoadFileColsMappingController extends MybatisBaseConrollerImpl<SysLoadFileColsMappingDao, SysLoadFileColsMapping> implements BaseController<SysLoadFileColsMapping> {
+
 	static Logger					logger	= LoggerFactory.getLogger(SysLoadFileColsMappingController.class);
+
 	@Autowired
 	SysLoadFileColsMappingService	sysLoadFileColsMappingService;
-	
+
 	@RequestMapping(value = "/saveFileMappingConfig", method = RequestMethod.POST)
 	public BaseResult<String> saveFileMappingConfig(@RequestBody SysLoadFileColsMappingVo vo) {
 		logger.info("<saveFileConfig> param info:{} ", vo.toString());
@@ -44,5 +46,5 @@ public class SysLoadFileColsMappingController extends MybatisBaseConrollerImpl<S
 			return ResultUtil.error(e.getMessage());
 		}
 	}
-	
+
 }
