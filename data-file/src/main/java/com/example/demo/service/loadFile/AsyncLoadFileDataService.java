@@ -40,46 +40,46 @@ import com.example.demo.vo.SysLoadFileColsMappingVo;
 @Service
 public class AsyncLoadFileDataService {
 	private static final Logger		logger	= LoggerFactory.getLogger(AsyncLoadFileDataService.class);
-	
+
 	@Autowired
 	XlsFileLoad						xlsFileLoad;
-
+	
 	@Autowired
 	XlsxFileLoad					xlsxFileLoad;
-
+	
 	@Autowired
 	CsvFileLoad						csvFileLoad;
-
+	
 	@Autowired
 	TxtFileLoad						txtFileLoad;
-
+	
 	@Autowired
 	XmlFileLoad						xmlFileLoad;
-
+	
 	@Autowired
 	JsonFileLoad					jsonFileLoad;
-
+	
 	@Autowired
 	DataFileLoad					dataFileLoad;
-	
+
 	@Autowired
 	SysLoadFileInfoService			sysLoadFileInfoService;
-
+	
 	@Autowired
 	SysLoadFileColsInfoService		sysLoadFileColsInfoService;
-
+	
 	@Autowired
 	SysDbmsTabsTableInfoService		sysDbmsTabsTableInfoService;
-	
+
 	@Autowired
 	SysDbmsTabsColsInfoService		sysDbmsTabsColsInfoService;
-	
+
 	@Autowired
 	SysLoadFileLogInfoService		sysLoadFileLogInfoService;
-
+	
 	@Autowired
 	SysLoadFileColsMappingService	sysLoadFileColsMappingService;
-
+	
 	// 报告多线程调用
 	@Async("asyncServiceExecutor")
 	public CompletableFuture<String> executeAsync(SysLoadFileLogInfo log) {
@@ -94,13 +94,13 @@ public class AsyncLoadFileDataService {
 			sysLoadFileLogInfoService.saveOrUpdate(log);
 			return CompletableFuture.completedFuture(RunState.ERROR);
 		}
-		
+
 		log.setRunState(RunState.END);
 		sysLoadFileLogInfoService.saveOrUpdate(log);
 		logger.info("end executeAsync");
 		return CompletableFuture.completedFuture(RunState.END);
 	}
-
+	
 	/**
 	 * 方法名： mappingConfig
 	 * 功 能： 1. 读取配置信息
@@ -121,14 +121,14 @@ public class AsyncLoadFileDataService {
 		QueryWrapper<SysDbmsTabsTableInfo> tableWrapper = new QueryWrapper<>();
 		tableWrapper.in("uuid", mappings.get(0).getTabsUuid());
 		SysDbmsTabsTableInfo tableInfo = sysDbmsTabsTableInfoService.getOne(tableWrapper);
-		
-		QueryWrapper<SysDbmsTabsColsInfo> tableColWrapper = new QueryWrapper<>();
-		tableColWrapper.in("table_uuid", mappings.get(0).getTabsUuid());
-		List<SysDbmsTabsColsInfo> tableColInfo = sysDbmsTabsColsInfoService.list(tableColWrapper);
 
+		QueryWrapper<SysDbmsTabsColsInfo> tableColWrapper = new QueryWrapper<>();
+		tableColWrapper.in("tabs_uuid", mappings.get(0).getTabsUuid());
+		List<SysDbmsTabsColsInfo> tableColInfo = sysDbmsTabsColsInfoService.list(tableColWrapper);
+		
 		return new SysLoadFileColsMappingVo(log, fileInfo, fileColsInfos, tableInfo, mappings, tableColInfo);
 	}
-
+	
 	public void loadFile(SysLoadFileColsMappingVo vo) {
 		SysLoadFileInfo info = vo.getFileInfo();
 		try {

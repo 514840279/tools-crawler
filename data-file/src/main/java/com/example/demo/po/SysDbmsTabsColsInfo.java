@@ -117,11 +117,34 @@ public class SysDbmsTabsColsInfo extends MybatisBaseEntity implements Serializab
 		this.colsWidth = 150;
 		this.colsSwitchable = true;
 		this.colsDesc = colsDesc;
-		this.colsName = colsName;
+		this.colsName = subLength(colsName);
+		
 		this.colsType = colsType;
 		this.tabsUuid = tabsUuid;
 		this.createTime = new Date();
 		this.sort = sort;
+	}
+	
+	/**
+	 * 方法名： subLength
+	 * 功 能： TODO(这里用一句话描述这个方法的作用)
+	 * 参 数： @param colsName2
+	 * 参 数： @return
+	 * 返 回： String
+	 * 作 者 ： Administrator
+	 * @throws
+	 */
+	private String subLength(String colsName) {
+		if (colsName == null) {
+			return null;
+		}
+		
+		colsName = colsName.replaceAll("(\\.|\\(|\\)|\\（|\\）|\\[|\\]|\\{|\\}|\\$|@|!|【|】| |	|；|;)", "_");
+		while (colsName.getBytes().length > 30) {
+			colsName = colsName.substring(0, colsName.length() - 2);
+		}
+		
+		return colsName;
 	}
 	
 }

@@ -3,5 +3,5 @@ user:
   file-dir: file/import/
   error-dir: file/export/
   read-rows: 10 
-  commit-rows: 1000
+  commit-rows: 10
   

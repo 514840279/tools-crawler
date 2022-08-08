@@ -26,16 +26,16 @@ import com.example.demo.service.loadFile.AsyncLoadFileDataService;
 @Component
 @Order(30)
 public class LoadDataTask {
-
-	@Autowired
-	SysLoadFileLogInfoService	sysLoadFileLogInfoService;
 	
 	@Autowired
-	AsyncLoadFileDataService	asyncLoadFileDataService;
+	SysLoadFileLogInfoService	sysLoadFileLogInfoService;
 
+	@Autowired
+	AsyncLoadFileDataService	asyncLoadFileDataService;
+	
 	// 每天凌晨开始执行
 //	@Scheduled(cron = "1 0 0 * * ? ")
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 10000)
 	public void run() {
 		// 运行中
 		QueryWrapper<SysLoadFileLogInfo> queryWrapper = new QueryWrapper<>();
@@ -47,7 +47,7 @@ public class LoadDataTask {
 		list.add("update_time");
 		list.add("create_time");
 		queryWrapper.orderByAsc(list);
-
+		
 		List<CompletableFuture<String>> alistCompletableFuture = new ArrayList<>();
 		List<SysLoadFileLogInfo> listLog = sysLoadFileLogInfoService.list(queryWrapper);
 		if (listLog != null && listLog.size() > 0) {
@@ -56,21 +56,21 @@ public class LoadDataTask {
 				CompletableFuture<String> createOrder = asyncLoadFileDataService.executeAsync(sysLoadFileLogInfo);
 				alistCompletableFuture.add(createOrder);
 			}
-
+			
 			// 初始化需要得到的数组
 			@SuppressWarnings("unchecked")
 			CompletableFuture<String>[] array = new CompletableFuture[alistCompletableFuture.size()];
-			
+
 			// 使用for循环得到数组
 			for (int i = 0; i < alistCompletableFuture.size(); i++) {
 				array[i] = alistCompletableFuture.get(i);
 			}
-			
+
 			// 等待所有任务都执行完
 			CompletableFuture.allOf(array).join();
-
+			
 		}
-
+		
 	}
-	
+
 }

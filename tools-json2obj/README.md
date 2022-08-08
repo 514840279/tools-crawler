@@ -71,7 +71,7 @@ jsonfile下文件格式说明
  
 # 执行 
 
-``java -jar tools-json2obj.jar --f=test.txt --web=false`` 
+``java -jar tools-json2obj.jar --f=test.txt --web=false --t=file `` 
  
 ``java -jar tools-json2obj.jar --web=false --t=dir`` 
 

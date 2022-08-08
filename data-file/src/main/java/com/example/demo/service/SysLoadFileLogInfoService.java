@@ -21,7 +21,7 @@ import com.example.demo.po.SysLoadFileLogInfo;
  */
 @Service
 public class SysLoadFileLogInfoService extends MybatisBaseServiceImpl<SysLoadFileLogInfoDao, SysLoadFileLogInfo> {
-
+	
 	// 查询最新的一条记录 如果没有则新建然后返回
 	public SysLoadFileLogInfo queryTop(String fileUuid) {
 		SysLoadFileLogInfo log = new SysLoadFileLogInfo(fileUuid);
@@ -35,7 +35,7 @@ public class SysLoadFileLogInfoService extends MybatisBaseServiceImpl<SysLoadFil
 		}
 		return log;
 	}
-
+	
 	/**
 	 * 方法名： reStartJob
 	 * 功 能： 创建新任务关闭老任务
@@ -47,7 +47,7 @@ public class SysLoadFileLogInfoService extends MybatisBaseServiceImpl<SysLoadFil
 	public String reStartJob(SysLoadFileInfo info) {
 		String fileUuid = info.getUuid();
 		SysLoadFileLogInfo log = queryTop(fileUuid);
-
+		
 		// 运行中、停止的需要关闭
 		if (RunState.RUNNING.equals(log.getRunState()) || RunState.STOPED.equals(log.getRunState())) {
 			log.setRunState(RunState.CLOSED);
@@ -57,14 +57,19 @@ public class SysLoadFileLogInfoService extends MybatisBaseServiceImpl<SysLoadFil
 		// 除准备态外其他的需要新建
 		if (!RunState.STRAT.equals(log.getRunState())) {
 			log = new SysLoadFileLogInfo(fileUuid, 0L, 0L, null, RunState.STRAT);
+			if (info.getHasHead().equals("Y")) {
+				log.setRowCount((long) info.getSkip() + 1);
+			} else {
+				log.setRowCount((long) info.getSkip());
+			}
 			save(log);
 			return "修改配置信息成功！";
 		} else {
 			return "已经是准备状态，没必要重启！";
 		}
-		
-	}
 
+	}
+	
 	/**
 	 * 方法名： stopJob
 	 * 功 能： 停止任务
@@ -80,14 +85,14 @@ public class SysLoadFileLogInfoService extends MybatisBaseServiceImpl<SysLoadFil
 			log.setRunState(RunState.STOPED);
 			log.setUpdateTime(new Date());
 			saveOrUpdate(log);
-			
+
 			return "修改配置信息成功！";
 		} else {
 			return "没有运行的记录，不需要停止！";
 		}
-		
+
 	}
-	
+
 	/**
 	 * 方法名： continueJob
 	 * 功 能： 继续任务
@@ -107,7 +112,7 @@ public class SysLoadFileLogInfoService extends MybatisBaseServiceImpl<SysLoadFil
 		} else {
 			return "没有停止的记录，不需要继续！";
 		}
-		
-	}
 
+	}
+	
 }

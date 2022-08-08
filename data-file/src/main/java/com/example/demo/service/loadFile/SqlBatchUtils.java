@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.chuxue.application.common.base.BaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +33,10 @@ public class SqlBatchUtils {
 	private static final Logger	logger	= LoggerFactory.getLogger(SqlBatchUtils.class);
 
 	@Autowired
-	static JdbcTemplate			connection;
+	@Resource(name = "jdbcTemplate")
+	JdbcTemplate				connection;
 	
-	public static Long batchInsert(String sqlstr, List<Map<String, String>> dataList, List<SysLoadFileColsMapping> mappings) {
+	public Long batchInsert(String sqlstr, List<Map<String, String>> dataList, List<SysLoadFileColsMapping> mappings) {
 		if (dataList == null || dataList.size() == 0) {
 			logger.info("BatchInsertUtil batchInsert list data is null!");
 			return 0L;
@@ -54,9 +58,7 @@ public class SqlBatchUtils {
 			}
 			connection.batchUpdate(sqlstr, batchArgs);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("BatchInsertUtil batchInsert is exception！clazz={}", e);
-
+			throw new BaseException("BatchInsertUtil batchInsert is exception！" + e.getMessage());
 		}
 		return null;
 	}

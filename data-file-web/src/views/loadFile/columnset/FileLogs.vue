@@ -16,6 +16,8 @@
           </el-col>
         </el-row>
         <el-table id="tableid" v-loading="loading" :data="dataList" style="width: 100%">
+          <el-table-column type="index" label="行号" width="50" />
+          <el-table-column prop="rowCount" label="当前行" width="150" />
           <el-table-column prop="complateRows" label="执行提交行" width="150" />
           <el-table-column prop="errorRows" label="执行失败行" width="150" />
           <el-table-column prop="errorMessage" label="失败消息" width="150" />

@@ -142,19 +142,19 @@ public class SysLoadFileInfoService extends MybatisBaseServiceImpl<SysLoadFileIn
 	 */
 	@Transactional
 	public SysDbmsTabsTableInfo sqlText(SysLoadFileInfoVo vo) {
-		sysLoadFileInfoDao.createTable(vo.getSqlText());
 		String table = vo.getSqlText().split("\r\n")[0];
 		String tableName = table.replaceAll("CREATE|TABLE|IF|NOT|EXISTS|\\(| ", "").trim();
 
 		SysDbmsTabsTableInfo tab = new SysDbmsTabsTableInfo(vo.getInfo().getFileName(), tableName);
 		List<SysDbmsTabsColsInfo> colsInfos = new ArrayList<>();
 		for (SysLoadFileColsInfo fileColsInfo : vo.getColumns()) {
-			SysDbmsTabsColsInfo tabsColsInfo = new SysDbmsTabsColsInfo(fileColsInfo.getColumnDesc(), fileColsInfo.getColumnName(), fileColsInfo.getColumnType(), tab.getUuid(), fileColsInfo.getSort());
+			SysDbmsTabsColsInfo tabsColsInfo = new SysDbmsTabsColsInfo(fileColsInfo.getColumnDesc(), fileColsInfo.getColumnDesc(), fileColsInfo.getColumnType(), tab.getUuid(), fileColsInfo.getSort());
 			colsInfos.add(tabsColsInfo);
 		}
 
 		sysDbmsTabsTableInfoService.save(tab);
 		sysDbmsTabsColsInfoService.saveBatch(colsInfos);
+		sysLoadFileInfoDao.createTable(vo.getSqlText());
 		return tab;
 	}
 	

@@ -38,6 +38,10 @@ public class SysLoadFileLogInfo extends MybatisBaseEntity implements Serializabl
 	@TableField(value = "error_rows")
 	private Long				errorRows;
 
+	// 当前文件行数
+	@TableField(value = "row_count")
+	private Long				rowCount;
+
 	// 错误文件位置
 	@TableField(value = "error_file")
 	private String				errorFile;
@@ -91,6 +95,7 @@ public class SysLoadFileLogInfo extends MybatisBaseEntity implements Serializabl
 		this.errorRows = errorRows;
 		this.errorFile = errorFile;
 		this.runState = runState;
+
 	}
 
 }
