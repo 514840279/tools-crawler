@@ -1,6 +1,6 @@
 server:
   port: 18020
-  servlet:    context-path: /data
+
   
 
 spring:

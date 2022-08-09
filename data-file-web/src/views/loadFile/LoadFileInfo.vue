@@ -28,7 +28,7 @@ const store = loadStore();
 const { fileInfo } = storeToRefs(store);
 let show = ref<boolean>(true);
 
-let rootUrl: string = '/serve/sysLoadFileInfo';
+let rootUrl: string = '/sysLoadFileInfo';
 let columns: Array<Column> = [{
   name: "uuid",
   title: "uuid",

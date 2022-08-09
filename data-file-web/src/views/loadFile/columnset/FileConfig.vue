@@ -76,7 +76,7 @@ function readFile() {
 function readFileData(param: any) {
   // showdata.value = false;
   datas.value = null;
-  http.post<any>("/serve/sysLoadFileInfo/readFile", param).then((reponse) => {
+  http.post<any>("/sysLoadFileInfo/readFile", param).then((reponse) => {
     if (reponse.code == 200) {
       fileColumns.value = reponse.data.columns;
       fileInfo.value = reponse.data.info;
@@ -104,7 +104,7 @@ function saveFileConfig() {
     info: fileInfo.value,
     columns: fileColumns.value
   }
-  http.post<any>("/serve/sysLoadFileInfo/saveFileConfig", param).then((reponse) => {
+  http.post<any>("/sysLoadFileInfo/saveFileConfig", param).then((reponse) => {
     if (reponse.code == 200) {
       ElMessage({
         message: reponse.data,

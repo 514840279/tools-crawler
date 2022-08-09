@@ -8,7 +8,7 @@
 import Table from '../../../components/table/Table.vue'
 import { Column } from '../../../interface/Table'
 
-let rootUrl: String = '/serve/sysDbmsTabsTypeInfo',
+let rootUrl: String = '/sysDbmsTabsTypeInfo',
     columns: Array<Column> = [{
         name: "uuid",
         title: "uuid",

@@ -290,7 +290,7 @@ function saveMappingConfig() {
     fileInfo: fileInfo.value,
     mappings: fileColsMapping.value
   }
-  http.post<any>("/serve/sysLoadFileColsMapping/saveFileMappingConfig", param).then((reponse) => {
+  http.post<any>("/sysLoadFileColsMapping/saveFileMappingConfig", param).then((reponse) => {
     if (reponse.code == 200) {
       // 延时 证明系统在后台处理
       setTimeout(function () {

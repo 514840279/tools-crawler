@@ -60,7 +60,7 @@ const init = function () {
 // 加载已经配置的文件字段信息,
 const initFileColumn = function () {
   let param = { info: { fileUuid: fileInfo.value.uuid }, sortList: [{ sortIndex: 1, sortOrder: "asc", sortName: "sort", }] }
-  http.post<any>("/serve/sysLoadFileColsInfo/findAllBySort", param).then((reponse) => {
+  http.post<any>("/sysLoadFileColsInfo/findAllBySort", param).then((reponse) => {
     if (reponse.code == 200 && reponse.data.length > 0) {
       fileColumns.value = reponse.data;
       if (reponse.data != null && reponse.data.length > 0) {
@@ -77,7 +77,7 @@ const initFileColumn = function () {
 // 加载字段映射信息 
 const initMapping = function () {
   let param = { fileUuid: fileInfo.value.uuid }
-  http.post<any>("/serve/sysLoadFileColsMapping/findAll", param).then((reponse) => {
+  http.post<any>("/sysLoadFileColsMapping/findAll", param).then((reponse) => {
     if (reponse.code == 200 && reponse.data.length > 0) {
       fileColsMapping.value = reponse.data;
       if (reponse.data != null) {
@@ -96,7 +96,7 @@ const initMapping = function () {
 // 加载所有表信息
 const initTables = function () {
   let param = { uuid: fileColsMapping.value[0].tabsUuid }
-  http.post<any>("/serve/sysDbmsTabsTableInfo/findOne", param).then((reponse) => {
+  http.post<any>("/sysDbmsTabsTableInfo/findOne", param).then((reponse) => {
     if (reponse.code == 200 && reponse.data != null) {
       tableInfo.value = reponse.data;
       showPage.value = "1";
@@ -108,7 +108,7 @@ const initTables = function () {
 // // 加载对应表的字段信息
 // const initColumns = function () {
 //   let param = { info: { tabsUuid: fileColsMapping.value[0].tabsUuid }, sortList: [{ sortIndex: 1, sortOrder: "asc", sortName: "sort", }] }
-//   http.post<any>("/serve/sysDbmsTabsColsInfo/findAllBySort", param).then((reponse) => {
+//   http.post<any>("/sysDbmsTabsColsInfo/findAllBySort", param).then((reponse) => {
 //     if (reponse.code == 200 && reponse.data.length > 0) {
 //       tableColumnsInfo.value = reponse.data;
 //     } else {
@@ -126,7 +126,7 @@ const initLogs = function () {
 // 全部配置的表信息
 const initAllTables = function () {
   let param = {}
-  http.post<any>("/serve/sysDbmsTabsTableInfo/findAll", param).then((reponse) => {
+  http.post<any>("/sysDbmsTabsTableInfo/findAll", param).then((reponse) => {
     if (reponse.code == 200) {
       tables.value = reponse.data;
     }

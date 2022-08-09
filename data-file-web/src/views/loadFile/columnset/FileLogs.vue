@@ -104,7 +104,7 @@ onBeforeMount(() => {
 function initTable() {
   // dataList.value = [];
   // loading.value = true;
-  http.post<any>("/serve/sysLoadFileLogInfo/page", param).then((reponse) => {
+  http.post<any>("/sysLoadFileLogInfo/page", param).then((reponse) => {
     if (reponse.code == 200) {
       dataList.value = reponse.data.content;
       param.totalElements = reponse.data.totalElements;
@@ -132,7 +132,7 @@ function setTimeinitTable(): void {
 
 // 重启一个任务
 function reStartJob() {
-  http.post<any>("/serve/sysLoadFileLogInfo/reStartJob", fileInfo.value).then((reponse) => {
+  http.post<any>("/sysLoadFileLogInfo/reStartJob", fileInfo.value).then((reponse) => {
     if (reponse.code == 200) {
       ElMessage({
         message: reponse.data,
@@ -149,7 +149,7 @@ function reStartJob() {
 
 // 停止任务
 function stopJob() {
-  http.post<any>("/serve/sysLoadFileLogInfo/stopJob", fileInfo.value).then((reponse) => {
+  http.post<any>("/sysLoadFileLogInfo/stopJob", fileInfo.value).then((reponse) => {
     if (reponse.code == 200) {
       ElMessage({
         message: reponse.data,
@@ -167,7 +167,7 @@ function stopJob() {
 
 // 继续执行job
 function continueJob() {
-  http.post<any>("/serve/sysLoadFileLogInfo/continueJob", fileInfo.value).then((reponse) => {
+  http.post<any>("/sysLoadFileLogInfo/continueJob", fileInfo.value).then((reponse) => {
     if (reponse.code == 200) {
       ElMessage({
         message: reponse.data,

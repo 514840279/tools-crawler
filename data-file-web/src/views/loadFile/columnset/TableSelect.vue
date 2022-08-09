@@ -123,7 +123,7 @@ const emit = defineEmits(["next", "gotoBefor"]);
 // 加载对应表的字段信息
 function gotoNext() {
   let param = { info: { tabsUuid: tableInfo.value?.uuid }, sortList: [{ sortIndex: 1, sortOrder: "asc", sortName: "sort", }] }
-  http.post<any>("/serve/sysDbmsTabsColsInfo/findAllBySort", param).then((reponse) => {
+  http.post<any>("/sysDbmsTabsColsInfo/findAllBySort", param).then((reponse) => {
     if (reponse.code == 200) {
       tableColumnsInfo.value = reponse.data;
       emit('next')
@@ -194,7 +194,7 @@ const toCreateTable = function () {
     columns: fileColumns.value,
     sqlText: sqlText.value
   }
-  http.post<any>("/serve/sysLoadFileInfo/sqlText", param).then((reponse) => {
+  http.post<any>("/sysLoadFileInfo/sqlText", param).then((reponse) => {
     if (reponse.code == 200) {
       tableInfo.value = reponse.data;
       searchText.value = tableInfo.value?.tabsName;
