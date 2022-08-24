@@ -4,8 +4,8 @@ user:
   type: "file"  # dir or file
   json-dir: "C:\\Users\\Public\\Nwt\\cache\\recv\\邓波\\"
   sql-dir: "C:\\Users\\Administrator\\Desktop\\data\\06-14\\sqlfile\\"
-  json-file: "上海衍六国际货物运输代理有限公司.txt"
-  sql-file: "上海衍六国际货物运输代理有限公司.txt"
+  json-file: "北京京邦达贸易有限公司.txt"
+  sql-file: "北京京邦达贸易有限公司.txt"
   web: false
   ignore-type: # 
     - "基本信息"

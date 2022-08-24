@@ -30,31 +30,31 @@ import com.tools.json2obj.service.data.OtherService;
 
 @Service
 public class JsonToSqlService {
-
+	
 	@Autowired
 	JsonFileRead		jsonFileRead;
-	
+
 	@Autowired
 	JsonTableCofigDao	jsonTableCofigDao;
-	
+
 	@Autowired
 	JsonTableColumnDao	jsonTableColumnDao;
-
+	
 	@Autowired
 	BaseCompanyTypeDao	baseCompanyTypeDao;
-	
+
 	@Autowired
 	GudongService		gudongService;
-	
+
 	@Autowired
 	OtherService		otherService;
-
+	
 	@Autowired
 	NianbaoService		nianbaoService;
-
+	
 	@Autowired
 	JdbcTemplate		jdbcTemplate;
-	
+
 	// 处理企业数据的json格式转sql格式
 	public String json2sql(String filePath, String sqlfilepath) {
 		try {
@@ -80,6 +80,7 @@ public class JsonToSqlService {
 						case JsonTableType.TYPE_4:
 							// 行政许可信息
 						case JsonTableType.TYPE_9:
+						case JsonTableType.TYPE_10:
 							otherService.spellSql(string, companyId, map.get(string), sqlfilepath);
 							break;
 						case JsonTableType.TYPE_6:
@@ -97,29 +98,29 @@ public class JsonToSqlService {
 						case JsonTableType.TYPE_6_7:
 						case JsonTableType.TYPE_6_8:
 							break;
-
+						
 						default:
 							System.out.println(String.format("该类型的数据还没有进行处理{%s}", string));
 							break;
 					}
-
+					
 				}
 			}
 		} catch (IOException e) {
 			throw new BaseException("文件处理错误：" + e.getMessage());
 		}
 		return sqlfilepath;
-
+		
 	}
-
+	
 	// 处理 营业执照信息 转换成企业信息
 	private String jsonforCompany(List<String> arrstr, String sqlfilepath) {
 		String companyId = null;
 		for (String string : arrstr) {
-
+			
 			// 如果字符串是JSON 格式的 TODO
 			if (string.startsWith("{") && string.endsWith("}")) {
-
+				
 			} else if (string.startsWith("$$")) {
 				companyId = string.replace("$$", "").trim();
 			} else {
@@ -159,9 +160,9 @@ public class JsonToSqlService {
 									value = ss[0];
 									map.put("币种", "人民币");
 								}
-
+								
 								break;
-
+							
 							case "类型":
 //							BaseCompanyType type = new BaseCompanyType(str);
 //							Optional<BaseCompanyType> optional = baseCompanyTypeDao.findOne(Example.of(type));
@@ -171,7 +172,7 @@ public class JsonToSqlService {
 //							}
 								value = str;
 								break;
-
+							
 							default:
 								value = str;
 								break;
@@ -179,7 +180,7 @@ public class JsonToSqlService {
 					}
 				}
 				map.put(key, value);
-				
+
 				// 获取全局唯一id
 				String sql = null;
 				if (StringUtils.isBlank(companyId)) {
@@ -190,23 +191,23 @@ public class JsonToSqlService {
 					// 整理成入库更新语句
 					sql = mapToUpd(map, companyId);
 				}
-				
+
 				// 写进sql文件
 				TxtFilesWriter.appendWriteToFile(sql, sqlfilepath);
-				
+
 				// 行业整理
 				String companyindustry = map.get("行业");
-
+				
 				sql = industryToSql(companyId, companyindustry);
-				
+
 				TxtFilesWriter.appendWriteToFile(sql, sqlfilepath);
-				
+
 			}
 		}
-
+		
 		return companyId;
 	}
-
+	
 	private String mapToUpd(Map<String, String> map, String companyId) {
 		JsonTableCofig conf = new JsonTableCofig(JsonTableType.TYPE_1);
 		Optional<JsonTableCofig> optional = jsonTableCofigDao.findOne(Example.of(conf));
@@ -214,12 +215,12 @@ public class JsonToSqlService {
 			conf = optional.get();
 			JsonTableColumn column = new JsonTableColumn(conf.getId());
 			List<JsonTableColumn> columns = jsonTableColumnDao.findAll(Example.of(column));
-			
+
 			return SpellSql.map2Upd(map, conf, columns, companyId);
 		}
 		return null;
 	}
-	
+
 	private String industryToSql(String companyId, String companyindustry) {
 		if (StringUtils.isBlank(companyindustry)) {
 			return null;
@@ -251,7 +252,7 @@ public class JsonToSqlService {
 		sb.append("  from industry_category i0");
 		sb.append(" where i0.industry_name = '" + companyindustry + "'");
 		sb.append("  limit 1");
-		
+
 		StringBuilder result = new StringBuilder();
 		Map<String, Object> a = jdbcTemplate.queryForMap(sb.toString());
 		if (a != null) {
@@ -265,7 +266,7 @@ public class JsonToSqlService {
 			result.append(valueIfNull(a.get("CODE_2")));
 			result.append(valueIfNull(a.get("CODE_3")));
 			result.append(");\n");
-
+			
 			result.append("delete from `data`.prec_bcis where company_id ='" + companyId + "';\n");
 			result.append("insert into `data`.prec_bcis(company_id,industry_code,industry_category,criteria_code_1,criteria_code_2,criteria_code_3,stage,industry_name,industryCodePath)");
 			result.append("values('");
@@ -281,10 +282,10 @@ public class JsonToSqlService {
 			result.append(valueIfNull(a.get("INDUSTRYCODEPATH")));
 			result.append(");");
 		}
-		
+
 		return result.toString();
 	}
-
+	
 	private Object valueIfNull(Object object) {
 		if (object == null) {
 			return ",null";
@@ -296,7 +297,7 @@ public class JsonToSqlService {
 			return ",'" + string.trim() + "'";
 		}
 	}
-	
+
 	// 首先拿统一信用代码作为唯一id，如果没有则用企业名称的md5
 	private String dataforid(Map<String, String> map) {
 		String companyid = map.get("统一社会信用代码");
@@ -306,7 +307,7 @@ public class JsonToSqlService {
 		}
 		return companyid;
 	}
-	
+
 	// 拼接sql
 	private String mapToSql(Map<String, String> map, String companyId) {
 		JsonTableCofig conf = new JsonTableCofig(JsonTableType.TYPE_1);
@@ -315,13 +316,13 @@ public class JsonToSqlService {
 			conf = optional.get();
 			JsonTableColumn column = new JsonTableColumn(conf.getId());
 			List<JsonTableColumn> columns = jsonTableColumnDao.findAll(Example.of(column));
-			
+
 			return SpellSql.map2sql(map, conf, columns, companyId);
 		}
 		return null;
-		
+
 	}
-	
+
 	// 创建一个新的sql文件
 	private void createTofile(String jsonFilePath, String sqlfilepath) throws IOException {
 		File tofile = new File(sqlfilepath);
