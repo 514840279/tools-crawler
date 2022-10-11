@@ -25,14 +25,11 @@ class YsLi(feapder.AirSpider):
         rows = self.db.find(sql=sql, limit=limit, to_json=True)
         while len(rows) > 0:
             for row in rows:
-                try:
-                    rid = row['id']
-                    url = row['工程链接']
-                    lid = row['lid']
-                    yield feapder.Request(url,retry_times=3, timeout=timeout,id=rid, lid=lid)
-                finally:
-                    usql = "update 不动产登记中心_商品房预售房源 set delete_flag = -1 where delete_flag = 0 and id = %s" % rid
-                    self.db.update(usql)
+                rid = row['id']
+                url = row['工程链接']
+                lid = row['lid']
+                yield feapder.Request(url,retry_times=3,is_abandoned=True, timeout=timeout,id=rid, lid=lid)
+
             rows = self.db.find(sql=sql, limit=limit, to_json=True)
 
     def parse(self, request, response):
@@ -89,6 +86,15 @@ class YsLi(feapder.AirSpider):
 
         sql = "update 不动产登记中心_商品房预售房源 set delete_flag = 1 where delete_flag = 0 and id = %s" %request.id
         self.db.update(sql)
+
+    def exception_request(self, request, response):
+        print()
+        usql = "update 不动产登记中心_商品房预售房源 set delete_flag = -1 where delete_flag = 0 and id = %s" % request.id
+        self.db.update(usql)
+
+    def failed_request(self, request, response):
+        usql = "update 不动产登记中心_商品房预售房源 set delete_flag = -2 where delete_flag = 0 and id = %s" % request.id
+        self.db.update(usql)
 
 if __name__ == "__main__":
     YsLi(thread_count=10).start()
