@@ -29,3 +29,5 @@ class 不动产登记中心商品房预售房源Item(Item):
         self.总面积 = None
         self.项目id = None
         self.预售许可证 = None
+        self.建筑面积 = None
+        self.lid = None

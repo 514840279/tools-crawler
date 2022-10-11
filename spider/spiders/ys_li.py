@@ -12,21 +12,24 @@ from feapder.db.mysqldb import MysqlDB
 from items import 不动产登记中心_商品房预售房源基本信息_item
 
 
+
 class YsLi(feapder.AirSpider):
+    db = MysqlDB()
+
     def start_requests(self):
-        db = MysqlDB()
+
         sql = "select id,工程链接 from 不动产登记中心_商品房预售房源 where delete_flag = 0"
         limit = 500  # 分页 大于1
         timeout = 2000  # 超时
         try:
-            rows = db.find(sql=sql, limit=limit, to_json=True)
+            rows = self.db.find(sql=sql, limit=limit, to_json=True)
             while len(rows) > 0:
                 for row in rows:
                     id = row['id']
                     url = row['工程链接']
                     lid = url.replace('http://124.93.228.101:8087/bd/tgxm/getLi?lid=','')
                     yield feapder.Request(url,id=id,lid=lid,is_abandoned=True,timeout=timeout)
-                rows = db.find(sql=sql, limit=limit, to_json=True)
+                rows = self.db.find(sql=sql, limit=limit, to_json=True)
         finally:
             flag = False
             pass
@@ -76,9 +79,9 @@ class YsLi(feapder.AirSpider):
                             item.other = title
                     yield item
 
-        db = MysqlDB()
+
         sql = "update 不动产登记中心_商品房预售房源 set delete_flag = 1 where delete_flag = 0 and id = %s" %request.id
-        db.update(sql)
+        self.db.update(sql)
 
 if __name__ == "__main__":
     YsLi().start()

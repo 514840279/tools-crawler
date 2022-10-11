@@ -25,3 +25,6 @@ class 不动产登记中心商品房预售许可Item(Item):
         self.项目名称 = None
         self.项目地址 = None
         self.项目链接 = None
+        self.许可证号 = None
+        self.可售总面积 = None
+

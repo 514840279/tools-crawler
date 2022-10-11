@@ -13,10 +13,11 @@ from items import 不动产登记中心_商品房预售房源_item
 
 
 class ys_LAjax(feapder.AirSpider):
+    db = MysqlDB()
     def start_requests(self):
-        db = MysqlDB()
+
         sql = "select id,项目链接 from 不动产登记中心_商品房预售许可 where delete_flag = 1"
-        rows = db.find(sql=sql, limit=15000, to_json=True)
+        rows = self.db.find(sql=sql, limit=15000, to_json=True)
         urls = "http://124.93.228.101:8087/bd/tgxm/LAjax"
         for row in rows:
             id = row['id']
@@ -44,12 +45,12 @@ class ys_LAjax(feapder.AirSpider):
                 item.坐落 = tr.xpath('./td[3]/text()').extract_first()
                 item.总套数 = tr.xpath('./td[4]/text()').extract_first()
                 item.总面积 = tr.xpath('./td[5]/text()').extract_first()
+                item.lid = 工程链接.replace('http://124.93.228.101:8087/bd/tgxm/getLi?lid=', '')
 
                 yield item
-        db = MysqlDB()
         sql = "update 不动产登记中心_商品房预售许可  set delete_flag=2 where delete_flag = 1 and id =%s" %id
 
-        db.update(sql)
+        self.db.update(sql)
 
 
 

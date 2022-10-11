@@ -156,8 +156,10 @@ public class SpellSql {
 				v = "经理";
 			} else if (v.equals(JsonImgData.fdsz)) {
 				v = "副董事长";
-			} else if (v.equals(JsonImgData.jshzx)) {
+			} else if (v.equals(JsonImgData.jshzx) || v.equals(JsonImgData.jshzx2)) {
 				v = "监事会主席";
+			} else if (v.equals(JsonImgData.dlds)) {
+				v = "独立董事";
 			}
 			
 		}

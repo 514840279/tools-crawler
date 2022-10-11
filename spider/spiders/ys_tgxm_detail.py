@@ -16,10 +16,12 @@ from items import 不动产登记中心_商品房预售许可_item
 
 
 class YsTgxmDetail(feapder.AirSpider):
+    db = MysqlDB()
+
     def start_requests(self):
-        db = MysqlDB()
-        sql = "select id,项目链接  from 不动产登记中心_商品房预售许可 where delete_flag = 0"
-        rows = db.find(sql=sql,limit=15000,to_json=True)
+
+        sql = "select id,项目链接,区域名称,项目名称,项目地址,开发企业名称  from 不动产登记中心_商品房预售许可 where delete_flag = 0"
+        rows = self.db.find(sql=sql,limit=15000,to_json=True)
         try:
             for row in rows:
                 url = row['项目链接']
@@ -81,8 +83,8 @@ class YsTgxmDetail(feapder.AirSpider):
             item.可售非住宅面积 = content.xpath('./table[@class="table table-bordered FCtable mar-bo"]/tr[3]/td[8]/text()').extract_first()
 
         item.delete_flag = 1
-        db = MysqlDB()
-        db.update_smart(table="不动产登记中心_商品房预售许可",data=item.to_dict,condition="id="+str(row['id']))
+
+        self.db.update_smart(table="不动产登记中心_商品房预售许可",data=item.to_dict,condition="id="+str(row['id']))
 
 
 
