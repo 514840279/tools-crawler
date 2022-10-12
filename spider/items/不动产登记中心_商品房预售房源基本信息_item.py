@@ -30,3 +30,4 @@ class 不动产登记中心商品房预售房源基本信息Item(Item):
         self.房源id = None
         self.楼层 = None
         self.预售价格上限 = None
+        self.xmid = None
