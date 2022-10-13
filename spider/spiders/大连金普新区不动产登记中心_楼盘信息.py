@@ -19,7 +19,7 @@ class YsLi(feapder.AirSpider):
     def start_requests(self):
 
         sql1 = "select id,工程链接,lid,xmid from 不动产登记中心_商品房预售房源 where delete_flag = 0"
-        limit = 40  # 分页 大于1
+        limit = 10  # 分页 大于1
         timeout = 30000.00  # 超时
 
         rows = self.db.find(sql=sql1, limit=limit, to_json=True)
@@ -39,7 +39,7 @@ class YsLi(feapder.AirSpider):
         tds = response.xpath('//table[@class="XkbTable"]//tr//td/span')
         房子数量 = 0
         if tds:
-            se = "select id,房源id from 不动产登记中心_商品房预售房源基本信息 where 房源id=%s and  lid ='%s' and xmid='%s'" %(request.id,request.lid,request.xmid)
+            se = "select id,房源id from 不动产登记中心_商品房预售房源基本信息 where 房源id=%s " % request.id
             fy = self.db.find(sql=se, limit=2, to_json=True)
             if fy:
                 self.db.delete("delete from 不动产登记中心_商品房预售房源基本信息 where 房源id =%s" % request.id)
@@ -100,7 +100,7 @@ class YsLi(feapder.AirSpider):
 
         tds = response.xpath('//table[@class="table table-bordered FCtable"]/tr/td')
         if tds:
-            se = "select id,房源id from 不动产登记中心_商品房预售房源基本信息 where 房源id=%s and  lid ='%s' and xmid='%s'" %(request.id,request.lid,request.xmid)
+            se = "select id,房源id from 不动产登记中心_商品房预售房源基本信息 where 房源id=%s " % request.id
             fy = self.db.find(sql=se, limit=2, to_json=True)
             if fy:
                 self.db.delete("delete from 不动产登记中心_商品房预售房源基本信息 where 房源id =%s" % request.id)
